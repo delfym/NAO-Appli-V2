@@ -31,12 +31,12 @@ class User implements UserInterface, \Serializable
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $role;
 
@@ -55,9 +55,15 @@ class User implements UserInterface, \Serializable
      */
     private $observations;
 
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $mail;
+
     public function __construct()
     {
         $this->observations = new ArrayCollection();
+        $this->role = 'ROLE_USER';
     }
 
 
@@ -193,7 +199,7 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return $this->role;
+        return array($this->role);
     }
 
     /*public function getPassword()
@@ -210,7 +216,7 @@ class User implements UserInterface, \Serializable
 
     public function serialize() //donnés enregistrées en session
     {
-        return serialise(array(
+        return serialize(array(
             $this->id,
             $this->pseudo,
             $this->password,
@@ -224,6 +230,18 @@ class User implements UserInterface, \Serializable
             $this->pseudo,
             $this->password,
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
     }
 
 
