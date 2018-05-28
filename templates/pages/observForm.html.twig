@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <header id="head" class="secondary"></header>
+
+    <!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="{{ asset('home') }}">Accueil</a></li>
+            <li class="active">Vos observations</li>
+        </ol>
+        <div class="row">
+            <header class="page-header">
+                <h1 class="page-title">Saisir votre observation</h1>
+            </header>
+        </div>
+
+        <div class="row">
+            <!-- Article main content -->
+            <article class="col-md-8 maincontent">
+                <!--div class="row widget"></div-->
+
+                <h3>Situer l'oiseau sur la carte</h3>
+                <!-- intégration de la carte -->
+                <div id="mapid"></div>
+            </article>
+            <!-- /Article -->
+
+            <!-- Sidebar -->
+            <aside class="col-md-4 sidebar sidebar-left asideTheme">
+                <!--div class="row widget">
+                    <div class="col-xs-12">
+                        <h4></h4>
+                        <p></p>
+                    </div>
+                </div-->
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h3>Formulaire de saisie</h3>
+
+                        <form class="form-group" action="" method="post">
+                            <label>Votre observation :</label>
+                            <textarea class="form-control" name="commentObs"></textarea>
+                            <label>Coordonnées de l'observation :</label>
+                            <input class="form-control" type="text" id="gpsObs"/>
+
+                            <label>Date de l'observation :</label>
+                            <input class="form-control" type="date" name="dateObs"/>
+                            <label>Photo de l'oiseau (facultatif):</label>
+                            <input class="form-control" type="file" name="imgObs"/>
+
+                            <input class="btn btn-action btnLigtht" type="submit" name="submitObs"/>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h4></h4>
+                        <p><img src="" alt=""></p>
+                        <p></p>
+                    </div>
+                </div>
+
+            </aside>
+            <!-- /Sidebar -->
+
+
+        </div>
+    </div>    <!-- /container -->
+
+{% endblock %}
+
+	
+
