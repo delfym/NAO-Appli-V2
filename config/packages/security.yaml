@@ -10,7 +10,7 @@ security:
                 property: pseudo
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|images|js)/
             security: false
         main:
             anonymous: true
@@ -33,6 +33,7 @@ security:
     access_control:
          - { path: ^/observForm, roles: ROLE_USER}
          - { path: ^/contact, roles: ROLE_USER }
+         - { path: ^/admin, roles: ROLE_ADMIN }
 
      
     role_hierarchy:
