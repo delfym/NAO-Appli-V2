@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,61 +37,35 @@ class Observation
     private $post_date;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $delete_date;
+    private $validation_date;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $validation_date;
+    private $delete_date;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $reason_of_delete;
 
-  
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Birds", inversedBy="observations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $bird_id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="observations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\AppUsers", inversedBy="observations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Birds", inversedBy="observations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bird;
 
     public function getId()
     {
         return $this->id;
-    }
-
-    /*public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }*/
-
-    /*public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }*/
-
-    public function getBirdId(): ?int
-    {
-        return $this->bird_id;
-    }
-
-    public function setBirdId(int $bird_id): self
-    {
-        $this->bird_id = $bird_id;
-
-        return $this;
     }
 
     public function getGeographicCoordinates(): ?string
@@ -144,6 +116,18 @@ class Observation
         return $this;
     }
 
+    public function getValidationDate(): ?\DateTimeInterface
+    {
+        return $this->validation_date;
+    }
+
+    public function setValidationDate(\DateTimeInterface $validation_date): self
+    {
+        $this->validation_date = $validation_date;
+
+        return $this;
+    }
+
     public function getDeleteDate(): ?\DateTimeInterface
     {
         return $this->delete_date;
@@ -152,18 +136,6 @@ class Observation
     public function setDeleteDate(?\DateTimeInterface $delete_date): self
     {
         $this->delete_date = $delete_date;
-
-        return $this;
-    }
-
-    public function getValidationDate(): ?\DateTimeInterface
-    {
-        return $this->validation_date;
-    }
-
-    public function setValidationDate(?\DateTimeInterface $validation_date): self
-    {
-        $this->validation_date = $validation_date;
 
         return $this;
     }
@@ -180,37 +152,26 @@ class Observation
         return $this;
     }
 
-    /*public function addUserId(User $userId): self
-    {
-        if (!$this->user_id->contains($userId)) {
-            $this->user_id[] = $userId;
-            $userId->setObservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserId(User $userId): self
-    {
-        if ($this->user_id->contains($userId)) {
-            $this->user_id->removeElement($userId);
-            // set the owning side to null (unless already changed)
-            if ($userId->getObservation() === $this) {
-                $userId->setObservation(null);
-            }
-        }
-
-        return $this;
-    }*/
-
-    public function getUser(): ?User
+    public function getUser(): ?AppUsers
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?AppUsers $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBird(): ?Birds
+    {
+        return $this->bird;
+    }
+
+    public function setBird(?Birds $bird): self
+    {
+        $this->bird = $bird;
 
         return $this;
     }

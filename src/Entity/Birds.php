@@ -24,14 +24,14 @@ class Birds
     private $nom_de_reference;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $synonymes_chresonymes;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $nom_vernaculaire;
+    private $nom_verticulaire;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -39,37 +39,37 @@ class Birds
     private $statut;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $regne;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $classe;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $ordre;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $famille;
+    private $family;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $CD_REF;
+    private $cd_ref;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $CD_NOM;
+    private $cd_nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Observation", mappedBy="bird_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Observation", mappedBy="bird")
      */
     private $observations;
 
@@ -100,21 +100,21 @@ class Birds
         return $this->synonymes_chresonymes;
     }
 
-    public function setSynonymesChresonymes(?string $synonymes_chresonymes): self
+    public function setSynonymesChresonymes(string $synonymes_chresonymes): self
     {
         $this->synonymes_chresonymes = $synonymes_chresonymes;
 
         return $this;
     }
 
-    public function getNomVernaculaire(): ?string
+    public function getNomVerticulaire(): ?string
     {
-        return $this->nom_vernaculaire;
+        return $this->nom_verticulaire;
     }
 
-    public function setNomVernaculaire(?string $nom_vernaculaire): self
+    public function setNomVerticulaire(string $nom_verticulaire): self
     {
-        $this->nom_vernaculaire = $nom_vernaculaire;
+        $this->nom_verticulaire = $nom_verticulaire;
 
         return $this;
     }
@@ -136,7 +136,7 @@ class Birds
         return $this->regne;
     }
 
-    public function setRegne(?string $regne): self
+    public function setRegne(string $regne): self
     {
         $this->regne = $regne;
 
@@ -148,7 +148,7 @@ class Birds
         return $this->classe;
     }
 
-    public function setClasse(?string $classe): self
+    public function setClasse(string $classe): self
     {
         $this->classe = $classe;
 
@@ -160,45 +160,45 @@ class Birds
         return $this->ordre;
     }
 
-    public function setOrdre(?string $ordre): self
+    public function setOrdre(string $ordre): self
     {
         $this->ordre = $ordre;
 
         return $this;
     }
 
-    public function getFamille(): ?string
+    public function getFamily(): ?string
     {
-        return $this->famille;
+        return $this->family;
     }
 
-    public function setFamille(?string $famille): self
+    public function setFamily(string $family): self
     {
-        $this->famille = $famille;
+        $this->family = $family;
 
         return $this;
     }
 
-    public function getCDREF(): ?int
+    public function getCdRef(): ?int
     {
-        return $this->CD_REF;
+        return $this->cd_ref;
     }
 
-    public function setCDREF(?int $CD_REF): self
+    public function setCdRef(int $cd_ref): self
     {
-        $this->CD_REF = $CD_REF;
+        $this->cd_ref = $cd_ref;
 
         return $this;
     }
 
-    public function getCDNOM(): ?int
+    public function getCdNom(): ?int
     {
-        return $this->CD_NOM;
+        return $this->cd_nom;
     }
 
-    public function setCDNOM(?int $CD_NOM): self
+    public function setCdNom(int $cd_nom): self
     {
-        $this->CD_NOM = $CD_NOM;
+        $this->cd_nom = $cd_nom;
 
         return $this;
     }
@@ -215,7 +215,7 @@ class Birds
     {
         if (!$this->observations->contains($observation)) {
             $this->observations[] = $observation;
-            $observation->setBirdId($this);
+            $observation->setBird($this);
         }
 
         return $this;
@@ -226,8 +226,8 @@ class Birds
         if ($this->observations->contains($observation)) {
             $this->observations->removeElement($observation);
             // set the owning side to null (unless already changed)
-            if ($observation->getBirdId() === $this) {
-                $observation->setBirdId(null);
+            if ($observation->getBird() === $this) {
+                $observation->setBird(null);
             }
         }
 
