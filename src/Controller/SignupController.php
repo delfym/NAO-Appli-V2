@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Form\SignupType;
-use App\Entity\User;
+use App\Entity\AppUsers;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +16,7 @@ class SignupController extends Controller
 	 */
 	public function signup(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface)
 	{
-		$user = new User();
+		$user = new AppUsers();
 		$form = $this->createForm(SignupType::class, $user);
 
 		$form->handleRequest($request);
@@ -39,4 +39,4 @@ class SignupController extends Controller
 	}
 }
 
- ?>
+ 
