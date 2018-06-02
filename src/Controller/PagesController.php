@@ -90,31 +90,6 @@ class PagesController
     }
 
     /**
-     * @Route("/signin")
-     * @param Environment $twig
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function signin(Environment $twig){
-        return new Response($twig->render('pages/signin.html.twig'));
-    }
-
-    /**
-     * @Route("/signup")
-     * @param Environment $twig
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function signup(Environment $twig){
-        return new Response($twig->render('pages/signup.html.twig'));
-    }
-
-
-    /**
      * @Route("/adminSpace")
      * @param Environment $twig
      * @return Response
