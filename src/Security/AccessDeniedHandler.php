@@ -14,6 +14,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
 
 	public function handle(Request $request, AccessDeniedException $accessDeniedException)
 	{
-		return new RedirectResponse('home');
+		return new RedirectResponse('home'); // redirige vers la page d'accueil
 	}
 }
