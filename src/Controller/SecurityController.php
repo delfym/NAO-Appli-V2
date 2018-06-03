@@ -24,6 +24,6 @@ class SecurityController extends Controller
          return $this->render('signin.html.twig', array(
          		'last_username' => $lastUsername,
          		'error'			=> $error,
-         ));
+         )); // affiche le formulaire
 	}
 }
