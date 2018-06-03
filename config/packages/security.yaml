@@ -6,7 +6,7 @@ security:
     providers:
         our_db_provider:
             entity:
-                class: App\Entity\AppUsers #A MODIFIER LES 2
+                class: App\Entity\AppUsers #A MODIFIER LES 2.
                 property: username
     firewalls:
         dev:
