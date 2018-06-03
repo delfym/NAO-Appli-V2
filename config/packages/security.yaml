@@ -21,7 +21,7 @@ security:
 
             logout:
                 path:   /logout
-                target: /
+                target: /home
             # activate different ways to authenticate
 
             # http_basic: true
