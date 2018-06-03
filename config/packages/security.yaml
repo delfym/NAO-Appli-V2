@@ -1,8 +1,8 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-            App\Entity\AppUsers:
-                algorithm: bcrypt     
+        App\Entity\AppUsers:
+            algorithm: bcrypt
     providers:
         our_db_provider:
             entity:
