@@ -1,3 +1,4 @@
+
 <?php 
 
 namespace App\Controller;
@@ -38,5 +39,6 @@ class SignupController extends Controller
 		
 	}
 }
+
 
  
