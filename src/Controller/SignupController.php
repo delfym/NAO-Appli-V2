@@ -14,7 +14,7 @@ class SignupController extends Controller
 	/**
 	 * @Route("/signup")
 	 */
-	public function signup(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface)
+	public function signup(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface) // a ameliorer avec gestion access avant et apres POST
 	{
 		$user = new AppUsers();
 		$form = $this->createForm(SignupType::class, $user);

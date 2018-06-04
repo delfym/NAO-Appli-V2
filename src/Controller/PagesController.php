@@ -26,12 +26,12 @@ class PagesController extends Controller
 	}
 
 	/**
-	 * @Route("/observForm")
-	 */
+	 * Route("/observForm")
+	 
 	public function observForm()
 	{
 	 	return $this->render('pages/observForm.html.twig');
-	}
+	}*/
 
 	/**
 	 * @Route("/about")

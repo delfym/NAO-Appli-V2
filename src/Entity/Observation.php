@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Datetime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ObservationRepository")
@@ -62,6 +63,11 @@ class Observation
      * @ORM\JoinColumn(nullable=false)
      */
     private $bird;
+
+    public function __construct()
+    {
+        $this->post_date = new Datetime();
+    }
 
     public function getId()
     {
