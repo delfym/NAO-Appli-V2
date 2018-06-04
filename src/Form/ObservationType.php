@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ObservationType extends AbstractType
 {
@@ -17,6 +18,9 @@ class ObservationType extends AbstractType
             ->add('observation_title', TextType::class)
             ->add('comment', TextType::class)
             ->add('bird', TextType::class)
+            ->add('save', SubmitType::class, array(
+                'label' => 'Enregistrer'
+            ))
         ;
     }
 
