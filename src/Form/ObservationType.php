@@ -14,12 +14,21 @@ class ObservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('geographic_coordinates', TextType::class)
-            ->add('observation_title', TextType::class)
-            ->add('comment', TextType::class)
-            ->add('bird', TextType::class)
+            ->add('geographic_coordinates', TextType::class, array(
+                'attr' => array('class' => 'form-control',),
+            ))
+            ->add('observation_title', TextType::class, array(
+                'attr' => array('class' => 'form-control',),
+            ))
+            ->add('comment', TextType::class, array(
+                "attr" => array('class' => 'form-control',),
+            ))
+            ->add('bird', TextType::class, array(
+                'attr' => array('class' => 'form-control',),
+            ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Enregistrer'
+                'attr' => array('class' => 'btn btn-action btnLigtht',),
+                'label' => 'Enregistrer',
             ))
         ;
     }

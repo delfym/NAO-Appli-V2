@@ -41,7 +41,21 @@
                         <h3>Formulaire de saisie</h3>
 
                         <form class="form-group" action="" method="post">
-                            <label>Votre observation :</label>
+                            {{ form_label(form.geographic_coordinates) }}
+                            {{ form_errors(form.geographic_coordinates) }}
+                            {{ form_widget(form.geographic_coordinates) }}
+
+                            {{ form_label(form.observation_title) }}
+                            {{ form_errors(form.observation_title) }}
+                            {{ form_widget(form.observation_title) }}
+
+                            {{ form_label(form.comment) }}
+                            {{ form_errors(form.comment) }}
+                            {{ form_widget(form.comment) }}
+
+                            {{ form_widget(form.save) }}
+
+                            <!--<label>Votre observation :</label>
                             <textarea class="form-control" name="commentObs"></textarea>
                             <label>Coordonnées de l'observation :</label>
                             <input class="form-control" type="text" id="gpsObs"/>
@@ -51,7 +65,7 @@
                             <label>Photo de l'oiseau (facultatif):</label>
                             <input class="form-control" type="file" name="imgObs"/>
 
-                            <input class="btn btn-action btnLigtht" type="submit" name="submitObs"/>
+                            <input class="btn btn-action btnLigtht" type="submit" name="submitObs"/> -->
                         </form>
                     </div>
                 </div>
