@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block body %}
 
+   
     <header id="head" class="secondary"></header>
-
     <!-- container -->
     <div class="container">
 
@@ -41,6 +43,10 @@
                         <h3>Formulaire de saisie</h3>
 
                         <form class="form-group" action="" method="post">
+                            {{ form_label(form.bird) }}
+                            {{ form_errors(form.bird) }}
+                            {{ form_widget(form.bird) }}
+
                             {{ form_label(form.geographic_coordinates) }}
                             {{ form_errors(form.geographic_coordinates) }}
                             {{ form_widget(form.geographic_coordinates) }}

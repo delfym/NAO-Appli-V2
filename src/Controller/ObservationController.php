@@ -22,6 +22,7 @@ class ObservationController extends Controller
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) 
 		{
+			var_dump($observ);
 			return $this->redirectToRoute('home');
 		}
 
