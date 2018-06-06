@@ -25,8 +25,22 @@ class SecurityController extends Controller
          		'last_username' => $lastUsername,
          		'error'			=> $error,
          ));
-	}
+         }
+
+     /**
+     * @Route("/adminSpace")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+        public function adminSpace(Environment $twig){
+            $username = $this->getUser()->getUsername();
+            return new Response($twig->render('pages/adminSpace.html.twig',[
+                'username' => $username
+                ]));
+        }
 }
 
 
- ?>
