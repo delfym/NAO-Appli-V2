@@ -32,7 +32,7 @@ class AutocompleteBirdsController extends Controller
 
 	    foreach ($birds as $bird) 
 	    {
-	    	$nom_reference[] = $bird->getNomDeReference(); 
+	    	$nom_reference[] = $bird->getNomDeReference(); //configurer l'affichage nom dans ajax/jquery Garder les objets intacts  
 	    }
 
 		$autocomplete = new JsonResponse();
