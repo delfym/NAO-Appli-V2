@@ -9,11 +9,13 @@ var birds = [
 ];
 
 
-  $('#observation_bird').autocomplete({
-	source: birds,
-	minLength: 2
-  });
 
+  $("#observation_bird").autocomplete({
+	source : "http://nao.local/index.php/jq/birds",
+	minLength : 3,
+
+	
+  });
 });
 
 
