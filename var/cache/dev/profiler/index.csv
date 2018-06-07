@@ -29,3 +29,6 @@ d0d47d,127.0.0.1,GET,http://nao.local/index.php/observForm,1528381104,,200
 5b2f77,127.0.0.1,GET,http://nao.local/index.php/jq/birds?term=aca,1528381109,,200
 ee484b,127.0.0.1,GET,http://nao.local/index.php/observForm,1528381122,05e0cf,200
 05e0cf,127.0.0.1,POST,http://nao.local/index.php/observForm,1528381122,,500
+8b7f69,127.0.0.1,GET,http://nao.local/,1528386764,,404
+4cae85,127.0.0.1,GET,http://nao.local/index.php/observForm,1528386776,,200
+dad402,127.0.0.1,GET,http://nao.local/index.php/jq/birds?term=aca,1528386786,,200
