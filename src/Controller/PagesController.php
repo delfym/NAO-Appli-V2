@@ -1,74 +1,91 @@
-<?php  
+<?php
+/**
+ * Created by PhpStorm.
+ * User: delphinemillotpedrero
+ * Date: 11/05/2018
+ * Time: 23:21
+ */
 
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-
-class PagesController extends Controller
+class PagesController
 {
-	/**
-	 * @Route("/")
-	 */
-	/*public function index()
-	{
-		return new Response("<html><body>Page index</body></html>");
-	}*/
+    /**
+     * @Route("/")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function index(Environment $twig){
+        return new Response($twig->render('pages/index.html.twig'));
+    }
 
-	/**
-	 * @Route("/home", name="home")
-	 */
-	public function home()
-	{
-		return $this->render('pages/index.html.twig');
-	}
+    /**
+     * @Route("/home", name="home")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function home(Environment $twig){
+        return new Response($twig->render('pages/index.html.twig'));
+    }
 
-	/**
-	 * Route("/observForm")
-	 
-	public function observForm()
-	{
-	 	return $this->render('pages/observForm.html.twig');
-	}*/
+    /**
+     * @Route("/test")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function test(Environment $twig){
+        // return new Response('test');
+        return new Response($twig->render('pages/index.html.twig'));
+    }
 
-	/**
-	 * @Route("/about")
-	 */
-	public function about()
-	{
-		return new Response("<html><body>Page About</body></html>");
-	}
+    /**
+     * @Route("/observForm")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function observForm(Environment $twig){
+        return new Response($twig->render('pages/observForm.html.twig'));
+    }
 
-	/**
-	 * @Route("/contact")
-	 */
-	public function contact()
-	{
-		return new Response("<html><body>Page Contact</body></html>");
-	}
+    /**
+     * @Route("/about")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function about(Environment $twig){
+        return new Response($twig->render('pages/about.html.twig'));
+    }
 
-	/**
-	 * Route("/signin") IGNOREE
-	 */
-	/*public function signin()
-	{
-		return new Response("<html><body>Page Connection</body></html>");
-	}*/
 
-	/**
-	 * Route("/signup")
-	 */
-	/*public function signup()
-	{
-		return new Response("<html><body>Page Inscription</body></html>");
-	}*/
-
+    /**
+     * @Route("/contact")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function contact(Environment $twig){
+        return new Response($twig->render('pages/contact.html.twig'));
+    }
 }
-
-
-
-
-
-

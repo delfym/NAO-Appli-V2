@@ -3,6 +3,8 @@
 /public/bundles/
 /var/
 /vendor/
+.env/dist
+.idea/php.xml
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-pack ###
