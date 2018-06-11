@@ -88,4 +88,16 @@ class PagesController
     public function contact(Environment $twig){
         return new Response($twig->render('pages/contact.html.twig'));
     }
+
+    /**
+     * @Route("/adminSpace")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function adminSpace(Environment $twig){
+        return new Response($twig->render('pages/adminSpace.html.twig'));
+    }
 }
