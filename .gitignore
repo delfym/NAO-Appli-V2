@@ -6,6 +6,7 @@
 .env/dist
 .idea/php.xml
 /.idea
+.composer.json
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-pack ###
