@@ -4,6 +4,7 @@
 /var/
 /vendor/
 .env/dist
+.env
 .idea/php.xml
 ###< symfony/framework-bundle ###
 
