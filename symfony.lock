@@ -92,9 +92,6 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
-    "pagerfanta/pagerfanta": {
-        "version": "v1.1.0"
-    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -397,15 +394,6 @@
     },
     "symfony/yaml": {
         "version": "v4.0.9"
-    },
-    "twig/extensions": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "4851df0afc426b8f07204379d21fca25b6df5d68"
-        }
     },
     "twig/twig": {
         "version": "v2.4.8"

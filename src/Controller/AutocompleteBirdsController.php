@@ -2,11 +2,16 @@
 
 namespace App\Controller;
 
-//use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+//use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AutocompleteBirdsController extends Controller
 {
@@ -15,29 +20,39 @@ class AutocompleteBirdsController extends Controller
 	 */
 	public function autocompleteBirds(Request $request)
 	{
-		// verifier si c'est une requete XMLHTTP via isXmlHttpRequest()
+
+		if ($request->isXmlHttpRequest() && $this->isGranted("ROLE_USER")) 
+		{
 
 		$term = $request->get('term');
 
 		$em = $this->getDoctrine()->getManager();
 
+		$encoders = array(new XmlEncoder(), new JsonEncoder);
+
+		$normalizers = array(new ObjectNormalizer());
+
+		$serializer = new Serializer($normalizers, $encoders);
+
 		$birds = $em->getRepository('App:Birds')->createQueryBuilder('b')
+			->select('b.nom_de_reference')
 			->andWhere('b.nom_de_reference LIKE :bird')
 			->setParameter('bird', '%'.$term.'%')
 			->getQuery()
 			->getResult();
 
-		//var_dump($birds);
-		//var_dump($term);
+	    $json = $serializer->serialize($birds, 'json');
+		$response = new Response($json);
+		$response->headers->set('Content-Type', 'application/json');
+		return $response;
+		
+		}
+		else{
 
-	    foreach ($birds as $bird) 
-	    {
-	    	$nom_reference[] = $bird->getNomDeReference(); //configurer l'affichage nom dans ajax/jquery Garder les objets intacts  
-	    }
+			//message flash
+			return new RedirectResponse("/home");
+		}
 
-		$autocomplete = new JsonResponse();
-		$autocomplete->setData($nom_reference);
-
-		return $autocomplete;
+		
 	}
 }

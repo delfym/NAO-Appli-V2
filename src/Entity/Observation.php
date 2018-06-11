@@ -38,7 +38,7 @@ class Observation
     private $post_date;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $validation_date;
 

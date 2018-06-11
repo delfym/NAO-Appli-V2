@@ -43,9 +43,11 @@
                         <h3>Formulaire de saisie</h3>
 
                         <form class="form-group" action="" method="post">
-                            {{ form_label(form.bird) }}
-                            {{ form_errors(form.bird) }}
-                            {{ form_widget(form.bird) }}
+                            {{ form_start(form) }} <!-- definition de la classe directement là -->
+
+                            {{ form_label(form.autocomp_bird) }}
+                            {{ form_errors(form.autocomp_bird) }}
+                            {{ form_widget(form.autocomp_bird) }}
 
                             {{ form_label(form.geographic_coordinates) }}
                             {{ form_errors(form.geographic_coordinates) }}
@@ -60,6 +62,9 @@
                             {{ form_widget(form.comment) }}
 
                             {{ form_widget(form.save) }}
+
+                            {{ form_rest(form) }}
+                            {{ form_end(form) }}
 
                             <!--<label>Votre observation :</label>
                             <textarea class="form-control" name="commentObs"></textarea>
