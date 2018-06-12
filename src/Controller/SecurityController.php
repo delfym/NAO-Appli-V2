@@ -13,9 +13,12 @@ use Twig\Environment;
 class SecurityController extends Controller
 {
 
-	/**
-	 * @Route("/signin", name="signin")
-	 */
+    /**
+     * @Route("/signin", name="signin")
+     * @param Request $request
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
 	public function signin(Request $request, AuthenticationUtils $authenticationUtils)
 	{
          $error = $authenticationUtils->getLastAuthenticationError();
@@ -26,7 +29,6 @@ class SecurityController extends Controller
          		'error'			=> $error,
          ));
 	}
-
 
     /**
      * @Route("/adminSpace")
