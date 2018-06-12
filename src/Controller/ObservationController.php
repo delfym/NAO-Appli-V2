@@ -38,7 +38,7 @@ class ObservationController extends Controller
 			->andWhere('b.nom_de_reference = :bird')
 			->setParameter('bird', $selectedBird)
 			->getQuery()
-			->getOneOrNullResult();
+			->getOneOrNullResult(); // retourne un resultat sous forme d'objet ou null (faire verif if null === bird)
 			//->getResult();
 
 			$user->addObservation($observ);
