@@ -1,8 +1,11 @@
 ###> symfony/framework-bundle ###
 /.env
+/.env/dist
 /public/bundles/
 /var/
 /vendor/
+/.idea/php.xml
+/.idea
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-pack ###
@@ -11,9 +14,11 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-pack ###
+
 composer.json
 composer.lock
 webpack.config.js
+
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
