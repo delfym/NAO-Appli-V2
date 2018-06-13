@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use \Datetime;
+//use App\Validator\Constraints as ValAssert;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ObservationRepository")
@@ -18,9 +21,10 @@ class Observation
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * ORM\Column(type="string", length=255) PLUS PRIS EN COMPTE
+     * ValAssert\GeoCoo
      */
-    private $geographic_coordinates;
+    //private $geographic_coordinates;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -63,6 +67,16 @@ class Observation
      * @ORM\JoinColumn(nullable=false)
      */
     private $bird;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $geo_latitude;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $geo_longitude;
 
     public function __construct()
     {
@@ -181,4 +195,70 @@ class Observation
 
         return $this;
     }
+
+    public function getGeoLatitude(): ?int
+    {
+        return $this->geo_latitude;
+    }
+
+    public function setGeoLatitude(int $geo_latitude): self
+    {
+        $this->geo_latitude = $geo_latitude;
+
+        return $this;
+    }
+
+    public function getGeoLongitude(): ?int
+    {
+        return $this->geo_longitude;
+    }
+
+    public function setGeoLongitude(int $geo_longitude): self
+    {
+        $this->geo_longitude = $geo_longitude;
+
+        return $this;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if (is_numeric($this->getGeoLongitude()))  
+        {
+            if (is_numeric($this->getGeoLatitude())) 
+            {
+                if ($this->getGeoLatitude() >= -90 && $this->getGeoLatitude() <= 90) 
+                {
+                    if (false === $this->getGeoLongitude() >= -180 && $this->getGeoLongitude() <= 180) 
+                    {
+                        $context->buildViolation('Longitude invalide')
+                        ->atPath('geo_latitude')
+                        ->addViolation();
+                    }
+                }
+                else
+                {
+                    $context->buildViolation('Latitude invalide')
+                    ->atPath('geo_latitude')
+                    ->addViolation();
+                }          
+            }
+            else
+            {
+                $context->buildViolation('Latitude invalide')
+                    ->atPath('geo_latitude')
+                    ->addViolation();
+            }
+        }
+        else
+        {
+                $context->buildViolation('Longitude invalide')
+                    ->atPath('geo_longitude')
+                    ->addViolation();
+        }
+
+
+    }// peut aussi etre externalisée, mais vu que l'on injecte aucun service pas la peine
 }
