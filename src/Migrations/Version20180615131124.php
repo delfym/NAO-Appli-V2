@@ -8,14 +8,16 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180613115427 extends AbstractMigration
+final class Version20180615131124 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE observation ADD geo_latitude INT NOT NULL, ADD geo_longitude INT NOT NULL');
+        $this->addSql('ALTER TABLE forgot_password ADD user_id INT NOT NULL');
+        $this->addSql('ALTER TABLE forgot_password ADD CONSTRAINT FK_2AB9B566A76ED395 FOREIGN KEY (user_id) REFERENCES app_users (id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_2AB9B566A76ED395 ON forgot_password (user_id)');
     }
 
     public function down(Schema $schema) : void
@@ -23,6 +25,8 @@ final class Version20180613115427 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE observation DROP geo_latitude, DROP geo_longitude');
+        $this->addSql('ALTER TABLE forgot_password DROP FOREIGN KEY FK_2AB9B566A76ED395');
+        $this->addSql('DROP INDEX UNIQ_2AB9B566A76ED395 ON forgot_password');
+        $this->addSql('ALTER TABLE forgot_password DROP user_id');
     }
 }
