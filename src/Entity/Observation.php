@@ -223,7 +223,7 @@ class Observation
     /**
      * @Assert\Callback
      */
-    public function validate(ExecutionContextInterface $context)
+    public function validate(ExecutionContextInterface $context) // Assert\Range ... :-(
     {
         if (is_numeric($this->getGeoLongitude()))  
         {
