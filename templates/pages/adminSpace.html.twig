@@ -6,41 +6,41 @@
 
 	<!-- container -->
 	<div class="container">
-		
+
 		<ol class="breadcrumb">
 			<li><a href="index.html">Accueil</a></li>
 			<li class="active">Page d'administration</li>
 		</ol>
 
 		<div class="row">
-            <div class="row">
-                <p></p>
-            </div>
+			<div class="row">
+				<p></p>
+			</div>
 			<!-- Sidebar -->
 			<aside class="col-md-4 sidebar sidebar-left " id="sidebarMenu">
 
-                <!--div class="row" id="sidebarMenu"></div-->
+				<!--div class="row" id="sidebarMenu"></div-->
 				<div class="row widget" id="obsLink">
 					<div class="col-xs-12">
 						<h4>Bonjour {{ username }}</h4>
-                        <h5><a href="#">Mes observations</a></h5>
-						</div>
-				</div>
-				<div class="row widget">
-					<div class="col-xs-12">
-                        <h4><a href="{{ asset('observForm') }}">Saisir une observation</a></h4>
+						<h5><a href="#">Mes observations</a></h5>
 					</div>
 				</div>
 				<div class="row widget">
 					<div class="col-xs-12">
-                        <h4><a href="#">Gérer les membres</a></h4>
-                        <p>Commun à tous les admins</p>
+						<h4><a href="{{ asset('observForm') }}">Saisir une observation</a></h4>
 					</div>
 				</div>
 				<div class="row widget">
 					<div class="col-xs-12">
-                        <h4><a href="#">Les saisies à valider</a></h4>
-                        <p>Commun à tous les admins</p>
+						<h4><a href="#">Gérer les membres</a></h4>
+						<p>Commun à tous les admins</p>
+					</div>
+				</div>
+				<div class="row widget">
+					<div class="col-xs-12">
+						<h4><a href="#">Les saisies à valider</a></h4>
+						<p>Commun à tous les admins</p>
 					</div>
 				</div>
 
@@ -52,36 +52,39 @@
 				<header class="page-header">
 					<h1 class="page-title">Mon tableau de bord</h1>
 				</header>
-                <p>Mes dernières observations
-                <ul><a href="#">Mes dernières observations</a></ul>
-                        <li>obs 1 <a href="#">...</a></li>
-                        <li>obs 2 <a href="#">...</a></li>
-                        <li>obs 3 <a href="#">...</a></li>
-                        <li>obs 4 <a href="#">...</a></li>
-                </p>
-                <p><a href="#">Saisir de nouvelles observations</a></p>
+				<p>Mes dernières observations
+				<ul><a href="#">Mes dernières observations</a>
+
+					<!-- faire une boucle pour récupérer les datas d'obs -->
+                    {% for obs in observations %}
+
+						<li>{{ obs.observationTitle }}  - date de l'observation : {{ obs.comment }}  - soiseau observé : {{ obs.bird.nomDeReference }} </li>
+                    {% endfor %}
+				</ul>
+				</p>
+				<p><a href="#">Saisir de nouvelles observations</a></p>
+
+				<p>Mes observations à valider
+
+				<ul><a href="#">On récupère ici les 3 premières obs en attente</a>
+                    {% for validObs in validatesObs %}
+						<li>{{ validObs.observationTitle }}  - commentaire : {{ validObs.comment }}  </li>
+                    {% endfor %}
+				</ul>
+				</p>
 
 
-                <p>Mes observations à valider
-                <ul><a href="#">On récupère ici les 3 premières obs en attente</a></ul>
-                <li>obs 1 <a href="#">...</a></li>
-                <li>obs 2 <a href="#">...</a></li>
-                <li>obs 3 <a href="#">...</a></li>
+				<p>Les nouveaux naturalistes à valider</p>
+				<ul><a href="#">On récupère ici les 3 premièrs memebres en attente de validation</a></ul>
+				<li>nat 1 <a href="#">...</a></li>
+				<li>nat 2 <a href="#">...</a></li>
+				<li>nat 3 <a href="#">...</a></li>
 
-                </p>
-
-
-                <p>Les nouveaux naturalistes à valider</p>
-                <ul><a href="#">On récupère ici les 3 premièrs memebres en attente de validation</a></ul>
-                <li>nat 1 <a href="#">...</a></li>
-                <li>nat 2 <a href="#">...</a></li>
-                <li>nat 3 <a href="#">...</a></li>
-
-            </article>
+			</article>
 			<!-- /Article -->
 
 		</div>
-	</div>	<!-- /container -->
-		
+	</div>    <!-- /container -->
+
 
 {% endblock %}

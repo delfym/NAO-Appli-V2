@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Observation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -40,10 +41,23 @@ class SecurityController extends Controller
      */
     public function adminSpace(Environment $twig){
         $username = $this->getUser()->getUsername();
+
+        $obs = $this->getDoctrine()
+                    ->getRepository(Observation::class);
+
+        $observations = $obs->findByUserId(1); //id à envoyer dynamiquement
+
+        $validatesObs = $obs->findByStatus(1); //id à envoyer dynamiquement
+
+        //  var_dump($validatesObs);
+
         return new Response($twig->render('pages/adminSpace.html.twig',[
-            'username' => $username
+            'username' => $username,
+            'observations' => $observations,
+            'validatesObs' => $validatesObs
         ]));
     }
+
 }
 
 

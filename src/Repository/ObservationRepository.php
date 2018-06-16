@@ -21,14 +21,32 @@ class ObservationRepository extends ServiceEntityRepository
 
     public function findByUserId($id)
     {
-        return $this->createQueryBuilder('o')
-            ->Where('o.user_id = :id')
-            ->setParameter('id', $id)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(4)
+        //faire la requête depuis l'entité/le repo app_user
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.user', 'user')
+            ->addSelect('user')
+            ->andWhere('user.id = :user_id')
+            ->setParameter('user_id', $id)
+            ->orderBy('o.post_date', 'ASC')
+            ->setMaxResults(2)
             ->getQuery()
-            ->getResult()
-            ;
+        ;
+        return $qb->getResult();
+    }
+
+    public function findByStatus($id)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.user', 'user')
+            ->where('o.validation_date IS NULL')
+            ->andWhere('user.id = :user_id')
+            ->addSelect('user')
+            ->setParameter('user_id', $id)
+            ->orderBy('o.validation_date', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+        ;
+        return $qb->getResult();
     }
 
 //    /**
