@@ -25,7 +25,6 @@ class SignupType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Confirmez votre mot de passe'),
-
             ))
             ->add('mail', TextType::class)
             ->add('save', SubmitType::class, array(

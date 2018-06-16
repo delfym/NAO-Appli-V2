@@ -14,7 +14,7 @@ class SignupController extends Controller
 	/**
 	 * @Route("/signup")
 	 */
-	public function signup(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface)
+	public function signup(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface) // a ameliorer avec gestion access avant et apres POST
 	{
 		$user = new AppUsers();
 		$form = $this->createForm(SignupType::class, $user);
@@ -32,11 +32,12 @@ class SignupController extends Controller
 			return $this->redirectToRoute('home');
 		}
 
-		return $this->render('signup.html.twig', array(
+		return $this->render('pages/signup.html.twig', array(
 			'form' => $form->createView()
 		));
 		
 	}
 }
+
 
  

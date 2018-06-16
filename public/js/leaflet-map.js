@@ -1,4 +1,3 @@
-
 var mymap = L.map('mapid').setView([47.331, 2.465], 5);
 
 var myLocation;
@@ -27,7 +26,8 @@ function onLocationFound(e) {
     L.marker(e.latlng).addTo(mymap)
         //.bindPopup("You are within " + radius + " meters from this point").openPopup();
         .bindPopup("<b>J'ai vu un oiseau ici : </b><br>Latitude : " + myLat + " - Longitude : " + myLng).openPopup();
-    $('#gpsObs').val(myLat + " - " + myLng);
+    $('#observation_geo_latitude').val(myLat);
+    $('#observation_geo_longitude').val(myLng);
     L.circle(e.latlng, radius).addTo(mymap);
 }
 
@@ -63,6 +63,6 @@ mymap.on('click', function (e) {
     marker = L.marker([myLat, myLng]).addTo(mymap);
     marker.bindPopup("<b>J'ai vu un oiseau ici : </b><br>Latitude : " + myLat + " - Longitude : " + myLng).openPopup();
 
-    $('#gpsObs').val(myLat + " - " + myLng);
+    $('#observation_geo_latitude').val(myLat);
+    $('#observation_geo_longitude').val(myLng); 
 });
-

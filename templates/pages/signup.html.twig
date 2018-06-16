@@ -1,80 +1,18 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
 
-	<header id="head" class="secondary"></header>
+{{ form_start(form) }}
 
-	<!-- container -->
-	<div class="container">
+{{ form_row(form.firstname) }}
+{{ form_row(form.lastname) }}
+{{ form_row(form.username) }}
+{{ form_row(form.password) }}
+{{ form_row(form.mail) }}
+{{ form_widget(form.save, {'attr': {'type': 'button'}}) }}
 
-		<ol class="breadcrumb">
-			<li><a href="{{ asset('home') }}">Accueil</a></li>
-			<li class="active">S'enregistrer</li>
-		</ol>
+{{ form_rest(form) }}
+{{ form_end(form) }}
 
-		<div class="row">
-			
-			<!-- Article main content -->
-			<article class="col-xs-12 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">S'enregistrer</h1>
-				</header>
-				
-				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<h3 class="thin text-center">Enregistrer un nouveau compte</h3>
-							<p class="text-center text-muted">Vous avez déjà un compte, <a href="{{ ('signin') }}">Se connecter</a></p>
-							<hr>
-
-							<form>
-								<div class="top-margin">
-									<label>Prénom</label>
-									<input type="text" class="form-control">
-								</div>
-								<div class="top-margin">
-									<label>Nom</label>
-									<input type="text" class="form-control">
-								</div>
-								<div class="top-margin">
-									<label>Adresse Email<span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
-								</div>
-
-								<div class="row top-margin">
-									<div class="col-sm-6">
-										<label>Mot de passe <span class="text-danger">*</span></label>
-										<input type="text" class="form-control">
-									</div>
-									<div class="col-sm-6">
-										<label>Confirmer le mot de passe <span class="text-danger">*</span></label>
-										<input type="text" class="form-control">
-									</div>
-								</div>
-
-								<hr>
-
-								<div class="row">
-									<div class="col-lg-7">
-										<label class="checkbox">
-											<input type="checkbox"> 
-											J'ai lu les <a href="page_terms.html">Conditions générales et les conditions d'utlisation du site</a>
-										</label>                        
-									</div>
-									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Créer le compte</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-
-				</div>
-				
-			</article>
-			<!-- /Article -->
-
-		</div>
-	</div>	<!-- /container -->
-	
 {% endblock %}

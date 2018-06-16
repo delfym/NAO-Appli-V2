@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block body %}
 
+   
     <header id="head" class="secondary"></header>
-
     <!-- container -->
     <div class="container">
 
@@ -41,7 +43,34 @@
                         <h3>Formulaire de saisie</h3>
 
                         <form class="form-group" action="" method="post">
-                            <label>Votre observation :</label>
+                            {{ form_start(form) }} <!-- definition de la classe directement là -->
+
+                            {{ form_label(form.autocomp_bird) }}
+                            {{ form_errors(form.autocomp_bird) }}
+                            {{ form_widget(form.autocomp_bird) }}
+
+                            {{ form_label(form.geo_latitude) }}
+                            {{ form_errors(form.geo_latitude) }}
+                            {{ form_widget(form.geo_latitude) }}
+
+                            {{ form_label(form.geo_longitude) }}
+                            {{ form_errors(form.geo_longitude) }}
+                            {{ form_widget(form.geo_longitude) }}
+
+                            {{ form_label(form.observation_title) }}
+                            {{ form_errors(form.observation_title) }}
+                            {{ form_widget(form.observation_title) }}
+
+                            {{ form_label(form.comment) }}
+                            {{ form_errors(form.comment) }}
+                            {{ form_widget(form.comment) }}
+
+                            {{ form_widget(form.save) }}
+
+                            {{ form_rest(form) }}
+                            {{ form_end(form) }}
+
+                            <!--<label>Votre observation :</label>
                             <textarea class="form-control" name="commentObs"></textarea>
                             <label>Coordonnées de l'observation :</label>
                             <input class="form-control" type="text" id="gpsObs"/>
@@ -51,7 +80,7 @@
                             <label>Photo de l'oiseau (facultatif):</label>
                             <input class="form-control" type="file" name="imgObs"/>
 
-                            <input class="btn btn-action btnLigtht" type="submit" name="submitObs"/>
+                            <input class="btn btn-action btnLigtht" type="submit" name="submitObs"/> -->
                         </form>
                     </div>
                 </div>
@@ -72,6 +101,4 @@
     </div>    <!-- /container -->
 
 {% endblock %}
-
-	
 
