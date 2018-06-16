@@ -18,6 +18,9 @@ yarn-error.log
 composer.json
 composer.lock
 webpack.config.js
+.env.dist
+.gitignore
+
 
 ###> symfony/web-server-bundle ###
 /.web-server-pid
