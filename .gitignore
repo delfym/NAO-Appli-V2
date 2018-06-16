@@ -17,6 +17,7 @@ yarn-error.log
 
 composer.json
 composer.lock
+composer.phar
 webpack.config.js
 .env.dist
 .gitignore

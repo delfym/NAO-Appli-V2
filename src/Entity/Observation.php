@@ -88,18 +88,6 @@ class Observation
         return $this->id;
     }
 
-    public function getGeographicCoordinates(): ?string
-    {
-        return $this->geographic_coordinates;
-    }
-
-    public function setGeographicCoordinates(string $geographic_coordinates): self
-    {
-        $this->geographic_coordinates = $geographic_coordinates;
-
-        return $this;
-    }
-
     public function getObservationTitle(): ?string
     {
         return $this->observation_title;
