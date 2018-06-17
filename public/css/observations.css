@@ -1,3 +1,14 @@
 .title-obs {
     font-weight: bold;
 }
+
+.img_obs {
+    height: 150px;
+    width: auto;
+}
+
+
+.obs{
+    padding-left: 15px;
+
+}

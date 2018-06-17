@@ -19,7 +19,7 @@ class ObservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Observation::class);
     }
 
-    public function findByUserId($id)
+    public function findByUserId($id, $offset=null)
     {
         //faire la requête depuis l'entité/le repo app_user
         $qb = $this->createQueryBuilder('o')
@@ -28,13 +28,13 @@ class ObservationRepository extends ServiceEntityRepository
             ->andWhere('user.id = :user_id')
             ->setParameter('user_id', $id)
             ->orderBy('o.post_date', 'ASC')
-            ->setMaxResults(2)
+            ->setMaxResults($offset)
             ->getQuery()
         ;
         return $qb->getResult();
     }
 
-    public function findByStatus($id)
+    public function findByStatus($id, $offset=null)
     {
         $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.user', 'user')
@@ -43,7 +43,7 @@ class ObservationRepository extends ServiceEntityRepository
             ->addSelect('user')
             ->setParameter('user_id', $id)
             ->orderBy('o.validation_date', 'ASC')
-            ->setMaxResults(3)
+            ->setMaxResults($offset)
             ->getQuery()
         ;
         return $qb->getResult();

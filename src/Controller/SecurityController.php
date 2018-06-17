@@ -2,17 +2,30 @@
 
 namespace App\Controller;
 
+use App\Entity\AppUsers;
 use App\Entity\Observation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\User\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Twig\Environment;
 
 
 class SecurityController extends Controller
 {
+    private $currentUsername;
+    private $currentUserId;
+
+    public function __construct()
+    {
+        //$this->currentUsername = $this->getUser()->getUsername();
+        //$this->currentUserId = $this->getUser()->getId();
+        //var_dump($this);
+
+    }
 
     /**
      * @Route("/signin", name="signin")
@@ -40,19 +53,20 @@ class SecurityController extends Controller
      * @throws \Twig_Error_Syntax
      */
     public function adminSpace(Environment $twig){
-        $username = $this->getUser()->getUsername();
+
+        $currentUserId = $this->getUser()->getId();
+        $currentUsername = $this->getUser()->getUsername();
 
         $obs = $this->getDoctrine()
-            ->getRepository(Observation::class);
+                    ->getRepository(Observation::class);
 
-        $observations = $obs->findByUserId(1); //id à envoyer dynamiquement
-
-        $validatesObs = $obs->findByStatus(1); //id à envoyer dynamiquement
+        $observations = $obs->findByUserId($currentUserId, 2);
+        $validatesObs = $obs->findByStatus($currentUserId);
 
         //  var_dump($validatesObs);
 
         return new Response($twig->render('pages/adminSpace.html.twig',[
-            'username' => $username,
+            'username' => $currentUsername,
             'observations' => $observations,
             'validatesObs' => $validatesObs
         ]));
@@ -67,24 +81,19 @@ class SecurityController extends Controller
      * @throws \Twig_Error_Syntax
      */
     public function myObservations(Environment $twig){
-        $username = $this->getUser()->getUsername();
+        $currentUserId = $this->getUser()->getId();
+        $currentUsername = $this->getUser()->getUsername();
 
         $obs = $this->getDoctrine()
-            ->getRepository(Observation::class);
+                    ->getRepository(Observation::class);
 
-        $observations = $obs->findByUserId(1); //id à envoyer dynamiquement
-
-        $validatesObs = $obs->findByStatus(1); //id à envoyer dynamiquement
-
-        //  var_dump($validatesObs);
+        $observations = $obs->findByUserId($currentUserId);
 
         return new Response($twig->render('pages/adminSpace/myObservations.html.twig',[
-            'username' => $username,
-            'observations' => $observations
+            'username'      => $currentUsername,
+            'observations'  => $observations
         ]));
     }
 
 
 }
-
-

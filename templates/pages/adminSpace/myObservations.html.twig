@@ -22,8 +22,7 @@
                 <!--div class="row" id="sidebarMenu"></div-->
                 <div class="row widget" id="obsLink">
                     <div class="col-xs-12">
-                        <h4>Bonjour {{ username }}</h4>
-                        <h5><a href="#">Mes observations</a></h5>
+                        <h4><a href="#">Mes observations</a></h4>
                     </div>
                 </div>
                 <div class="row widget">
@@ -52,14 +51,20 @@
                 <header class="page-header">
                     <h1 class="page-title">Mes observations</h1>
                 </header>
-                <section class="">
-{{ dump(observations) }}
+                <section class="row obs">
                     <!-- faire une boucle pour récupérer les datas d'obs -->
                     {% for obs in observations %}
-                        <h5 class="h5">{{ obs.observationTitle }}</h5>
-                        <p><span class="title-obs">Date de l'observation :</span> {{ obs.postDate | date("d/m/Y") }} </p>
-                        <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
-                        <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
+                        <u><h5 class="h5 title-obs">{{ obs.observationTitle }}</h5></u>
+                        <div class="col-lg-7">
+                            <p><span class="title-obs">Date de l'observation :</span> {{ obs.postDate | date("d/m/Y") }}
+                            </p>
+                            <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
+                            <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
+                        </div>
+                        <div class="col">
+                            <p><img class="img_obs" src="{{ asset('images/chouette.jpg') }}"></p>
+                        </div>
+                        <p id="encadre"></p>
                     {% endfor %}
                 </section>
 

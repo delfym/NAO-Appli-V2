@@ -99,23 +99,32 @@ form label, form .btn{
     margin-bottom: 8px;
 }
 
-#sidebarMenu, #sidebarMenu a  {
+#sidebarMenu, #sidebarMenu a {
     background-color: #FF9B22;
     color: white;
     height: 600px;
+	border-radius: 5px;
+	box-shadow: 0px 4px 4px #ffb73a;
 }
 
 #obsLink {
     margin-top: 45px;
 }
 
-
+#encadre{
+	height: 1px;
+	background-color: #ffb73a;
+	border-radius: 5px;
+	box-shadow: 0px 1px 1px #ffb73a;
+}
 
 @media all and (min-width: 900px) {
     #sidebarMenu {
-        height: auto;
+		height: auto;
     }
 }
+
+
 /*
 .btnLigtht{
     color: rgba(255,255,255,.5);
