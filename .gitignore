@@ -21,7 +21,7 @@ composer.phar
 webpack.config.js
 .env.dist
 .gitignore
-
+/src/Migrations
 
 ###> symfony/web-server-bundle ###
 /.web-server-pid
