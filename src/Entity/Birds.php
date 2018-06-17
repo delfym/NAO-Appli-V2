@@ -31,7 +31,7 @@ class Birds
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom_verticulaire;
+    private $nom_verniculaire;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -107,14 +107,14 @@ class Birds
         return $this;
     }
 
-    public function getNomVerticulaire(): ?string
+    public function getNomVerniculaire(): ?string
     {
-        return $this->nom_verticulaire;
+        return $this->nom_verniculaire;
     }
 
-    public function setNomVerticulaire(string $nom_verticulaire): self
+    public function setNomVerniculaire(string $nom_verniculaire): self
     {
-        $this->nom_verticulaire = $nom_verticulaire;
+        $this->nom_verniculaire = $nom_verniculaire;
 
         return $this;
     }

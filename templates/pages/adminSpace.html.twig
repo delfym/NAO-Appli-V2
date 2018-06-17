@@ -58,7 +58,7 @@
 					<!-- faire une boucle pour récupérer les datas d'obs -->
                     {% for obs in observations %}
 
-						<li>{{ obs.observationTitle }}  - date de l'observation : {{ obs.comment }}  - soiseau observé : {{ obs.bird.nomDeReference }} </li>
+						<li>{{ obs.observationTitle }}  - date de l'observation : {{ obs.comment }}  - soiseau observé : {{ obs.bird.nomVerniculaire }} </li>
                     {% endfor %}
 				</ul>
 				</p>
