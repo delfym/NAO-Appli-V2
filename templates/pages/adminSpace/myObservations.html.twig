@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <header id="head" class="secondary"></header>
+
+    <!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="active">Page d'administration</li>
+        </ol>
+
+        <div class="row">
+            <div class="row">
+                <p></p>
+            </div>
+            <!-- Sidebar -->
+            <aside class="col-md-4 sidebar sidebar-left " id="sidebarMenu">
+
+                <!--div class="row" id="sidebarMenu"></div-->
+                <div class="row widget" id="obsLink">
+                    <div class="col-xs-12">
+                        <h4>Bonjour {{ username }}</h4>
+                        <h5><a href="#">Mes observations</a></h5>
+                    </div>
+                </div>
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h4><a href="{{ asset('observForm') }}">Saisir une observation</a></h4>
+                    </div>
+                </div>
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h4><a href="#">Gérer les membres</a></h4>
+                        <p>Commun à tous les admins</p>
+                    </div>
+                </div>
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h4><a href="#">Les saisies à valider</a></h4>
+                        <p>Commun à tous les admins</p>
+                    </div>
+                </div>
+
+            </aside>
+            <!-- /Sidebar -->
+
+            <!-- Article main content -->
+            <article class="col-md-8 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Mes observations</h1>
+                </header>
+                <section class="">
+{{ dump(observations) }}
+                    <!-- faire une boucle pour récupérer les datas d'obs -->
+                    {% for obs in observations %}
+                        <h5 class="h5">{{ obs.observationTitle }}</h5>
+                        <p><span class="title-obs">Date de l'observation :</span> {{ obs.postDate | date("d/m/Y") }} </p>
+                        <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
+                        <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
+                    {% endfor %}
+                </section>
+
+
+            </article>
+            <!-- /Article -->
+
+        </div>
+    </div>    <!-- /container -->
+
+
+{% endblock %}
