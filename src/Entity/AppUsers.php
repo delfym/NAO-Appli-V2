@@ -31,7 +31,7 @@ class AppUsers implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
@@ -51,7 +51,7 @@ class AppUsers implements UserInterface
     private $last_notif_check;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $mail;
 
@@ -59,6 +59,11 @@ class AppUsers implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Observation", mappedBy="user")
      */
     private $observations;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $MailValidationDate;
 
     public function __construct()
     {
@@ -217,5 +222,17 @@ class AppUsers implements UserInterface
             $this->username,
             $this->password,
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getMailValidationDate(): ?\DateTimeInterface
+    {
+        return $this->MailValidationDate;
+    }
+
+    public function setMailValidationDate(?\DateTimeInterface $MailValidationDate): self
+    {
+        $this->MailValidationDate = $MailValidationDate;
+
+        return $this;
     }
 }

@@ -27,12 +27,14 @@ class ForgetPasswordEraserCommand extends Command
 
 	protected function execute(InputInterface $inputinterface, OutputInterface $outputinterface)
 	{
-		$outputinterface->writeLn('Test');
+		$outputinterface->writeLn('Vidage de la table en cours');
 
+		$date = new \Datetime();
 		$oldForgetPassword = $this->em->getRepository('App:ForgotPassword')->createQueryBuilder('p')
-			->andWhere("p.request_date < DATE_ADD(CURRENT_DATE(),'-5', 'hour')")
+			->andWhere("p.request_date < DATE_ADD(:date,'-5', 'hour')")
+			->setParameter('date', $date)
 			->getQuery()
-			->getResult(); //Ecrire directement en DQL ?
+			->getResult(); //Ecrire directement en DQL ce qui evite la boucle avec execute()?
 
 		if (false === empty($oldForgetPassword)) 
 		{
@@ -43,6 +45,7 @@ class ForgetPasswordEraserCommand extends Command
 		  $this->em->flush();	
 		}
 
+		$outputinterface->writeLn('Vidage terminé');
 		//var_dump($oldForgetPassword);
 	}
 }
