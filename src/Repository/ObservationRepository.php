@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Observation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,9 +20,8 @@ class ObservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Observation::class);
     }
 
-    public function findByUserId($id, $offset=null)
+    public function findByUserId($id, $offset = null)
     {
-        //faire la requête depuis l'entité/le repo app_user
         $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.user', 'user')
             ->addSelect('user')
@@ -29,12 +29,36 @@ class ObservationRepository extends ServiceEntityRepository
             ->setParameter('user_id', $id)
             ->orderBy('o.post_date', 'ASC')
             ->setMaxResults($offset)
-            ->getQuery()
-        ;
+            ->getQuery();
+
         return $qb->getResult();
     }
 
-    public function findByStatus($id, $offset=null)
+    /**
+     * @param $id
+     * @param int $first_result
+     * @param int $max_results
+     * @return Paginator
+     */
+    public function getObs($id, $first_result = 0, $max_results = 20)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.user', 'user')
+            ->addSelect('user')
+            ->andWhere('user.id = :user_id')
+            ->setParameter('user_id', $id)
+            ->orderBy('o.post_date', 'ASC')
+            ->setFirstResult($first_result)
+            ->setMaxResults($max_results);
+     //   $obs = $qb->getQuery()->getResult();
+
+        $pag = new Paginator($qb);
+var_dump($pag);
+        $nbPages = $pag->count();
+        return $pag;
+    }
+
+    public function findByStatus($id, $offset = null)
     {
         $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.user', 'user')
@@ -44,11 +68,11 @@ class ObservationRepository extends ServiceEntityRepository
             ->setParameter('user_id', $id)
             ->orderBy('o.validation_date', 'ASC')
             ->setMaxResults($offset)
-            ->getQuery()
-        ;
-        return $qb->getResult();
-    }
+            ->getQuery();
 
+        $qb->getResult();
+    }
+}
 //    /**
 //     * @return Observation[] Returns an array of Observation objects
 //     */
@@ -77,4 +101,23 @@ class ObservationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /*
+     *
+    public function findByStatus($id, $offset=null)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.user', 'user')
+            ->where('o.validation_date IS NULL')
+            ->andWhere('user.id = :user_id')
+            ->addSelect('user')
+            ->setParameter('user_id', $id)
+            ->orderBy('o.validation_date', 'ASC')
+            ->setMaxResults($offset)
+            ->getQuery()
+        ;
+        return $qb->getResult();
+    }
+
 }
+*/

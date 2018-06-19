@@ -10,5 +10,18 @@
 
 .obs{
     padding-left: 15px;
+}
 
+#title-user{
+    background-color: rgba(255,202,41, 0.2);
+    padding: 10px;
+/*  opacity: 0.2;*/
+}
+
+.btn-obs {
+    margin: 6px;
+}
+
+.btn-grp-obs {
+    padding-left: 6px;
 }
