@@ -72,6 +72,22 @@ var_dump($pag);
 
         $qb->getResult();
     }
+
+    public function updateObs($obsId, $userId)
+    {
+        $today = new \DateTime('now');
+        $this->createQueryBuilder($obsId, $userId)
+            ->update(Observation::class, 'o')
+            ->leftJoin('o.user', 'user')
+            ->where('o.obsId = :obsId')
+            ->andWhere('user.id = :user_id')
+            ->addSelect('user')
+            ->setParameter('user_id', $userId)
+            ->setParameter('obsId', $obsId)
+            ->set('o.validation_date', $today)
+        ;
+    }
+
 }
 //    /**
 //     * @return Observation[] Returns an array of Observation objects
