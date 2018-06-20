@@ -101,7 +101,7 @@ class AdminSpaceController extends Controller
         $obs = $this->getDoctrine()
                     ->getRepository(Observation::class);
 
-        $observations = $obs->findByUserId($this->currentUserId, 2);
+        $observations = $obs->findByUserId($this->currentUserId);
         $validatesObs = $obs->findByStatus($this->currentUserId);
 
         return new Response($twig->render('pages/adminSpace/obsToValidate.html.twig',[
