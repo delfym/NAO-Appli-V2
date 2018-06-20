@@ -5,6 +5,7 @@
 .img_obs {
     height: 150px;
     width: auto;
+    border-radius: 4px;
 }
 
 
@@ -23,5 +24,12 @@
 }
 
 .btn-grp-obs {
-    padding-left: 6px;
+    padding-left: 14px;
+}
+
+@media all and (min-width: 892px) {
+    #sidebarMenu {
+        height: auto;
+        padding: 1px;
+    }
 }

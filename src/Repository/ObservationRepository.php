@@ -73,7 +73,7 @@ var_dump($pag);
         $qb->getResult();
     }
 
-    public function updateObs($obsId, $userId)
+    public function updateObservation($obsId, $userId)
     {
         $today = new \DateTime('now');
         $this->createQueryBuilder($obsId, $userId)
@@ -85,6 +85,8 @@ var_dump($pag);
             ->setParameter('user_id', $userId)
             ->setParameter('obsId', $obsId)
             ->set('o.validation_date', $today)
+            ->getQuery()
+            ->execute()
         ;
     }
 
