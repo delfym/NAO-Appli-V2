@@ -140,8 +140,6 @@ class AdminSpaceController extends Controller
      * @return Response
      */
     public function refusedObs(Request $request){
-        //prévoir le cas d'une observation déjà validée?
-
         if ($request->isMethod('POST')) {
             $obsId = htmlspecialchars($_POST['idObs']);
             $refusalComment = htmlspecialchars($_POST['refusalComment']);
