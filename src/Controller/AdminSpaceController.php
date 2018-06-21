@@ -143,7 +143,6 @@ class AdminSpaceController extends Controller
         //prévoir le cas d'une observation déjà validée?
 
         if ($request->isMethod('POST')) {
-            var_dump($_POST);
             $obsId = htmlspecialchars($_POST['idObs']);
             $refusalComment = htmlspecialchars($_POST['refusalComment']);
 
@@ -158,7 +157,7 @@ class AdminSpaceController extends Controller
 
             return new RedirectResponse('obsToValidate');
         }
-        return new JsonResponse(null,500);  //envoyer un message d'erreur?
+        return new RedirectResponse('obsToValidate');
     }
 
     private function getCurrentUser(){

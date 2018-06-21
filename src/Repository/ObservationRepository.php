@@ -78,25 +78,6 @@ class ObservationRepository extends ServiceEntityRepository
 
         return $qb->getResult();
     }
-
-    // A supprimer
-    public function updateObservation($obsId, $userId)
-    {
-        $today = new \DateTime('now');
-        $this->createQueryBuilder(Observation::class, 'o')
-            ->update(Observation::class, 'o')
-            ->leftJoin('o.user', 'user')
-            ->where('o.obsId = :obsId')
-            ->andWhere('user.id = :user_id')
-            ->addSelect('user')
-            ->setParameter('user_id', $userId)
-            ->setParameter('obsId', $obsId)
-            ->set('o.validation_date', $today)
-            ->getQuery()
-            ->execute()
-        ;
-    }
-
 }
 //    /**
 //     * @return Observation[] Returns an array of Observation objects
