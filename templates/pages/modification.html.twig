@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <header id="head" class="secondary"></header>
+
+    <!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="{{ asset('home') }}">Accueil</a></li>
+            <li class="active">Accès membre</li>
+        </ol>
+
+        <div class="row">
+
+            <!-- Article main content -->
+            <article class="col-xs-12 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Creation d'un compte NAO</h1>
+                </header>
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3 class="thin text-center">Vos Informations</h3>
+                            <hr>
+
+                            <form action="" method="post">
+                                <div class="top-margin">
+                                {{ form_start(form) }}	
+
+								{{ form_label(form.firstname) }}
+                            	{{ form_errors(form.firstname) }}
+                            	{{ form_widget(form.firstname) }}
+
+                            	{{ form_label(form.lastname) }}
+                            	{{ form_errors(form.lastname) }}
+                            	{{ form_widget(form.lastname) }}
+
+                            	{{ form_label(form.username) }}
+                            	{{ form_errors(form.username) }}
+                            	{{ form_widget(form.username) }}
+
+
+                            	{{ form_label(form.mail) }}
+                            	{{ form_errors(form.mail) }}
+                            	{{ form_widget(form.mail) }}
+
+                                </div>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-lg-4 text-right">
+                                        {{ form_widget(form.save) }}
+
+                                        {{ form_rest(form) }}
+                            			{{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </article>
+            <!-- /Article -->
+
+        </div>
+    </div>    <!-- /container -->
+
+{% endblock %}
