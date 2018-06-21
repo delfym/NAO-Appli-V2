@@ -94,4 +94,17 @@ class PagesController
     {
         return new Response($twig->render('pages/contact.html.twig'));
     }
+
+    /**
+     * @Route("/legals")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function legals(Environment $twig)
+    {
+        return new Response($twig->render('pages/legals.html.twig'));
+    }
 }
