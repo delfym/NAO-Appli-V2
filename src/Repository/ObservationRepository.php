@@ -61,6 +61,7 @@ class ObservationRepository extends ServiceEntityRepository
     /**
      * @param $id
      * @param null $offset
+     * @return mixed
      */
     public function findByStatus($id, $offset = null)
     {
@@ -77,6 +78,7 @@ class ObservationRepository extends ServiceEntityRepository
         return $qb->getResult();
     }
 
+    // A supprimer
     public function updateObservation($obsId, $userId)
     {
         $today = new \DateTime('now');

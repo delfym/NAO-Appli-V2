@@ -17,9 +17,7 @@
                 <p></p>
             </div>
             <!-- Sidebar -->
-
-            {%  include ('pages/adminSpace/asideBar.html.twig') %}
-
+            {% include ('pages/adminSpace/asideBar.html.twig') %}
             <!-- /Sidebar -->
 
             <!-- Article main content -->
@@ -48,13 +46,45 @@
                             <div class="row btn-group btn-grp-obs" data-path="{{ asset('updateObs') }}">
                                 <a class="btn-action btn btn-obs" name="validBtn_{{ obs.id }}"
                                    href="{#{ asset('updateObs') }#}" type="button">Valider</a>
-                                <button class="btn-action btn btn-obs" name="RefuseBtn_{{ obs.id }}" type="submit">
+                                <button class="btn-action btn btn-obs" ype="submit"
+                                        data-toggle="modal"
+                                        data-target="#modalBox"
+                                        name="RefuseBtn_{{ obs.id }}" t>
                                     Refuser
                                 </button>
                                 <!-- envoi vers fenêtre modale pour motif -->
                             </div>
 
-                            <p id="encadre"></p>
+                            <!--  Modal -->
+                            <div class="modal" id="modalBox">
+                                <div class="modal-dialog">
+                                    <div class="modal-content align-middle">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">x</button>
+                                            <h5 class="modal-title" id="report">Refuser l'observation</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post">
+                                                <label>Sélectionner un motif de refus :
+                                                    <select id="reportSelected" name="reportSelected"
+                                                            class="list-group-item-dark">
+                                                        <option value="incohérent">incohérent</option>
+                                                        <option value="incomplet">commentaire à compléter</option>
+                                                        <option value="photo illisible">photo illisible</option>
+                                                    </select>
+                                                </label>
+                                                <input type="hidden" name="idObs" id="RefusalIdObs" class=""/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" name="report">Valider</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/div-->
+
+                            <p id="separate"></p>
                         </div>
                     {% endfor %}
                 </section>
