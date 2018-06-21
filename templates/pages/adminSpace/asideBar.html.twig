@@ -1,0 +1,39 @@
+{% block asideBar %}
+
+            <!-- Sidebar -->
+            <aside class="col-md-4 sidebar sidebar-left " id="sidebarMenu">
+
+                <!--div class="row" id="sidebarMenu"></div-->
+                <div class="row widget" id="obsLink">
+                    <div class="col-xs-12 text-center">
+                        <h4 id="title-user">Bienvenue {{ username }} !</h4>
+                    </div>
+                </div>
+                <div class="row widget" id="obsLink">
+                    <div class="col-xs-12">
+                        <h4><a href="{{ asset('myObservations') }}">Mes observations</a></h4>
+                    </div>
+                </div>
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h4><a href="{{ asset('observForm') }}">Saisir une observation</a></h4>
+                    </div>
+                </div>
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h4><a href="#">Gérer les membres</a></h4>
+                        <p>Commun à tous les admins</p>
+                    </div>
+                </div>
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h4><a href="{{ asset('obsToValidate') }}">Les observations à valider</a></h4>
+                    </div>
+                </div>
+
+            </aside>
+            <!-- /Sidebar -->
+
+
+
+{% endblock %}
