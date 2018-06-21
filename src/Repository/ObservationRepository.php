@@ -50,14 +50,18 @@ class ObservationRepository extends ServiceEntityRepository
             ->orderBy('o.post_date', 'ASC')
             ->setFirstResult($first_result)
             ->setMaxResults($max_results);
-     //   $obs = $qb->getQuery()->getResult();
+        return $qb->getQuery()->getResult();
 
-        $pag = new Paginator($qb);
-var_dump($pag);
-        $nbPages = $pag->count();
-        return $pag;
+     //   $pag = new Paginator($qb);
+//var_dump($pag);
+  //      $nbPages = $pag->count();
+    //    return $pag;
     }
 
+    /**
+     * @param $id
+     * @param null $offset
+     */
     public function findByStatus($id, $offset = null)
     {
         $qb = $this->createQueryBuilder('o')
@@ -67,10 +71,10 @@ var_dump($pag);
             ->addSelect('user')
             ->setParameter('user_id', $id)
             ->orderBy('o.validation_date', 'ASC')
-            ->setMaxResults($offset)
+            //->setMaxResults($offset)
             ->getQuery();
 
-        $qb->getResult();
+        return $qb->getResult();
     }
 
     public function updateObservation($obsId, $userId)

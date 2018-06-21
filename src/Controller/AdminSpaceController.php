@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\AppUsers;
 use App\Entity\Observation;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -74,7 +75,7 @@ class AdminSpaceController extends Controller
         $this->getCurrentUser();
 
         $obs = $this->getDoctrine()
-            ->getRepository(Observation::class);
+                    ->getRepository(Observation::class);
 
         $observations = $obs->findByUserId($this->currentUserId);
 
@@ -101,13 +102,12 @@ class AdminSpaceController extends Controller
         $obs = $this->getDoctrine()
                     ->getRepository(Observation::class);
 
-        $observations = $obs->findByUserId($this->currentUserId);
-        $validatesObs = $obs->findByStatus($this->currentUserId);
+        //$observations = $obs->findByUserId($this->currentUserId);
+        $obsToValidate = $obs->findByStatus($this->currentUserId);
 
         return new Response($twig->render('pages/adminSpace/obsToValidate.html.twig',[
             'username' => $this->currentUsername,
-            'observations' => $observations,
-            'validatesObs' => $validatesObs
+            'validatesObs' => $obsToValidate
         ]));
     }
 
@@ -128,9 +128,9 @@ class AdminSpaceController extends Controller
                               ->find($obsId);
             $obsToUpdate->setValidationDate(new \DateTime());
             $em->flush();
-            return new Response();
+            return new JsonResponse(null,200);
         }
-        return new Response();  //envoyer un message d'erreur
+        return new JsonResponse(null,500);  //envoyer un message d'erreur?
     }
 
     private function getCurrentUser(){

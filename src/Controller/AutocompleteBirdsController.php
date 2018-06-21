@@ -15,9 +15,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AutocompleteBirdsController extends Controller
 {
-	/**
-	 * @Route("/jq/birds", name="jquery_autocomplete_birds")
-	 */
+    /**
+     * @Route("/jq/birds", name="jquery_autocomplete_birds")
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
 	public function autocompleteBirds(Request $request)
 	{
 
