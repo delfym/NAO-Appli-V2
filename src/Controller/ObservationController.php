@@ -12,9 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ObservationController extends Controller
 {
-	/**
-	 * @Route("/observForm")
-	 */
+    /**
+     * @Route("/observForm")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
 	public function postObservation(Request $request)
 	{
 		$observ = new Observation();

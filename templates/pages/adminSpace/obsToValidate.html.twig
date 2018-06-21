@@ -43,9 +43,9 @@
                                 <span class="numObs" name="obsNum_{{ loop.index }}"
                                       id="obsNum_{{ loop.index }}">{{ obs.id }}</span>
                             </div>
-                            <div class="row btn-group btn-grp-obs" data-path="{{ asset('updateObs') }}">
+                            <div class="row btn-group btn-grp-obs actionChoice" data-path="{{ asset('updateObs') }}">
                                 <a class="btn-action btn btn-obs" name="validBtn_{{ obs.id }}"
-                                   href="{#{ asset('updateObs') }#}" type="button">Valider</a>
+                                   type="button">Valider</a>
                                 <button class="btn-action btn btn-obs" ype="submit"
                                         data-toggle="modal"
                                         data-target="#modalBox"
@@ -64,16 +64,16 @@
                                             <h5 class="modal-title" id="report">Refuser l'observation</h5>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post">
+                                            <form method="post" action="{{ asset('refusedObs') }}">
                                                 <label>Sélectionner un motif de refus :
-                                                    <select id="reportSelected" name="reportSelected"
+                                                    <select id="refusalComment" name="refusalComment"
                                                             class="list-group-item-dark">
                                                         <option value="incohérent">incohérent</option>
                                                         <option value="incomplet">commentaire à compléter</option>
                                                         <option value="photo illisible">photo illisible</option>
                                                     </select>
                                                 </label>
-                                                <input type="hidden" name="idObs" id="RefusalIdObs" class=""/>
+                                                <input type="hidden" name="idObs" id="RefusalIdObs" value=""/>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary" name="report">Valider</button>

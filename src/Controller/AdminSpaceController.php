@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\AppUsers;
 use App\Entity\Observation;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -129,6 +130,33 @@ class AdminSpaceController extends Controller
             $obsToUpdate->setValidationDate(new \DateTime());
             $em->flush();
             return new JsonResponse(null,200);
+        }
+        return new JsonResponse(null,500);  //envoyer un message d'erreur?
+    }
+
+    /**
+     * @Route("/refusedObs")
+     * @param Request $request
+     * @return Response
+     */
+    public function refusedObs(Request $request){
+        //prévoir le cas d'une observation déjà validée?
+
+        if ($request->isMethod('POST')) {
+            var_dump($_POST);
+            $obsId = htmlspecialchars($_POST['idObs']);
+            $refusalComment = htmlspecialchars($_POST['refusalComment']);
+
+            $em = $this->getDoctrine()
+                        ->getManager();
+
+            $obsToUpdate = $em->getRepository(Observation::class)
+                                ->find($obsId);
+            $obsToUpdate->setDeleteDate(new \DateTime());
+            $obsToUpdate->setReasonOfDelete($refusalComment);
+            $em->flush();
+
+            return new RedirectResponse('obsToValidate');
         }
         return new JsonResponse(null,500);  //envoyer un message d'erreur?
     }

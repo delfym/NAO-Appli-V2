@@ -68,6 +68,7 @@ class ObservationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.user', 'user')
             ->where('o.validation_date IS NULL')
+            ->andWhere('o.delete_date IS NULL')
             ->andWhere('user.id = :user_id')
             ->addSelect('user')
             ->setParameter('user_id', $id)
@@ -125,23 +126,3 @@ class ObservationRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    /*
-     *
-    public function findByStatus($id, $offset=null)
-    {
-        $qb = $this->createQueryBuilder('o')
-            ->leftJoin('o.user', 'user')
-            ->where('o.validation_date IS NULL')
-            ->andWhere('user.id = :user_id')
-            ->addSelect('user')
-            ->setParameter('user_id', $id)
-            ->orderBy('o.validation_date', 'ASC')
-            ->setMaxResults($offset)
-            ->getQuery()
-        ;
-        return $qb->getResult();
-    }
-
-}
-*/
