@@ -18,17 +18,30 @@ class SignupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('username', TextType::class)
+            ->add('firstname', TextType::class, array(
+                'attr' => array('class' => 'form-control'),
+                'label' => 'Prenom',
+            ))
+            ->add('lastname', TextType::class, array(
+                'attr' => array('class' => 'form-control'),
+                'label' => 'Nom',
+            ))
+            ->add('username', TextType::class, array(
+                'attr' => array('class' => 'form-control'),
+                'label' => 'Pseudo',
+            ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options' => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Confirmez votre mot de passe'),
+                'first_options' => array('label' => 'Mot de passe', 'attr' => array('class' => 'form-control')),
+                'second_options' => array('label' => 'Confirmez votre mot de passe', 'attr' => array('class' => 'form-control')),         
             ))
-            ->add('mail', EmailType::class)
+            ->add('mail', EmailType::class, array(
+                'attr' => array('class' => 'form-control'),
+                'label' => 'Adresse Mail',
+            ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Enregistrer'
+                'label' => 'Enregistrer',
+                'attr' => array('class' => 'btn btn-action btnLigtht'),
             ))
         ;
     }

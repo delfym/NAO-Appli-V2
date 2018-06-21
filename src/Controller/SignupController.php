@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\SignupType;
 use App\Entity\AppUsers;
+use App\Entity\AccountValidation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,6 +12,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SignupController extends Controller
 {
+	private $mailer;
+
+	public function __construct(\Swift_Mailer $mailer)
+	{
+		$this->mailer = $mailer;
+	}
+
 	/**
 	 * @Route("/signup")
 	 */
@@ -27,7 +35,26 @@ class SignupController extends Controller
 
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($user);
+
+			//new accountvalidation ...
+
+			$accountvalidation = new AccountValidation(); // faire lien dans constructeur user ?
+			$accountvalidation->setUser($user);
+			$accountvalidation->setValidationKey(uniqid()); // directement dans le constructeur de l'entité?
+			$accountvalidation->setMail($user->getMail()); //pas très utile vu que l'on a un lien onetoone unidir
+
+			$entityManager->persist($accountvalidation);
+			
+			//envoi du mail avec lien generé
+			//passe l'entite user a l'entite accountvalidation
 			$entityManager->flush();
+
+			$message = (new \Swift_Message("Test"))
+				->setFrom('palmino.angelo@gmail.com')
+				->setTo($user->getMail())
+				->addPart("Merci de bien voiloir cliquer sur ce lien pour activer votre compte http://nao.local/index.php/accountactivation/".$accountvalidation->getValidationKey());
+
+			  $this->mailer->send($message);
 
 			return $this->redirectToRoute('home');
 		}
