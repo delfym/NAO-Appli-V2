@@ -30,7 +30,7 @@ class NonValidatedAccountEraserCommand extends Command
 	{
 		$date = new \Datetime();
 		$accountValidation = $this->em->getRepository('App:AccountValidation')->createQueryBuilder('a')
-			->andWhere("a.request_date < DATE_ADD(:date,'-5', 'hour')") //CURRENT_DATE retourne a chaque fois 00:00:00
+			->andWhere("a.request_date < DATE_ADD(:date,'-5', 'hour')") //CURRENT_DATE retourne à chaque fois 00:00:00
 			->setParameter('date', $date)
 			->getQuery()
             ->getResult();
