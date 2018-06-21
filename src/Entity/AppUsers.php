@@ -21,27 +21,27 @@ class AppUsers implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=80, nullable=true)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=80, unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=80, nullable=true)
      */
     private $role;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=80)
      */
     private $password;
 
@@ -51,7 +51,7 @@ class AppUsers implements UserInterface
     private $last_notif_check;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @ORM\Column(type="string", length=100, unique=true, nullable=true)
      */
     private $mail;
 
