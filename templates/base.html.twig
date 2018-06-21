@@ -50,19 +50,23 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
-                <li class="active"><a href="{{ asset('home') }}">Accueil</a></li>
-                <li><a href="{{ asset('about') }}">A propos</a></li>
-                <li><a href="{{ asset('observForm') }} ">Saisir une observation</a></li>
-                <li><a href="{{ asset('adminSpace') }} ">Dashboard</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
+                    <a href="{{ asset('home') }}" class="dropdown-toggle" data-toggle="dropdown">Accueil<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <!--li><a href="{# {{ path('sidebarLeft') }} #}">Left Sidebar</a></li-->
+                        <li><a href="{{ asset('about') }}">A propos</a></li>
+                        <li><a href="{{ asset('contact') }} ">Nous contacter</a></li>
+                     </ul>
+                </li>
+                <li><a href=" # ">Rechercher un oiseau</a></li>
+                <li><a href=" # ">Afficher les observations</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tableau de bord<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ asset('myObservations') }}">Mes observations</a></li>
                         <li><a href="{{ asset('observForm') }} ">Saisir une observation</a></li>
-                        <li class="active"><a href="{{ asset('myObservations') }}">Mes observations</a></li>
+                        <li class="active"><a href="{{ asset('obsToValidate') }}">Les observations à valider</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ asset('contact') }}">Contact</a></li>
                 <li><a class="btn" href="{{ ('signin') }}">Se connecter / S'inscrire</a></li>
             </ul>
         </div><!--/.nav-collapse -->
