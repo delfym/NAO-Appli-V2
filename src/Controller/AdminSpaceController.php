@@ -113,13 +113,24 @@ class AdminSpaceController extends Controller
 
     /**
      * @Route("/updateObs")
-     * @return void
+     * @param Request $request
+     * @return Response
      */
     public function updateObs(Request $request){
+        //prévoir le cas d'une observation déjà validée?
 
-        $this->getCurrentUser();
-       // $this->getDoctrine()->getRepository($obsId, $this->currentUserId);
+        if ($request->isXmlHttpRequest()) {
+            $obsId = htmlspecialchars($_POST['obsId']);
+            $em = $this->getDoctrine()
+                        ->getManager();
 
+            $obsToUpdate = $em->getRepository(Observation::class)
+                              ->find($obsId);
+            $obsToUpdate->setValidationDate(new \DateTime());
+            $em->flush();
+            return new Response();
+        }
+        return new Response();  //envoyer un message d'erreur
     }
 
     private function getCurrentUser(){

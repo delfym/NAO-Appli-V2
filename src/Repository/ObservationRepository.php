@@ -76,7 +76,7 @@ var_dump($pag);
     public function updateObservation($obsId, $userId)
     {
         $today = new \DateTime('now');
-        $this->createQueryBuilder($obsId, $userId)
+        $this->createQueryBuilder(Observation::class, 'o')
             ->update(Observation::class, 'o')
             ->leftJoin('o.user', 'user')
             ->where('o.obsId = :obsId')

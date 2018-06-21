@@ -58,26 +58,33 @@
                 <section class="row obs">
                     <!-- faire une boucle pour récupérer les datas d'obs -->
                     {% for obs in observations %}
-                    <u><h5 class="h5 title-obs">{{ obs.observationTitle }}</h5></u>
-                    <div class="col-lg-7">
-                        <p><span class="title-obs">Date de l'observation :</span> {{ obs.postDate | date("d/m/Y") }}
-                        </p>
-                        <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
-                        <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
+                        <div id="obs_{{ obs.id }}">
+                            <u><h5 class="h5 title-obs">{{ obs.observationTitle }}</h5></u>
+                            <div class="col-lg-7">
+                                <p>
+                                    <span class="title-obs">Date de l'observation :</span> {{ obs.postDate | date("d/m/Y") }}
+                                </p>
+                                <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
+                                <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
 
-                    </div>
-                        <div class="col">
-                            <p><img class="img_obs" src="{{ asset('images/martin-pecheur.jpg') }}"></p>
-                            <span class="numObs" name="obsNum_{{ loop.index }}" id="obsNum_{{ loop.index }}">{{ obs.id }}</span>
-                        </div>
-                        <div class="row btn-group btn-grp-obs">
-                            <a class="btn-action btn btn-obs" name="validBtn_{{ loop.index }}" href="{#{ asset('updateObs') }#}" type="button">Valider</a>
-                            <button class="btn-action btn btn-obs" type="submit">Refuser</button>
-                            <!-- envoi vers fenêtre modale pour motif -->
-                        </div>
+                            </div>
+                            <div class="col">
+                                <p><img class="img_obs" src="{{ asset('images/martin-pecheur.jpg') }}"></p>
+                                <span class="numObs" name="obsNum_{{ loop.index }}"
+                                      id="obsNum_{{ loop.index }}">{{ obs.id }}</span>
+                            </div>
+                            <div class="row btn-group btn-grp-obs" data-path="{{ asset('updateObs') }}">
+                                <a class="btn-action btn btn-obs" name="validBtn_{{ obs.id }}"
+                                   href="{#{ asset('updateObs') }#}" type="button">Valider</a>
+                                <button class="btn-action btn btn-obs" name="RefuseBtn_{{ obs.id }}" type="submit">
+                                    Refuser
+                                </button>
+                                <!-- envoi vers fenêtre modale pour motif -->
+                            </div>
 
-                        <p id="encadre"></p>
-                        {% endfor %}
+                            <p id="encadre"></p>
+                        </div>
+                    {% endfor %}
                 </section>
 
 

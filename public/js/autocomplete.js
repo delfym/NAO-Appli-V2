@@ -30,7 +30,7 @@ $(document).ready(function() {
       	return;
       	}
         $.ajax( {
-          url: "http://nao.local/index.php/jq/birds",
+          url: "http://localhost:8888/nao-app/public/jq/birds",
           dataType: "json",
           data: {
             term: term,
