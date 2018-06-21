@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Exception\AccountUnvalidatedException;
+use App\Exception\DeletedAccountException;
 use App\Entity\AppUsers as AppUser;
 //use Symfony\Component\Security\Core\Exception\AccountExpiredException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
@@ -27,8 +28,12 @@ class UserChecker implements UserCheckerInterface
 
 		if ($user->getMailValidationDate() === null) 
 		{
-			throw new AccountUnvalidatedException();
-			
+			throw new AccountUnvalidatedException();	
+		}
+
+		if (null === $user->getMail()) 
+		{
+			throw new DeletedAccountException();
 		}
 
 
