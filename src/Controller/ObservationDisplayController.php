@@ -28,11 +28,37 @@ class ObservationDisplayController extends Controller
 
 			$user = $this->getUser();
 
+			//récupérer l'id de l'obs saisie avec l'auto-complete grace à ajax
+
+			$obs = $em->getRepository(Observation::class);
+
 
 		return  $this->render('pages/displayObs.html.twig', [
 		    'form' => $form->createView()
         ]);
 	}
+
+    /**
+     * @Route("/recupObs")
+     * @param Request $request
+     * @return Response
+     */
+    public function getObs(Request $request){
+        //prévoir le cas d'une observation déjà validée?
+
+        if ($request->isXmlHttpRequest()) {
+            $obsId = htmlspecialchars($_POST['obsId']);
+            $em = $this->getDoctrine()
+                ->getManager();
+
+            $obsToUpdate = $em->getRepository(Observation::class)
+                ->find($obsId);
+            $obsToUpdate->setValidationDate(new \DateTime());
+            $em->flush();
+            return new JsonResponse(null,200);
+        }
+        return new JsonResponse(null,500);  //envoyer un message d'erreur?
+    }
 
 
 }
