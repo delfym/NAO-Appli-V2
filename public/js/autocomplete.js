@@ -20,6 +20,7 @@ $(document).ready(function() {
 
   var cache = {}; 
 //à voir avec le "localstorage" ou le "sessionstorage", la variable "cache" est detuite à chaque reload de la page, elle n'a donc que peu d'interet
+  var path = $("#observation_autocomp_bird").attr("data-path");
   $( "#observation_autocomp_bird" ).autocomplete({
       source: function( request, response ) {
         var term = request.term
@@ -30,7 +31,7 @@ $(document).ready(function() {
       	return;
       	}
         $.ajax( {
-          url: "http://localhost:8888/nao-app/public/jq/birds",
+          url: path,
           dataType: "json",
           data: {
             term: term,

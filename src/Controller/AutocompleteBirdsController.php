@@ -27,6 +27,7 @@ class AutocompleteBirdsController extends Controller
 		{
 
 		$term = $request->get('term');
+		$maxRows = $request->get('maxRows');
 
 		$em = $this->getDoctrine()->getManager();
 
@@ -40,6 +41,7 @@ class AutocompleteBirdsController extends Controller
 			->select('b.nom_de_reference')
 			->andWhere('b.nom_de_reference LIKE :bird')
 			->setParameter('bird', '%'.$term.'%')
+			->setMaxResults($maxRows)
 			->getQuery()
 			->getResult();
 

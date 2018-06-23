@@ -46,7 +46,7 @@
 
                             {{ form_label(form.autocomp_bird) }}
                             {{ form_errors(form.autocomp_bird) }}
-                            {{ form_widget(form.autocomp_bird) }}
+                            {{ form_widget(form.autocomp_bird, {'attr': {'data-path': path('jquery_autocomplete_birds') }}) }}
 
                             {{ form_label(form.geo_latitude) }}
                             {{ form_errors(form.geo_latitude) }}

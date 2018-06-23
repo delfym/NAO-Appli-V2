@@ -37,6 +37,9 @@ security:
          - { path: ^/contact, roles: ROLE_USER }
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/obsToValidate, roles: ROLE_ADMIN }
+         - { path: ^/unsubscribe, roles: ROLE_USER }
+         - { path: ^/jq/birds, roles: ROLE_USER }
+         - { path: ^/usermodification roles: ROLE_USER}
          #- { path: ^/signin, roles: IS_AUTHENTICATED_ANONYMOUSLY} La gestion se fait directement dans le controller
          #- { path: ^/signup, roles: IS_AUTHENTICATED_ANONYMOUSLY} La gestion se fait directement dans le controller
 

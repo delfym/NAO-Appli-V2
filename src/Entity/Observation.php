@@ -58,7 +58,7 @@ class Observation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\AppUsers", inversedBy="observations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
 

@@ -32,7 +32,7 @@ class AccountActivationController extends Controller
 				
 				//$em->flush();
 
-				//redirect vers page connection
+				return $this->redirectToRoute('home');
 			}
 			//redirect
 		}

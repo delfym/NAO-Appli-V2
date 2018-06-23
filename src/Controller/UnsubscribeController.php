@@ -26,13 +26,16 @@ class UnsubscribeController extends Controller
 				$user = $this->getUser();
 
 				$em = $this->getDoctrine()->getManager();
-				$user->setMail(null);
-				$user->setFirstName(null);
-				$user->setLastname(null);
-
+				//$user->setMail(null);
+				//$user->setFirstName(null);
+				//$user->setLastname(null);
+				$this->get('security.token_storage')->setToken(null);
+				//dump($this->get('security.token_storage')->getToken()); //settoken(null)
+				//invalider la session $request->getSession->invalidate ?
+				$em->remove($user);
 				$em->flush();
 
-				return $this->redirectToRoute('logout');
+				return $this->redirectToRoute('home');
 			}
 		}
 
