@@ -17,11 +17,11 @@ class ObservationType extends AbstractType
         $builder
             ->add('geo_longitude', TextType::class, array(
                 'attr' => array('class' => 'form-control', "readonly" => true),
-                "label" => "Longitude (degrès decimal)", 
+                "label" => "Longitude",
             ))
             ->add('geo_latitude', TextType::class, array(
                 'attr' => array('class' => 'form-control', "readonly" => true),
-                "label" => "Latitude (degrès decimal)", 
+                "label" => "Latitude",
             ))
             ->add('observation_title', TextType::class, array(
                 'attr' => array('class' => 'form-control',),
