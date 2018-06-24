@@ -46,7 +46,7 @@ class ObservationType extends AbstractType
             ->add('file', FileType::class, array(
                 'attr' => array('class' => 'form-control'),
                 'label' => "Photo",
-                'required' => false
+                'required' => false,
             ))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-action btnLigtht',),
