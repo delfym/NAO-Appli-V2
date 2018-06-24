@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ObservationType extends AbstractType
 {
@@ -42,6 +43,10 @@ class ObservationType extends AbstractType
                     new Bird(),
                 ),
             )) // champ independant de l'entité "birds" ce qui nous permet de recuperer le champ pour le transformer en objet (...)
+            ->add('file', FileType::class, array(
+                'attr' => array('class' => 'form-control'),
+                'label' => "Photo"
+            ))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-action btnLigtht',),
                 'label' => 'Enregistrer',

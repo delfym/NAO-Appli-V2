@@ -9,6 +9,8 @@ use App\Entity\AppUsers;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ObservationController extends Controller
 {
@@ -46,6 +48,24 @@ class ObservationController extends Controller
 			$user->addObservation($observ);
 			$bird->addObservation($observ);
 
+			var_dump($observ);
+
+			$file = $form->get('file')->getData();
+
+			if (false === empty($file)) 
+			{
+				var_dump($file);
+
+				$fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+
+				$file->move(
+					$this->getParameter('file_directory'),
+					$fileName
+				);
+
+				$observ->setFile($fileName);
+			}
+
             $entityManager = $this->getDoctrine()->getManager(); 
             $entityManager->persist($observ);
             //$entityManager->persist($bird);
@@ -60,5 +80,10 @@ class ObservationController extends Controller
 		return  $this->render('pages/observForm.html.twig', array(
 			'form' => $form->createView()
 		));
+	}
+
+	private function generateUniqueFileName()
+	{
+		return md5(uniqid());
 	}
 }

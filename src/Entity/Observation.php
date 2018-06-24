@@ -7,6 +7,9 @@ use \Datetime;
 //use App\Validator\Constraints as ValAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Entity\Image;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ObservationRepository")
@@ -77,6 +80,13 @@ class Observation
      * @ORM\Column(type="integer")
      */
     private $geo_longitude;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $file;
+
+
 
     public function __construct()
     {
@@ -248,5 +258,19 @@ class Observation
         }
 
 
-    }// peut aussi etre externalisée, mais vu que l'on injecte aucun service pas la peine
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+// peut aussi etre externalisée, mais vu que l'on injecte aucun service pas la peine
 }
