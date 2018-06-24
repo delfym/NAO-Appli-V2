@@ -15,8 +15,16 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 //************************************************
 
 //localisation
-$('form').on('click', '#observation_geo_latitude', function (e) {
-   console.log('hello');
+$('form').on('blur', '#observation_autocomp_bird', function (e) {
+    var birdRefName = $('#observation_autocomp_bird').val();
+    console.log('hello' + birdRefName);
+    var path = $('#pathBirds').attr('data-path');
+    //console.log(path);
+    $.post(path, {birdRefName: birdRefName},
+        function (birdRefName) {
+            console.log(birdRefName);
+        })
+        .fail("Nous n'\avons pas d\'observations pour cet oiseau\.");
 });
 
 //j'ajoute un marqueur

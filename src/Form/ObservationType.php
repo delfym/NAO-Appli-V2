@@ -44,7 +44,6 @@ class ObservationType extends AbstractType
             )) // champ independant de l'entité "birds" ce qui nous permet de recuperer le champ pour le transformer en objet (...)
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-action btnLigtht',),
-                'label' => 'Enregistrer',
             ))
         ;
     }

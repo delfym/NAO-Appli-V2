@@ -47,7 +47,12 @@
                             {{ form_label(form.autocomp_bird) }}
                             {{ form_errors(form.autocomp_bird) }}
                             {{ form_widget(form.autocomp_bird, {'attr': {'data-path': path('jquery_autocomplete_birds') }}) }}
-                        <div id="geo_coordinates">
+                            <span id="pathBirds" data-path="{{ asset('displayRef') }}"></span>
+                            {{ form_widget(form.save, { 'label': 'Rechercher' }) }}
+
+                            <p><a class="" id="btn-display" href="" >Plus d'infos sur l'oiseau</a></p>
+
+                        <div id="geo_coordinates"> <!--   à utiliser seulement pour récupérer les coordonnées  -->
                             {{ form_label(form.geo_latitude) }}
                             {{ form_errors(form.geo_latitude) }}
                             {{ form_widget(form.geo_latitude) }}
@@ -57,7 +62,6 @@
                             {{ form_widget(form.geo_longitude) }}
                         </div>
 
-                            {{ form_widget(form.save) }}
 
                             {{ form_rest(form) }}
                             {{ form_end(form) }}

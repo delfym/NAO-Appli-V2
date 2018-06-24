@@ -69,12 +69,12 @@ class Observation
     private $bird;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $geo_latitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $geo_longitude;
 
@@ -184,32 +184,9 @@ class Observation
         return $this;
     }
 
-    public function getGeoLatitude(): ?int
-    {
-        return $this->geo_latitude;
-    }
-
-    public function setGeoLatitude(int $geo_latitude): self
-    {
-        $this->geo_latitude = $geo_latitude;
-
-        return $this;
-    }
-
-    public function getGeoLongitude(): ?int
-    {
-        return $this->geo_longitude;
-    }
-
-    public function setGeoLongitude(int $geo_longitude): self
-    {
-        $this->geo_longitude = $geo_longitude;
-
-        return $this;
-    }
-
     /**
      * @Assert\Callback
+     * @param ExecutionContextInterface $context
      */
     public function validate(ExecutionContextInterface $context) // Assert\Range ... :-(
     {
@@ -248,5 +225,29 @@ class Observation
         }
 
 
+    }
+
+    public function getGeoLatitude()
+    {
+        return $this->geo_latitude;
+    }
+
+    public function setGeoLatitude($geo_latitude): self
+    {
+        $this->geo_latitude = $geo_latitude;
+
+        return $this;
+    }
+
+    public function getGeoLongitude()
+    {
+        return $this->geo_longitude;
+    }
+
+    public function setGeoLongitude($geo_longitude): self
+    {
+        $this->geo_longitude = $geo_longitude;
+
+        return $this;
     }// peut aussi etre externalisée, mais vu que l'on injecte aucun service pas la peine
 }

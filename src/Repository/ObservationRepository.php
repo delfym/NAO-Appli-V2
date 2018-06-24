@@ -78,32 +78,22 @@ class ObservationRepository extends ServiceEntityRepository
 
         return $qb->getResult();
     }
-}
-//    /**
-//     * @return Observation[] Returns an array of Observation objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Observation
+    /**
+     * @param $birdName
+     * @return mixed
+     */
+    public function findByBird($birdName)
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.bird', 'b')
+            ->where('b.nom_de_reference = :birdNameRef')
+            ->addSelect('b')
+            ->setParameter('birdNameRef', $birdName)
+           // ->orderBy('b.nom_de_reference', 'ASC')
+            //->setMaxResults($offset)
+            ->getQuery();
+
+        return $qb->getResult();
     }
-    */
+}
