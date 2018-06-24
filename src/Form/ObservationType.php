@@ -45,7 +45,8 @@ class ObservationType extends AbstractType
             )) // champ independant de l'entité "birds" ce qui nous permet de recuperer le champ pour le transformer en objet (...)
             ->add('file', FileType::class, array(
                 'attr' => array('class' => 'form-control'),
-                'label' => "Photo"
+                'label' => "Photo",
+                'required' => false
             ))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-action btnLigtht',),

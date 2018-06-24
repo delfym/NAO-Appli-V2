@@ -83,6 +83,7 @@ class Observation
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg" }, mimeTypesMessage = "Format JPG/JPEG seulement", maxSize = "1024k", uploadFormSizeErrorMessage = "Fichier trop grand")
      */
     private $file;
 
