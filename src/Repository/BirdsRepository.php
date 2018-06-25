@@ -19,6 +19,21 @@ class BirdsRepository extends ServiceEntityRepository
         parent::__construct($registry, Birds::class);
     }
 
+    /**
+     * @param $birdName
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findByBirdName($birdName)
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->where('b.nom_de_reference = :birdNameRef')
+            ->setParameter('birdNameRef', $birdName)
+            ->orderBy('b.nom_de_reference', 'ASC')
+            ->getQuery();
+
+        return $qb->getOneOrNullResult();
+    }
 //    /**
 //     * @return Birds[] Returns an array of Birds objects
 //     */

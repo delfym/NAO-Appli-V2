@@ -3,7 +3,7 @@
 
 {% block body %}
 
-   
+
     <header id="head" class="secondary"></header>
     <!-- container -->
     <div class="container">
@@ -26,66 +26,68 @@
                 <h3>Situer l'oiseau sur la carte</h3>
                 <!-- intégration de la carte -->
                 <div id="mapid"></div>
+
             </article>
             <!-- /Article -->
 
             <!-- Sidebar -->
             <aside class="col-md-4 sidebar sidebar-left asideTheme">
-                <!--div class="row widget">
-                    <div class="col-xs-12">
-                        <h4></h4>
-                        <p></p>
-                    </div>
-                </div-->
                 <div class="row widget">
                     <div class="col-xs-12">
                         <h3>Rechercher un oiseau</h3>
 
                         <form class="form-group" action="" method="post">
-                            {{ form_start(form) }} <!-- definition de la classe directement là -->
+                            {{ form_start(form) }}
 
                             {{ form_label(form.autocomp_bird) }}
                             {{ form_errors(form.autocomp_bird) }}
                             {{ form_widget(form.autocomp_bird, {'attr': {'data-path': path('jquery_autocomplete_birds') }}) }}
+
                             <span id="pathBirds" data-path="{{ asset('displayRef') }}"></span>
+
                             {{ form_widget(form.save, { 'label': 'Rechercher' }) }}
 
-                            <p><a class="" id="btn-display" href="" >Plus d'infos sur l'oiseau</a></p>
+                            <!--p><a class="" id="btn-display" href="{#{ path('displayBird', {'param_birdName' : nom_de_reference}) }#}" >Plus d'infos sur l'oiseau</a></p-->
+                            <!--p class="display"><a class="" id="btn-display" href="">Plus d'infos sur
+                                    l'oiseau</a></p-->
+                            <button class="" id="btn-displayInfos" href="">Plus d'infos sur
+                                l'oiseau</button>
 
-                        <div id="geo_coordinates"> <!--   à utiliser seulement pour récupérer les coordonnées  -->
-                            {{ form_label(form.geo_latitude) }}
-                            {{ form_errors(form.geo_latitude) }}
-                            {{ form_widget(form.geo_latitude) }}
+                            <div class="invisible col-1">
 
-                            {{ form_label(form.geo_longitude) }}
-                            {{ form_errors(form.geo_longitude) }}
-                            {{ form_widget(form.geo_longitude) }}
-                        </div>
-
-
-                            {{ form_rest(form) }}
-                            {{ form_end(form) }}
+                                {{ form_end(form) }}
+                            </div>
                         </form>
                     </div>
                 </div>
+            </aside>
+        </div>
 
-                <div class="row widget">
-                    <div class="col-xs-12">
-                        <h4></h4>
-                        <p><img src="" alt=""></p>
-                        <p></p>
+        <div class="row invisible" id="infos">
+            <div class="row widget">
+                <div class="col-xs-12">
+                    <h3>Fiche de l'oiseau</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr class="">
+                                <th id="" name="">Nom usuel</th>
+                                <th id="" name="">Classe</th>
+                                <th id="" name="">Famille</th>
+                            </tr>
+                            <tr>
+                                <th id="birdNameVern" name="birdNameVern">A</th>
+                                <th id="birdClass" name="birdClass">B</th>
+                                <th id="birdFamily" name="birdFamily">C</th>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-
-            </aside>
-            <!-- /Sidebar -->
-
-
+            </div>
         </div>
+    </div>
     </div>    <!-- /container -->
-
 {% endblock %}
-{%  block javascripts %}
+{% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/observDisplay.js') }}"></script>
 {% endblock %}

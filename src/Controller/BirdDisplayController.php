@@ -7,13 +7,14 @@ use App\Entity\Birds;
 use App\Form\ObservationType;
 use App\Entity\Observation;
 use App\Entity\AppUsers;
+use App\Form\ObsSearchType;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ObservationDisplayController extends Controller
+class BirdDisplayController extends Controller
 {
     /**
      * @Route("/displayObs")
@@ -45,29 +46,7 @@ class ObservationDisplayController extends Controller
 	}
 
     /**
-     * @Route("/recupObs")
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function getObs(Request $request){
-        //prévoir le cas d'une observation déjà validée?
-
-        if ($request->isXmlHttpRequest()) {
-            $obsId = htmlspecialchars($_POST['obsId']);
-            $em = $this->getDoctrine()
-                ->getManager();
-
-            $obsToUpdate = $em->getRepository(Observation::class)
-                ->find($obsId);
-            $obsToUpdate->setValidationDate(new \DateTime());
-            $em->flush();
-            return new JsonResponse(null,200);
-        }
-        return new JsonResponse(null,500);  //envoyer un message d'erreur?
-    }
-
-    /**
-     * @Route("/displayRef")
+     * @Route("/displayBird")
      * @param Request $request
      * @return JsonResponse
      */
@@ -77,20 +56,13 @@ class ObservationDisplayController extends Controller
         $birdRef = htmlspecialchars($_POST['birdRefName']);
 
         $em = $this->getDoctrine()->getManager();
-        $birdsObservations = $em->getRepository(Observation::class)
-            ->findByBird($birdRef)
-        ;
 
-        foreach ($birdsObservations as $birdsObservation) {
-            //var_dump($birdsOb->getGeoLatitude);
-            //$birdGeoLat = $birdsObservation->getGeoLatitude;
-            //var_dump($birdsObservation);
-        //    var_dump($birdsObservation[0]['geo_latitude']);
-         //   var_dump($birdsObservation[0]->getGeoLatitude());
-           // var_dump($birdsObservation[0]->getGeoLongitude());
-        }
+        $birds = $em->getRepository(Birds::class);
+        $birds = $birds->findByBirdName($birdRef);
 
-        return new JsonResponse($birdsObservations);
+        //var_dump($birds);
+
+        return new JsonResponse($birds);
         }
     }
 

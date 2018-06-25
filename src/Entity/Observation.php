@@ -69,12 +69,12 @@ class Observation
     private $bird;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", precision=10, scale=4)
      */
     private $geo_latitude;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", precision=10, scale=4)
      */
     private $geo_longitude;
 

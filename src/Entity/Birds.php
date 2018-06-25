@@ -31,7 +31,7 @@ class Birds
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom_verniculaire;
+    private $nom_vernaculaire;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -56,7 +56,7 @@ class Birds
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $family;
+    private $famille;
 
     /**
      * @ORM\Column(type="integer")
@@ -107,14 +107,14 @@ class Birds
         return $this;
     }
 
-    public function getNomVerniculaire(): ?string
+    public function getNomVernaculaire(): ?string
     {
-        return $this->nom_verniculaire;
+        return $this->nom_vernaculaire;
     }
 
-    public function setNomVerniculaire(string $nom_verniculaire): self
+    public function setNomVernaculaire(string $nom_verniculaire): self
     {
-        $this->nom_verniculaire = $nom_verniculaire;
+        $this->nom_vernaculaire = $nom_vernaculaire;
 
         return $this;
     }
@@ -167,14 +167,14 @@ class Birds
         return $this;
     }
 
-    public function getFamily(): ?string
+    public function getFamille(): ?string
     {
-        return $this->family;
+        return $this->famille;
     }
 
-    public function setFamily(string $family): self
+    public function setFamille(string $family): self
     {
-        $this->family = $family;
+        $this->famille = $famille;
 
         return $this;
     }

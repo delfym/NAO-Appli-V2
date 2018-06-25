@@ -86,6 +86,8 @@ class ObservationRepository extends ServiceEntityRepository
     public function findByBird($birdName)
     {
         $qb = $this->createQueryBuilder('o')
+            ->addSelect('o.geo_longitude')
+            ->addSelect('o.geo_latitude')
             ->leftJoin('o.bird', 'b')
             ->where('b.nom_de_reference = :birdNameRef')
             ->addSelect('b')

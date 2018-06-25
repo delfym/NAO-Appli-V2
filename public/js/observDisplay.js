@@ -2,6 +2,7 @@ var mymap = L.map('mapid').setView([47.331, 2.465], 5);  //je pointe sur la fran
 
 var myLat;
 var myLng;
+var birdRefName;
 
 /* init de la carte */
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -14,38 +15,17 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 //************************************************
 
-//localisation
+
 $('form').on('blur', '#observation_autocomp_bird', function (e) {
-    var birdRefName = $('#observation_autocomp_bird').val();
-    console.log('hello' + birdRefName);
-    var path = $('#pathBirds').attr('data-path');
-    //console.log(path);
-    $.post(path, {birdRefName: birdRefName},
-        function (birdRefName) {
-            console.log(birdRefName);
-        })
-        .fail("Nous n'\avons pas d\'observations pour cet oiseau\.");
+    birdRefName = $('#observation_autocomp_bird').val();
+    console.log('hello ' + birdRefName);
 });
 
 //j'ajoute un marqueur
 var marker = L.marker([51.5, -0.09]).addTo(mymap);
 
-
-// ajout d'un marqueur*************************
-mymap.on('click', function (e) {
-
-
-    if(marker != undefined)
-    {
-        marker.remove();
-    }
-    marker = L.marker([myLat, myLng]).addTo(mymap);
-    marker.bindPopup("<b>J'ai vu un oiseau ici : </b><br>Latitude : " + myLat + " - Longitude : " + myLng).openPopup();
-
-
-});
-
-$('form').on('change', '#geo_coordinates', function (e) {
+/*
+$('').on('change', '#geo_coordinates', function (e) {
     e.preventDefault();
 
     var path = $('.btn-grp-obs').attr('data-path');
@@ -56,6 +36,37 @@ $('form').on('change', '#geo_coordinates', function (e) {
         .fail('Merci de valider de nouveau cette observation.');
 
 });
-//je récupère les ccoordonnées et je les envoie sur la carte
-$('#observation_geo_latitude').val(myLat);
-$('#observation_geo_longitude').val(myLng);
+*/
+
+$('form').on('click', '#btn-displayInfos', function (e) {
+    e.preventDefault();
+
+    $('div#infos').removeClass("invisible").addClass("visible");
+
+    $('#birdNameVern').html('piaf');
+    $('#birdFamily').html('piaf lala');
+    $('#birdClass').html('piaf pas comme les autres');
+
+    var path = $('#pathBirds').attr('data-path');
+    $.post(path, {birdRefName: birdRefName},
+        function (data) {
+            //for (var i=0; i <= data.length ; i++) {
+            console.log(data);
+            //console.log(data.geo_longitude);
+            //console.log(data.comment);
+            var i = 0;
+            $.each(data,function(){
+                console.log(data[i].geo_latitude);
+                console.log(data[i].geo_longitude);
+                i++;
+            });
+            // }
+           // console.log(birdObservations); //affiche success
+        })
+        .fail("Nous n'\avons pas d\'observations pour cet oiseau\.");
+
+    //je récupère les ccoordonnées et je les envoie sur la carte
+   // $('#observation_geo_latitude').val(myLat);
+   // $('#observation_geo_longitude').val(myLng);
+
+});

@@ -1,23 +1,5 @@
 $(document).ready(function() {
 
-/*var birds = [
-	"Pigeon",
-	"Mouette",
-	"Moineau",
-	"Hirondelle",
-	"Aigle",
-];*/
-
- //"http://nao.local/index.php/jq/birds"
-
-  /*$("#observation_autocomp_bird").autocomplete({
-	source : "http://nao.local/index.php/jq/birds",
-	minLength : 3,
-	success: function( data ) {
-            response( data );
-          }
-  });*/
-
   var cache = {}; 
 //à voir avec le "localstorage" ou le "sessionstorage", la variable "cache" est detuite à chaque reload de la page, elle n'a donc que peu d'interet
   var path = $("#observation_autocomp_bird").attr("data-path");

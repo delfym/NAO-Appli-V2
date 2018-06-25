@@ -51,7 +51,7 @@ class AutocompleteBirdsController extends Controller
 		return $response;
 		
 		}
-		else{
+		else {
 
 			//message flash
 			return new RedirectResponse("/home");
