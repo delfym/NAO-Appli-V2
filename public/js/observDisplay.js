@@ -4,6 +4,9 @@ var myLat;
 var myLng;
 var birdRefName;
 
+
+var marker;
+
 /* init de la carte */
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -22,7 +25,7 @@ $('form').on('blur', '#observation_autocomp_bird', function (e) {
 });
 
 //j'ajoute un marqueur
-var marker = L.marker([51.5, -0.09]).addTo(mymap);
+//var marker = L.marker([51.5, -0.09]).addTo(mymap);
 
 /*
 $('').on('change', '#geo_coordinates', function (e) {
@@ -58,6 +61,7 @@ $('form').on('click', '#btn-displayInfos', function (e) {
             $.each(data,function(){
                 console.log(data[i].geo_latitude);
                 console.log(data[i].geo_longitude);
+                marker = L.marker([data[i].geo_latitude, data[i].geo_longitude]).addTo(mymap);
                 i++;
             });
             // }
