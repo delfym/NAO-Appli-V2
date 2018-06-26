@@ -17,14 +17,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 
 //************************************************
-
-
-$('form').on('blur', '#observation_autocomp_bird', function (e) {
-
-});
-
-//récup des coordonnées pour créer les marqueurs sur la carte
-
 $('form').on('click', '#btn-searchObs', function (e) {
     e.preventDefault();
     if($('.leaflet-marker-icon'))
@@ -49,3 +41,10 @@ $('form').on('click', '#btn-searchObs', function (e) {
         .fail("Nous n'\avons pas d\'observations pour cet oiseau\.");
 });
 
+// Afficher les données sur l('oiseeau
+
+$('form').on('click', '#btn-displayInfos', function (e) {
+    e.preventDefault();
+    $('#infos').removeClass("invisible").addClass('visible');
+
+});

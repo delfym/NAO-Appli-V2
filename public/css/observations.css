@@ -27,6 +27,15 @@
     padding-left: 14px;
 }
 
+#searchAside {
+    height: 200px !important;
+}
+
+.tabBirdInfos {
+    background-image: linear-gradient(to bottom, #FF9B22 0%, #FF8C00 100%);
+    color: white;
+}
+
 @media all and (min-width: 892px) {
     #sidebarMenu {
         height: auto;
