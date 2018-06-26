@@ -104,3 +104,8 @@
     </div>    <!-- /container -->
 
 {% endblock %}
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/leaflet-map.js') }}"></script>
+    <script src="{{ asset('js/observ.js') }}"></script>
+{% endblock %}

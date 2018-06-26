@@ -98,3 +98,8 @@
 
 
 {% endblock %}
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/observ.js') }}"></script>
+{% endblock %}

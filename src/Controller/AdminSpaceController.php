@@ -26,19 +26,6 @@ class AdminSpaceController extends Controller
     private $currentUserId;
 
     /**
-     * AdminSpaceController constructor.
-     */
-    public function __construct()
-    {
-        //$this->currentUsername = $this->getUser()->getUsername();
-        //$this->currentUserId = $this->getUser()->getId();
-        //var_dump($this->currentUsername);
-        //$test = $this->getCurrentUser();
-        //var_dump($test);
-
-    }
-
-    /**
      * @Route("/adminSpace")
      * @param Environment $twig
      * @return Response

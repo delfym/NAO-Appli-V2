@@ -4,25 +4,31 @@ namespace App\Form;
 
 use App\Entity\Observation;
 use App\Validator\Constraints\Bird;
+//use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ObservationType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('geo_longitude', TextType::class, array(
+            ->add('geo_longitude', NumberType::class, array(
                 'attr' => array('class' => 'form-control', "readonly" => true),
-                "label" => "Longitude (degrès decimal)", 
+                "label" => "Longitude",
             ))
-            ->add('geo_latitude', TextType::class, array(
+            ->add('geo_latitude', NumberType::class, array(
                 'attr' => array('class' => 'form-control', "readonly" => true),
-                "label" => "Latitude (degrès decimal)", 
+                "label" => "Latitude",
             ))
             ->add('observation_title', TextType::class, array(
                 'attr' => array('class' => 'form-control',),
@@ -50,7 +56,6 @@ class ObservationType extends AbstractType
             ))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-action btnLigtht',),
-                'label' => 'Enregistrer',
             ))
         ;
     }

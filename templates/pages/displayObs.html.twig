@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    <header id="head" class="secondary"></header>
+    <!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="{{ asset('home') }}">Accueil</a></li>
+            <li class="active">Recherche d'oiseaux</li>
+        </ol>
+        <div class="row">
+            <header class="page-header">
+                <h1 class="page-title">Rechercher des oiseaux</h1>
+            </header>
+        </div>
+
+        <div class="row">
+            <!-- Article main content -->
+            <article class="col-md-8 maincontent">
+                <!--div class="row widget"></div-->
+
+                <h3>Situer l'oiseau sur la carte</h3>
+                <!-- intégration de la carte -->
+                <div id="mapid"></div>
+
+            </article>
+            <!-- /Article -->
+
+            <!-- Sidebar -->
+            <aside class="col-md-4 sidebar sidebar-left asideTheme" id="searchAside">
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h3>Rechercher un oiseau</h3>
+
+                        <form class="form-group" action="" method="post">
+                            {{ form_start(form) }}
+
+                            {{ form_label(form.autocomp_bird) }}
+                            {{ form_errors(form.autocomp_bird) }}
+                            {{ form_widget(form.autocomp_bird, {'attr': {'data-path': path('jquery_autocomplete_birds') }}) }}
+
+                            <span id="pathBirds" data-path="{{ asset('displayRef') }}"></span>
+                            <div class="btn-group btn-group-vertical">
+                            <button class="btn btn-action" id="btn-searchObs" href="">Rechercher un oiseau</button>
+
+                            <button class="btn btn-action" id="btn-displayInfos" href="">Plus d'infos sur
+                                l'oiseau</button>
+                            </div>
+                            <div class="invisible col-1">
+
+                                {{ form_end(form) }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="row invisible" data-path="{{ asset('displayBird') }}" id="infos">
+            <div class="row widget">
+                <div class="col-xs-12">
+                    <h3>Fiche de l'oiseau</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr class="tabBirdInfos">
+                                <th id="" name="">Nom usuel</th>
+                                <th id="" name="">Classe</th>
+                                <th id="" name="">Famille</th>
+                                <th id="" name="">Ordre</th>
+                            </tr>
+                            <tr>
+                                <th id="birdNameVern" name="birdNameVern"></th>
+                                <th id="birdClass" name="birdClass"></th>
+                                <th id="birdFamily" name="birdFamily"></th>
+                                <th id="birdOrder" name="birdOrder"></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>    <!-- /container -->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/observDisplay.js') }}"></script>
+{% endblock %}

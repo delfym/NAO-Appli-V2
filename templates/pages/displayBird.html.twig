@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    <header id="head" class="secondary"></header>
+    <!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a href="{{ asset('home') }}">Accueil</a></li>
+            <li class="active">Recherche d'oiseaux</li>
+        </ol>
+        <div class="row">
+            <header class="page-header">
+                <h1 class="page-title">Rechercher des oiseaux</h1>
+            </header>
+        </div>
+
+        <div class="row">
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <h3>Fiche de l'oiseau</h3>
+                        <form class="form-group" method="" action="">
+                            <label>Sélectionner un motif de refus :
+                                <label for="refBirdName">Nom de référence :</label>
+                                <input type="text" id="refBirdName" name="refBirdName" value="">
+
+                                <label for="birdNameVern">Nom usuel :</label>
+                                <input type="text" id="birdNameVern" name="birdNameVern" value="">
+
+                                <label for="birdClass">Classe :</label>
+                                <input type="text" id="birdClass" name="birdClass" value="">
+
+                                <label for="birdFamily">Famille :</label>
+                                <input type="text" id="birdFamily" name="birdFamily" value="">
+                            </label>
+                            <input type="hidden" name="" id="" value=""/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/div-->
+        <!--section class="row widget">
+            <div class="col-xs-12">
+                <h4>Fiche de l'oiseau</h4>
+                <form class="" action="" method="post">
+
+                    <label for="refBirdName">Nom de référence :</label>
+                    <input type="text" id="refBirdName" name="refBirdName">
+
+                    <label for="birdNameVern">Nom usuel :</label>
+                    <input type="text" id="birdNameVern" name="birdNameVern">
+
+                    <label for="birdClass">Classe :</label>
+                    <input type="text" id="birdClass" name="birdClass">
+
+                    <label for="birdFamily">Famille :</label>
+                    <input type="text" id="birdFamily" name="birdFamily">
+                </form>
+            </div>
+        </section-->
+    </div>    <!-- /container -->
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/observDisplay.js') }}"></script>
+{% endblock %}
