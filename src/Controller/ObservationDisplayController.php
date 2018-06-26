@@ -78,22 +78,10 @@ class ObservationDisplayController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $birdsObservations = $em->getRepository(Observation::class)
-            ->findByBird($birdRef)
-        ;
-
-        foreach ($birdsObservations as $birdsObservation) {
-            //var_dump($birdsOb->getGeoLatitude);
-            //$birdGeoLat = $birdsObservation->getGeoLatitude;
-            //var_dump($birdsObservation);
-        //    var_dump($birdsObservation[0]['geo_latitude']);
-         //   var_dump($birdsObservation[0]->getGeoLatitude());
-           // var_dump($birdsObservation[0]->getGeoLongitude());
-        }
+                                ->findByBird($birdRef);
 
         return new JsonResponse($birdsObservations);
         }
     }
-
-
 
 }

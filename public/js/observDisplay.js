@@ -1,11 +1,7 @@
 var mymap = L.map('mapid').setView([47.331, 2.465], 5);  //je pointe sur la france
 
-var myLat;
-var myLng;
 var birdRefName;
 
-
-var marker;
 
 /* init de la carte */
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -18,6 +14,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 //************************************************
 $('form').on('click', '#btn-searchObs', function (e) {
+    var marker;
+
     e.preventDefault();
     if($('.leaflet-marker-icon'))
     {
@@ -45,6 +43,27 @@ $('form').on('click', '#btn-searchObs', function (e) {
 
 $('form').on('click', '#btn-displayInfos', function (e) {
     e.preventDefault();
+
+    birdRefName = $('#observation_autocomp_bird').val();
+
     $('#infos').removeClass("invisible").addClass('visible');
+    $('#birdNameVern').html("piaf");
+    $('#birdClass').html("piaf");
+    $('#birdFamily').html("piaf");
+
+    var path = $('#infos').attr('data-path');
+    console.log('voici le path : ' + path);
+    $.post(path, {birdRefName: birdRefName},
+        function (data) {
+            var i = 0;
+            console.log(data);
+        //    $.each(data,function(){
+               // marker = L.marker([data[i].geo_latitude, data[i].geo_longitude]).addTo(mymap);
+        //        i++;
+        //    });
+            // }
+            // console.log(birdObservations); //affiche success
+        })
+        .fail("Nous n'\avons pas trouvé cet oiseau\. Merci de ré-essayer");
 
 });

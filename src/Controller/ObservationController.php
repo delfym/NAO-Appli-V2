@@ -52,7 +52,6 @@ class ObservationController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
 
-            var_dump($observ->getId());
 
 			//return $this->redirectToRoute('home');
 		}
