@@ -34,12 +34,15 @@ class AccountActivationController extends Controller
 
 				return $this->redirectToRoute('home');
 			}
-			//redirect
+			else
+			{
+				return $this->redirectToRoute('home');
+			}
 		}
 
 		else
 		{
-			//redirect ....
+			return $this->redirectToRoute('home');		
 		}
 	}
 }

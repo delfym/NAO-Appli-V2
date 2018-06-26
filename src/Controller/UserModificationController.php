@@ -17,22 +17,31 @@ class UserModificationController extends Controller
 	{
 		    $user = $this->getUser(); 
 
-			$form = $this->createForm(ModificationType::class, $user);
+		    if ($user && $user->getIsActive()) 
+		    {
+		    	$form = $this->createForm(ModificationType::class, $user);
 
-			$form->handleRequest($request);
+				$form->handleRequest($request);
 
-			if ($form->isSubmitted() && $form->isValid()) 
-			{
+				if ($form->isSubmitted() && $form->isValid()) 
+					{
 				
-				$em = $this->getDoctrine()->getManager();
-				$em->persist($user);
-				$em->flush();
+						$em = $this->getDoctrine()->getManager();
+						$em->persist($user);
+						$em->flush();
 
-			}
+					}
 
-			return $this->render('pages/modification.html.twig', array(
-			'form' => $form->createView()
-			));
+				return $this->render('pages/modification.html.twig', array(
+					'form' => $form->createView()
+				));
+		    }
+		    else
+		    {
+		    	return $this->redirectToRoute('signin');
+		    }
+
+			
 		
 	}
 }

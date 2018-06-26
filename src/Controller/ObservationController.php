@@ -48,7 +48,7 @@ class ObservationController extends Controller
 			$user->addObservation($observ);
 			$bird->addObservation($observ);
 
-			var_dump($observ);
+			//var_dump($observ);
 
 			$file = $form->get('file')->getData();
 

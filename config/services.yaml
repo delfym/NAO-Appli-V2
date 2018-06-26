@@ -29,6 +29,11 @@ services:
         autowire: true
         public: true
 
+    App\Events\KernelRequestEvent:
+        arguments: 
+            $token: '@security.token_storage'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
    
 
    

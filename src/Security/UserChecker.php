@@ -36,6 +36,11 @@ class UserChecker implements UserCheckerInterface
 			throw new DeletedAccountException();
 		}
 
+		if (false === $user->getIsActive()) 
+		{
+			throw new DeletedAccountException();
+		}
+
 
 	}
 

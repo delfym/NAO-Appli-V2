@@ -65,10 +65,21 @@ class AppUsers implements UserInterface
      */
     private $MailValidationDate;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $adminRequest;
+
     public function __construct()
     {
         $this->observations = new ArrayCollection();
         $this->role = 'ROLE_USER';
+        $this->isActive = true;
     }
 
     public function getId()
@@ -212,6 +223,7 @@ class AppUsers implements UserInterface
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive,
         ));
     }
 
@@ -221,6 +233,7 @@ class AppUsers implements UserInterface
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive,
         ) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
@@ -232,6 +245,30 @@ class AppUsers implements UserInterface
     public function setMailValidationDate(?\DateTimeInterface $MailValidationDate): self
     {
         $this->MailValidationDate = $MailValidationDate;
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getAdminRequest(): ?\DateTimeInterface
+    {
+        return $this->adminRequest;
+    }
+
+    public function setAdminRequest(?\DateTimeInterface $adminRequest): self
+    {
+        $this->adminRequest = $adminRequest;
 
         return $this;
     }
