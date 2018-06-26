@@ -44,15 +44,12 @@
                             {{ form_widget(form.autocomp_bird, {'attr': {'data-path': path('jquery_autocomplete_birds') }}) }}
 
                             <span id="pathBirds" data-path="{{ asset('displayRef') }}"></span>
+                            <div class="btn-group btn-group-vertical">
+                            <button class="btn btn-action" id="btn-searchObs" href="">Rechercher un oiseau</button>
 
-                            {{ form_widget(form.save, { 'label': 'Rechercher' }) }}
-
-                            <!--p><a class="" id="btn-display" href="{#{ path('displayBird', {'param_birdName' : nom_de_reference}) }#}" >Plus d'infos sur l'oiseau</a></p-->
-                            <!--p class="display"><a class="" id="btn-display" href="">Plus d'infos sur
-                                    l'oiseau</a></p-->
-                            <button class="" id="btn-displayInfos" href="">Plus d'infos sur
+                            <button class="btn btn-action" id="btn-displayInfos" href="">Plus d'infos sur
                                 l'oiseau</button>
-
+                            </div>
                             <div class="invisible col-1">
 
                                 {{ form_end(form) }}
