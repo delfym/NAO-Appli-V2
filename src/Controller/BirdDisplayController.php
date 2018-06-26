@@ -6,9 +6,6 @@ namespace App\Controller;
 use App\Entity\Birds;
 use App\Form\ObservationType;
 use App\Entity\Observation;
-use App\Entity\AppUsers;
-use App\Form\ObsSearchType;
-use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,11 +58,10 @@ class BirdDisplayController extends Controller
             $birdInfos = $em->getRepository(Birds::class)
                 ->findByBirdName($birdRef);
 
-            $response = new Response(json_encode($birdInfos));
+            return new JsonResponse($birdInfos);
 
-            $response->headers->set('Content-Type', 'application/json');
-
-            //return new JsonResponse($birdInfos);
+        } else {
+            return new JsonResponse(null, 504);
         }
     }
 

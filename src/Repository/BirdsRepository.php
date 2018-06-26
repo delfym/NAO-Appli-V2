@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Birds;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -22,7 +23,7 @@ class BirdsRepository extends ServiceEntityRepository
     /**
      * @param $birdName
      * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function findByBirdName($birdName)
     {
@@ -31,7 +32,7 @@ class BirdsRepository extends ServiceEntityRepository
             ->setParameter('birdNameRef', $birdName)
             ->orderBy('b.nom_de_reference', 'ASC')
             ->getQuery();
-
-        return $qb->getOneOrNullResult();
+        return $qb->getArrayResult();
+        //return $qb->getOneOrNullResult();
     }
 }

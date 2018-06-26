@@ -26,22 +26,15 @@ class ObservationController extends Controller
 		if ($form->isSubmitted() && $form->isValid()) 
 		{
             $selectedBird = $form->get('autocomp_bird')->getData();
+            $user = $this->getUser();
 
-            //$this->getUser()->addObservation($observ);
-
-            //recuperer l'entité oiseau pour lui assigner l'observation via addObservation() pareil pour user()
-
-            //$user = new AppUsers();
-            //var_dump($this->getUser() instanceof $user); //retourne true
-
-			$user = $this->getUser();
-
-			$bird = $this->getDoctrine()->getRepository('App:Birds')->createQueryBuilder('b')
-			->andWhere('b.nom_de_reference = :bird')
-			->setParameter('bird', $selectedBird)
-			->getQuery()
-			->getOneOrNullResult(); // retourne un resultat sous forme d'objet ou null (faire verif if null === bird)
-			//->getResult();
+			$bird = $this->getDoctrine()->getRepository('App:Birds')
+                        ->createQueryBuilder('b')
+                        ->andWhere('b.nom_de_reference = :bird')
+                        ->setParameter('bird', $selectedBird)
+                        ->getQuery()
+                        ->getOneOrNullResult(); // retourne un resultat sous forme d'objet ou null (faire verif if null === bird)
+                //->getResult();
 
 			$user->addObservation($observ);
 			$bird->addObservation($observ);

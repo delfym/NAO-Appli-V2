@@ -47,23 +47,19 @@ $('form').on('click', '#btn-displayInfos', function (e) {
     birdRefName = $('#observation_autocomp_bird').val();
 
     $('#infos').removeClass("invisible").addClass('visible');
-    $('#birdNameVern').html("piaf");
-    $('#birdClass').html("piaf");
-    $('#birdFamily').html("piaf");
 
     var path = $('#infos').attr('data-path');
     console.log('voici le path : ' + path);
     $.post(path, {birdRefName: birdRefName},
         function (data) {
-            var i = 0;
+         //   var i = 0;
             console.log(data);
-        //    $.each(data,function(){
-               // marker = L.marker([data[i].geo_latitude, data[i].geo_longitude]).addTo(mymap);
-        //        i++;
-        //    });
-            // }
-            // console.log(birdObservations); //affiche success
+            $('#birdNameVern').html(data[0].nom_vernaculaire);
+            $('#birdClass').html(data[0].classe);
+            $('#birdFamily').html(data[0].famille);
         })
-        .fail("Nous n'\avons pas trouvé cet oiseau\. Merci de ré-essayer");
+        .fail(function () {
+            alert("\"Nous n'\\avons pas trouvé cet oiseau\\. Merci de ré-essayer\"");
+        });
 
 });
