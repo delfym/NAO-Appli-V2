@@ -57,6 +57,8 @@ $('form').on('click', '#btn-displayInfos', function (e) {
             $('#birdNameVern').html(data[0].nom_vernaculaire);
             $('#birdClass').html(data[0].classe);
             $('#birdFamily').html(data[0].famille);
+            $('#birdOrder').html(data[0].ordre);
+            $('#birdRegne').html(data[0].regne);
         })
         .fail(function () {
             alert("\"Nous n'\\avons pas trouvé cet oiseau\\. Merci de ré-essayer\"");
