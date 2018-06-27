@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class PagesController
+class PagesController extends Controller
 {
     /**
      * @Route("/")
@@ -38,7 +38,9 @@ class PagesController
      */
     public function home(Environment $twig)
     {
+        dump($this->getUser());
         return new Response($twig->render('pages/index.html.twig'));
+        
     }
 
     /**

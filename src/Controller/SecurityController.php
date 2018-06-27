@@ -30,6 +30,11 @@ class SecurityController extends Controller
      */
     public function signin(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        if ($this->getUser() instanceof AppUsers) 
+        {
+            return $this->redirectToRoute('home');
+        }
+        dump('test');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

@@ -14,6 +14,8 @@ class UnsubscribeController extends Controller
 	 */
 	public function unsubscribe(Request $request)
 	{
+		$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); 		
+		
 		$form = $this->createForm(DeletionConfirmationtype::class);
 		$form->handleRequest($request);
 

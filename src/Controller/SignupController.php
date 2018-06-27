@@ -24,6 +24,11 @@ class SignupController extends Controller
 	 */
 	public function signup(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface) // a ameliorer avec gestion access avant et apres POST
 	{
+		if ($this->getUser() instanceof AppUsers) 
+		{
+			return $this->redirectToRoute('home');
+		}
+
 		$user = new AppUsers();
 		$form = $this->createForm(SignupType::class, $user);
 
@@ -49,10 +54,10 @@ class SignupController extends Controller
 			//passe l'entite user a l'entite accountvalidation
 			$entityManager->flush();
 
-			$message = (new \Swift_Message("Test"))
+			$message = (new \Swift_Message("Activation de votre compte NAO"))
 				->setFrom('palmino.angelo@gmail.com')
 				->setTo($user->getMail())
-				->addPart("Merci de bien voiloir cliquer sur ce lien pour activer votre compte http://nao.local/index.php/accountactivation/".$accountvalidation->getValidationKey());
+				->addPart("Merci de bien vouloir cliquer sur ce lien pour activer votre compte http://nao.local/index.php/accountactivation/".$accountvalidation->getValidationKey());
 
 			  $this->mailer->send($message);
 

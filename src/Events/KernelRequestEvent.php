@@ -22,10 +22,21 @@ class KernelRequestEvent
 		if (null === $this->token->getToken()) {
 			return;
 		}
-
 		else
 		{
-			dump($this->token->getToken()->getUser());
+			$user = $this->token->getToken()->getUser();
+
+			if ($user instanceof AppUsers) 
+			{
+				if (false === $user->getIsActive()) 
+				{
+					$this->token->setToken(null);
+				}
+			}
+
+			//dump(false === $user->getIsActive());
+			//dump($user instanceof AppUsers);
+			//dump($user);
 		}
 	}
 }

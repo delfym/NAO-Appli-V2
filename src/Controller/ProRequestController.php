@@ -13,13 +13,11 @@ class ProRequestController extends Controller
 	/**
 	 * @Route("/prorequest")
 	 */
-	public function prorequest(Request $request)//role user qui on un request date null
+	public function prorequest(Request $request)//role user qui on un request date null ET VERIFIER SI PAS DEJA PRO
 	{
 		$user = $this->getUser();
 
-		if (true === $user->getIsActive()) 
-		{
-			if ($user && is_null($user->getAdminRequest())) 
+			if ($user && is_null($user->getAdminRequest()) && $user->getRole() === 'ROLE_USER') //&& is ranted role user...
 			{
 			$form = $this->createForm(AdminRequestType::class);
 			$form->handleRequest($request);
@@ -51,13 +49,7 @@ class ProRequestController extends Controller
 			{
 		 		return $this->redirectToRoute('home');
 			}
-		}
 
-		else
-		{
-			   $this->get('security.token_storage')->setToken(null);
-			   return $this->redirectToRoute('signin');
-		}
 
 		
 	}

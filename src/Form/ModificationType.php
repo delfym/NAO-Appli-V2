@@ -23,10 +23,6 @@ class ModificationType extends AbstractType
                 'attr' => array('class' => 'form-control'),
                 'label' => 'Nom',
             ))
-            ->add('username', TextType::class, array(
-                'attr' => array('class' => 'form-control'),
-                'label' => 'Pseudo',
-            ))
             ->add('mail', EmailType::class, array(
                 'attr' => array('class' => 'form-control'),
                 'label' => 'Adresse mail',
