@@ -58,7 +58,6 @@ class ObservationController extends Controller
 
             $entityManager = $this->getDoctrine()->getManager(); 
             $entityManager->persist($observ);
-            //$entityManager->persist($bird);
             $entityManager->persist($user);
             $entityManager->flush();
 

@@ -221,6 +221,7 @@ class Observation
 
     /**
      * @Assert\Callback
+     * @param ExecutionContextInterface $context
      */
     public function validate(ExecutionContextInterface $context) // Assert\Range ... :-(
     {
@@ -261,6 +262,9 @@ class Observation
 
     }
 
+    /**
+     * @return null|string
+     */
     public function getFile(): ?string
     {
         return $this->file;

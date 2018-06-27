@@ -17,7 +17,7 @@
                 <p></p>
             </div>
             <!-- Sidebar -->
-            {%  include ('pages/adminSpace/asideBar.html.twig') %}
+            {% include ('pages/adminSpace/asideBar.html.twig') %}
             <!-- /Sidebar -->
 
             <!-- Article main content -->
@@ -25,9 +25,11 @@
                 <header class="myPage-header">
                     <h1 class="page-title">Mes observations</h1>
                 </header>
+
+                {{ dump(observations) }}
                 {% for obs in observations %}
-                <section class="row obs">
-                    <!-- faire une boucle pour récupérer les datas d'obs -->
+                    <section class="row obs">
+                        <!-- faire une boucle pour récupérer les datas d'obs -->
 
                         <u><h5 class="h5 title-obs">{{ obs.observationTitle }}</h5></u>
                         <div class="col-lg-7">
@@ -36,12 +38,17 @@
                             <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
                             <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
                         </div>
-                        <div class="col-1">
-                            <p><img class="img_obs" src="{{ obs.file }}"></p>
+                        <div>
+                            {% if obs.file %}
+                            <p class="col-1">
+                                <img class="img_obs" src="{{ asset('user_image/' ~ obs.file) }}">
+                            </p>
+
+                            {% endif %}
                         </div>
                         <p id="encadre"></p>
 
-                </section>
+                    </section>
                 {% endfor %}
 
             </article>

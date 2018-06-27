@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\AppUsers;
 use App\Entity\Observation;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,7 @@ class AdminSpaceController extends Controller
         ]));
     }
 
+
     /**
      * @Route("/myObservations")
      * @param Environment $twig
@@ -66,9 +68,11 @@ class AdminSpaceController extends Controller
                     ->getRepository(Observation::class);
 
         $observations = $obs->findByUserId($this->currentUserId);
+//var_dump($observations);
+             /*  $obs->setFile(new File(
+              $this->getParameter('file_directory').'/'.$obs->getFile())  */
+           // );
 
-        // $testPage = $this->getObs($currentUserId);
-        //var_dump($testPage);
 
         return new Response($twig->render('pages/adminSpace/myObservations.html.twig',[
             'username'      => $this->currentUsername,
