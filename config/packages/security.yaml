@@ -37,6 +37,7 @@ security:
          - { path: ^/contact, roles: ROLE_USER }
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/obsToValidate, roles: ROLE_ADMIN }
+         - { path: ^/myObservations, roles: ROLE_ADMIN }
          - { path: ^/unsubscribe, roles: ROLE_USER }
          - { path: ^/jq/birds, roles: ROLE_USER }
          - { path: ^/usermodification, roles: ROLE_USER}

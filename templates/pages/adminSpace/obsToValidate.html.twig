@@ -40,8 +40,6 @@
                             </div>
                             <div class="col">
                                 <p><img class="img_obs" src="{{ asset('images/martin-pecheur.jpg') }}"></p>
-                                <span class="numObs" name="obsNum_{{ loop.index }}"
-                                      id="obsNum_{{ loop.index }}">{{ obs.id }}</span>
                             </div>
                             <div class="row btn-group btn-grp-obs actionChoice" data-path="{{ asset('updateObs') }}">
                                 <a class="btn-action btn btn-obs" name="validBtn_{{ obs.id }}"
@@ -99,7 +97,7 @@
 
 {% endblock %}
 
-{%  block javascripts %}
+{% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/observ.js') }}"></script>
 {% endblock %}
