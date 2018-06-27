@@ -45,7 +45,7 @@
             <!-- Button for smallest screens -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-            <a class="navbar-brand" href="{{ asset('index') }}"><img src="{{ asset('images/logo-nao.png') }}"
+            <a class="navbar-brand" href="{{ asset('home') }}"><img src="{{ asset('images/logo-nao.png') }}"
                                                                      alt="NAO logo"></a>
         </div>
         <div class="navbar-collapse collapse">
@@ -65,8 +65,11 @@
                     <ul class="dropdown-menu">
                         <li class="active"><a href="{{ asset('myObservations') }}">Mes observations</a></li>
                         <li><a href="{{ asset('observForm') }} ">Saisir une observation</a></li>
+
+                        {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ asset('obsToValidate') }}">Les observations à valider</a></li>
                         <li><a href="#">Les nouveaux membres à valider</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 <li><a class="btn" href="{{ ('signin') }}">Se connecter / S'inscrire</a></li>
@@ -91,7 +94,7 @@
                 <div class="col-md-3 widget">
                     <h3 class="widget-title">Contact</h3>
                     <div class="widget-body">
-                        <p>+234 23 9873237<br>
+                        <p>02 41 42 43 44<br>
                             <a href="mailto:#">contact@nao.fr</a><br>
                             <br>
                             234 Hidden Pond Road, Ashland City, TN 37015

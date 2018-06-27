@@ -41,14 +41,11 @@ class ObservationController extends Controller
 			$user->addObservation($observ);
 			$bird->addObservation($observ);
 
-			//var_dump($observ);
 
 			$file = $form->get('file')->getData();
 
 			if (false === empty($file)) 
 			{
-				var_dump($file);
-
 				$fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
 				$file->move(
@@ -61,7 +58,6 @@ class ObservationController extends Controller
 
             $entityManager = $this->getDoctrine()->getManager(); 
             $entityManager->persist($observ);
-            //$entityManager->persist($bird);
             $entityManager->persist($user);
             $entityManager->flush();
 

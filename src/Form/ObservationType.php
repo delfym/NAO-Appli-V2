@@ -38,9 +38,6 @@ class ObservationType extends AbstractType
                 "attr" => array('class' => 'form-control',),
                 "label" => "Commentaire",
             ))
-            /*->add('bird', TextType::class, array(
-                'attr' => array('class' => 'form-control',),
-            ))*/
             ->add('autocomp_bird', TextType::class, array(
                 "attr" => array('class' => 'form-control',),
                 "mapped" => false,
@@ -56,6 +53,7 @@ class ObservationType extends AbstractType
             ))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-action btnLigtht',),
+                'label'=> 'Valider',
             ))
         ;
     }

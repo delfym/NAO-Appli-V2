@@ -8,7 +8,7 @@
 			<div class="row">
 				<h1 class="lead">BIENVENUE SUR LE SITE DE LA NAO</h1>
 				<p class="tagline">Association Nos Amis les Oiseaux</p>
-				<p><a class="btn btn-default btn-lg" role="button">Pour les particuliers</a> <a class="btn btn-action btn-lg" role="button">Pour les naturalistes</a></p>
+				<p><a class="btn btn-default btn-lg" href="{{ asset('displayObs') }}" role="button">Pour les particuliers</a> <a class="btn btn-action btn-lg" href="{{ asset('signin') }}" role="button">Pour les naturalistes</a></p>
 			</div>
 		</div>
 	</header>
@@ -46,7 +46,7 @@
 				<div class="col-md-4 col-sm-8 highlight">
 					<div class="h-caption"><h4><i class="fa fa-heart fa-5"></i>Les oiseaux du mois</h4></div>
 					<div class="h-body text-center">
-						<p>Les gagnants du mois sont...</p>
+						<p>La news du mois...</p>
 					</div>
 				</div>
 				<!--div class="col-md-3 col-sm-6 highlight">
@@ -64,7 +64,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<h2 class="text-center top-space">Les oiseaux du moment</h2>
+		<h2 class="text-center top-space">Les news du mois</h2>
 		<br>
 
 		<!--div class="row">
@@ -82,25 +82,19 @@
 		</div> <!-- /row -->
 
 		<div class="row">
-			<div class="col-sm-6">
-				<h3>L'oiseau le plus recherché du mois!!!</h3>
-				<p>La mouette est l'oiseau du mois!!!</p>
+				<h3></h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus at lectus efficitur dictum vitae et magna. Nullam sodales porta condimentum. Proin cursus rhoncus tortor in posuere. Aenean dictum ac elit ut mattis. Donec pretium nec mi vitae molestie. Suspendisse mattis urna et accumsan fringilla. Fusce nec nibh at dolor porttitor rhoncus quis vitae massa. Nullam lobortis rutrum arcu. Cras tincidunt arcu quis tortor efficitur, eget feugiat lectus venenatis.
+
+					Phasellus placerat hendrerit sodales. Etiam elementum in est non mollis. Sed rutrum sed leo nec suscipit. In elit neque, tristique id maximus ut, sagittis sed ligula. Pellentesque leo leo, fringilla sed tellus vitae, sollicitudin finibus odio. Duis iaculis, orci id fringilla dignissim, lorem nisl molestie sem, ut dictum arcu mauris non justo. Aliquam erat volutpat. Aenean id erat ac sem viverra maximus. Maecenas efficitur nisi vitae turpis tincidunt, vitae feugiat augue commodo. Cras quis interdum sem. Nam nisi tellus, tristique vel varius porta, aliquam eget ligula. Suspendisse ut tellus ullamcorper, egestas nibh ac, lacinia lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 <p>
-                    <img src="{{ asset('images/oiseau-blanc.jpg') }}" alt="oiseau du mois"  class="img-rounded center-block" width="200">
+                    <img src="{{ asset('images/rouge-gorge.jpg') }}" alt="oiseau du mois"  class="img-rounded center-block" width="200">
                 </p>
-			</div>
-			<div class="col-sm-6">
-				<h3>L'oiseau le plus observé du mois</h3>
-				<p>Le piou piou est l'oiseau le plus observé ce mois-ci !</p>
-                <p>
-                    <img src="{{ asset('images/oiseau-blanc.jpg') }}" alt="oiseau du mois"  class="img-rounded center-block" width="200">
-                </p>
-			</div>
+
 		</div> <!-- /row -->
 
 		<div class="jumbotron top-space">
 			<h4>Vous voulez saisir de nouvelles observations? C'est très simple grace à notre carte interactive.</h4>
-     		<p class="text-right"><a class="btn btn-primary btn-large">Accéder à la carte</a></p>
+     		<p class="text-right"><a class="btn btn-primary btn-large" href="{{ asset('observForm') }}">Accéder à la carte</a></p>
   		</div>
 
 </div>	<!-- /container -->
