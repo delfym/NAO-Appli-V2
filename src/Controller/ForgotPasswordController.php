@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ForgotPassword;
 use App\Form\ForgotPasswordType;
+use App\Entity\AppUsers;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +25,10 @@ class ForgotPasswordController extends Controller
 	 */
 	public function forgotpassword(Request $request)//verifier si non connecté
 	{
+		if ($this->getUser() instanceof AppUsers) 
+		{
+			return $this->redirectToRoute('home');
+		}
 		$forgot = new ForgotPassword();
 		$form = $this->createForm(ForgotPasswordType::class, $forgot);
 
@@ -43,14 +48,15 @@ class ForgotPasswordController extends Controller
 
 			if (false === empty($alreadyexist)) 
 			{
-				$message = (new \Swift_Message("Test"))
+				$message = (new \Swift_Message("Recuperation de votre mot de passe NAO"))
 				->setFrom('palmino.angelo@gmail.com')
 				->setTo($alreadyexist->getMail())
 				->addPart("Merci de bien voiloir cliquer sur ce lien pour changer votre mot de passe http://nao.local/index.php/resetpassword/".$alreadyexist->getUniqueKey());
 
 			  $this->mailer->send($message);
 
-				// return ....
+			  	$this->addFlash('notice', 'Un mail vous a deja ete envoyé, il viens d\'etre renvoyé, merci de verifier votre boite mail (y compris les spams).');
+				return $this->redirectToRoute('home');
 			}
 			else
 			{
@@ -67,14 +73,16 @@ class ForgotPasswordController extends Controller
 			 $entityManager->persist($forgot);
 			 $entityManager->flush();
 
-			 var_dump($forgot);
-
-			 $message = (new \Swift_Message("Test"))
+			 $message = (new \Swift_Message("Recuperation de votre mot de passe NAO"))
 				->setFrom('palmino.angelo@gmail.com')
 				->setTo($forgot->getMail())
 				->addPart("Merci de bien voiloir cliquer sur ce lien pour changer votre mot de passe http://nao.local/index.php/resetpassword/".$forgot->getUniqueKey());
 
 			  $this->mailer->send($message);
+
+			  $this->addFlash('notice', 'Un mail contenant le lien de changement de votre mot de passe vous a ete envoyé');
+
+			  return $this->redirectToRoute('home');
 			}
 
 			//lien bidirectionnel avec l'user ? 

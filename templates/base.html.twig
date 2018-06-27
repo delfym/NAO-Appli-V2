@@ -38,6 +38,8 @@
 </head>
 
 <body>
+
+
 <!-- Fixed navbar -->
 <div class="navbar navbar-inverse navbar-fixed-top headroom">
     <div class="container">
@@ -48,6 +50,7 @@
             <a class="navbar-brand" href="{{ asset('home') }}"><img src="{{ asset('images/logo-nao.png') }}"
                                                                      alt="NAO logo"></a>
         </div>
+
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
                 <li class="dropdown">
@@ -58,8 +61,7 @@
                         <li><a href="{{ asset('contact') }} ">Nous contacter</a></li>
                      </ul>
                 </li>
-                <li><a href=" # ">Rechercher un oiseau</a></li>
-                <li><a href="{{ asset('displayObs') }} ">Afficher les observations</a></li>
+                <li><a href="{{ asset('displayObs') }} ">Rechercher un oiseau</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tableau de bord<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -68,11 +70,17 @@
 
                         {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ asset('obsToValidate') }}">Les observations à valider</a></li>
-                        <li><a href="#">Les nouveaux membres à valider</a></li>
+                        <li><a href="{{ 'adminValidate' }}">Les nouveaux membres à valider</a></li>
                         {% endif %}
                     </ul>
                 </li>
-                <li><a class="btn" href="{{ ('signin') }}">Se connecter / S'inscrire</a></li>
+                {% if  is_granted('ROLE_USER')%}
+                    <li><a class="btn" href="{{ ('logout') }}">Se deconnecter</a></li>
+                {% else %}
+                    <li><a class="btn" href="{{ ('signin') }}">Se Connecter</a></li>
+                {% endif %}
+                
+                
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -81,6 +89,7 @@
 
 <!-- ***************** INTEGRATION DES CONTENUS DES AUTRES PAGES ****************** -->
 {% block body %}
+
 
 {% endblock %}
 <!-- ****************************************************************************** -->

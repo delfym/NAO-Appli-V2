@@ -38,6 +38,8 @@ class UnsubscribeController extends Controller
 				//$em->remove($user);
 				$em->flush();
 
+				$this->addFlash('notice', 'Votre demande de desinscription a ete prise en compte');
+
 				return $this->redirectToRoute('home');
 			}
 		}

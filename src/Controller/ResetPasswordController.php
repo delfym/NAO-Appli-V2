@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Entity\AppUsers;
 
 class ResetPasswordController extends Controller
 {
@@ -16,6 +17,10 @@ class ResetPasswordController extends Controller
 	 */
 	public function resetpassword(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface, $key)//regex
 	{
+		if ($this->getUser() instanceof AppUsers) 
+		{
+			return $this->redirectToRoute('home');
+		}
 		if (isset($key))
 		{  
 			$em = $this->getDoctrine()->getManager();
@@ -51,6 +56,8 @@ class ResetPasswordController extends Controller
 					//$em->detach($user);
 					$em->remove($forgotpassword);
 					$em->flush();
+
+					return $this->redirectToRoute('home');
 				 }
 				 else
 				 {

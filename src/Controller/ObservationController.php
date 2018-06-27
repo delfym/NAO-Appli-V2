@@ -61,8 +61,9 @@ class ObservationController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('notice', 'Votre observation a bien ete postée, elle reste en attente de validation');
 
-			//return $this->redirectToRoute('home');
+			return $this->redirectToRoute('home');
 		}
 
 		return  $this->render('pages/observForm.html.twig', array(

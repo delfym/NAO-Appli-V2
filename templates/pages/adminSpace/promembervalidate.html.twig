@@ -45,11 +45,11 @@
                                 <span class="numObs" name="obsNum_{{ loop.index }}"
                                       id="obsNum_{{ loop.index }}"> Id de l'utilisateur: {{ user.id }}</span>
                             </div>
-                            <div class="row btn-group btn-grp-obs actionChoice" data-path="{{ asset('index.php/becomeAdmin') }}">
+                            <div class="row btn-group btn-grp-obs actionChoice" data-path="{{ asset('/becomeAdmin') }}">
                                 <a class="btn-action btn btn-obs" name="validBtn_{{ user.id }}"
                                    type="button">Valider</a>
                             </div>
-                            <form method="post" action="{{ asset('index.php/stillUser') }}">
+                            <form method="post" action="{{ asset('/stillUser') }}">
                                                
                                          <input type="hidden" name="idObs" id="RefusalIdObs" value="{{ user.id }}"/>
                                          <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}" />

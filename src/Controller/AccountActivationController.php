@@ -32,6 +32,7 @@ class AccountActivationController extends Controller
 				
 				//$em->flush();
 
+				$this->addFlash('notice', 'Votre compte a ete validé, merci de vous connecter.');
 				return $this->redirectToRoute('home');
 			}
 			else

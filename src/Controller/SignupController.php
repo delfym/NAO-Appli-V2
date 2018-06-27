@@ -61,6 +61,8 @@ class SignupController extends Controller
 
 			  $this->mailer->send($message);
 
+			 $this->addFlash('notice', 'Votre compte à ete créé, merci de bien vouloir l\'activer en cliquant sur le lien que vous avez recu par mail');
+
 			return $this->redirectToRoute('home');
 		}
 
