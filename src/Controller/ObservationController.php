@@ -41,14 +41,11 @@ class ObservationController extends Controller
 			$user->addObservation($observ);
 			$bird->addObservation($observ);
 
-			//var_dump($observ);
 
 			$file = $form->get('file')->getData();
 
 			if (false === empty($file)) 
 			{
-				var_dump($file);
-
 				$fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
 				$file->move(
