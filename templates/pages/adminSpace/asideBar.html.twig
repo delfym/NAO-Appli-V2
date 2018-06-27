@@ -19,10 +19,11 @@
                         <h4><a href="{{ asset('observForm') }}">Saisir une observation</a></h4>
                     </div>
                 </div>
+
+                {% if is_granted('ROLE_ADMIN') %}
                 <div class="row widget">
                     <div class="col-xs-12">
                         <h4><a href="#">Gérer les membres</a></h4>
-                        <p>Commun à tous les admins</p>
                     </div>
                 </div>
                 <div class="row widget">
@@ -30,10 +31,8 @@
                         <h4><a href="{{ asset('obsToValidate') }}">Les observations à valider</a></h4>
                     </div>
                 </div>
-
+                {% endif %}
             </aside>
             <!-- /Sidebar -->
-
-
 
 {% endblock %}
