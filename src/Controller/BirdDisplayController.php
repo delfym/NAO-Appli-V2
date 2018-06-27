@@ -59,9 +59,6 @@ class BirdDisplayController extends Controller
                 ->findByBirdName($birdRef);
 
             return new JsonResponse($birdInfos);
-
-        } else {
-            return new JsonResponse(null, 504);
         }
     }
 
