@@ -26,7 +26,6 @@
                     <h1 class="page-title">Mes observations</h1>
                 </header>
 
-                {{ dump(observations) }}
                 {% for obs in observations %}
                     <section class="row obs">
                         <!-- faire une boucle pour récupérer les datas d'obs -->
@@ -47,7 +46,6 @@
                             {% endif %}
                         </div>
                         <p id="encadre"></p>
-
                     </section>
                 {% endfor %}
 
