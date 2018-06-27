@@ -39,7 +39,12 @@
 
                             </div>
                             <div class="col">
-                                <p><img class="img_obs" src="{{ asset('images/martin-pecheur.jpg') }}"></p>
+                                {% if obs.file %}
+                                    <!--p class="col-1"-->
+                                        <img class="img_obs" src="{{ asset('user_image/' ~ obs.file) }}">
+                                    <!--/p-->
+
+                                {% endif %}
                             </div>
                             <div class="row btn-group btn-grp-obs actionChoice" data-path="{{ asset('updateObs') }}">
                                 <a class="btn-action btn btn-obs" name="validBtn_{{ obs.id }}"

@@ -6,6 +6,7 @@ use App\Entity\Observation;
 use App\Validator\Constraints\Bird;
 //use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,6 +38,11 @@ class ObservationType extends AbstractType
             ->add('comment', TextType::class, array(
                 "attr" => array('class' => 'form-control',),
                 "label" => "Commentaire",
+            ))
+            ->add('post_date', DateType::class, array(
+                "attr" => array('class' => 'form-control',"readonly" => true),
+                'widget' => 'single_text',
+                "label" => "Date de l'observation",
             ))
             ->add('autocomp_bird', TextType::class, array(
                 "attr" => array('class' => 'form-control',),
