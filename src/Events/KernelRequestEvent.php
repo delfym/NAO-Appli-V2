@@ -30,13 +30,9 @@ class KernelRequestEvent
 			{
 				if (false === $user->getIsActive()) 
 				{
-					$this->token->setToken(null);
+					$this->token->setToken(null); //redirect ?
 				}
 			}
-
-			//dump(false === $user->getIsActive());
-			//dump($user instanceof AppUsers);
-			//dump($user);
 		}
 	}
 }

@@ -31,10 +31,6 @@ class ResetPasswordController extends Controller
 			->getQuery()
 			->getOneOrNullResult();
 
-			//var_dump($user);
-
-			//var_dump($forgotpassword->getUser()->getFirstname());
-
 			if (false === empty($forgotpassword)) 
 			{
 				 $user = $forgotpassword->getUser();

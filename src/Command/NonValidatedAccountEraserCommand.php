@@ -35,10 +35,6 @@ class NonValidatedAccountEraserCommand extends Command
 			->getQuery()
             ->getResult();
 
-		dump($accountValidation);
-		dump(\date("H:i:s"));
-
-
 		if(false === empty($accountValidation))
 		{
 			foreach ($accountValidation as $key) 

@@ -89,7 +89,7 @@ class AdminSpaceController extends Controller
         //$observations = $obs->findByUserId($this->currentUserId);
 
 
-//var_dump($observations);
+
              /*  $obs->setFile(new File(
               $this->getParameter('file_directory').'/'.$obs->getFile())  */
            // );

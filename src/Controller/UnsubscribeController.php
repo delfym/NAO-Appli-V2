@@ -33,7 +33,6 @@ class UnsubscribeController extends Controller
 				$user->setLastname(null);
 				$user->setIsActive(false);
 				$this->get('security.token_storage')->setToken(null);
-				//dump($this->get('security.token_storage')->getToken()); //settoken(null)
 				//invalider la session $request->getSession->invalidate ?
 				//$em->remove($user);
 				$em->flush();

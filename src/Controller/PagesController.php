@@ -38,7 +38,6 @@ class PagesController extends Controller
      */
     public function home(Environment $twig)
     {
-        dump($this->getUser());
         return new Response($twig->render('pages/index.html.twig'));
         
     }

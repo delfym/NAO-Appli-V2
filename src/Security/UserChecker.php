@@ -13,13 +13,7 @@ class UserChecker implements UserCheckerInterface
 {
 	public function checkPreAuth(UserInterface $user)
 	{
-		dump($user); //retourne entité user
-
-		dump($user->getRoles());
-
-		dump($user instanceof AppUser); //true
-
-		dump($user->getMailValidationDate());
+		
 
 		if (!$user instanceof AppUser) 
 		{

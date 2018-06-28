@@ -34,7 +34,7 @@ class ProMemberValidateController extends Controller
 		$pager = new Pagerfanta($adapter);
 		$pager->setMaxPerPage(5);
 
-		//var_dump($query);
+	
 
 		try
 		{

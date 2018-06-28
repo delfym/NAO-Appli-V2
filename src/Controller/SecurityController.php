@@ -18,7 +18,7 @@ class SecurityController extends Controller
     {
         //$this->currentUsername = $this->getUser()->getUsername();
         //$this->currentUserId = $this->getUser()->getId();
-        //var_dump($this);
+        
 
     }
 
@@ -34,7 +34,6 @@ class SecurityController extends Controller
         {
             return $this->redirectToRoute('home');
         }
-        dump('test');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

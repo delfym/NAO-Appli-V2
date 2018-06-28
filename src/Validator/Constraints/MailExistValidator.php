@@ -25,9 +25,6 @@ class MailExistValidator extends ConstraintValidator
 			->getQuery()
 			->getResult();
 
-	 //  var_dump($mail);
-
-
 		if (empty($mail)) 
 		{
 			$this->context->buildViolation($constraint->message)

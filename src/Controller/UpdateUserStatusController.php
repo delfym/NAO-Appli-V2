@@ -26,7 +26,6 @@ class UpdateUserStatusController extends Controller
             ->setAdminRequest(null);
 
             $em->flush();
-            dump($user);
             return new JsonResponse(null,200);
         }
         return new JsonResponse(null,500);  
@@ -53,7 +52,6 @@ class UpdateUserStatusController extends Controller
             		->setAdminRequest(null);
 
             		$em->flush();
-            		dump($user);
            			return $this->redirectToRoute('validate_pro_member');
 				}                  
         }
