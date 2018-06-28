@@ -36,6 +36,11 @@
     color: white;
 }
 
+#img-accueil {
+    height: auto;
+    width: 500px;
+}
+
 @media all and (min-width: 892px) {
     #sidebarMenu {
         height: auto;

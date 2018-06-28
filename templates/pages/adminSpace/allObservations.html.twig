@@ -23,14 +23,10 @@
             <!-- Article main content -->
             <article class="col-md-8 maincontent">
                 <header class="myPage-header">
-                    <h1 class="page-title">Toutes les observations</h1>
+                    <h1 class="page-title">Mes observations</h1>
                 </header>
 
-                {% if observations.haveToPaginate %}
-                        {{ pagerfanta(observations, 'default', {'routeName': 'my_observations'}) }}
-                {% endif %}
-
-                {% for obs in observations.currentPageResults %}
+                {% for obs in observations %}
                     <section class="row obs">
                         <!-- faire une boucle pour récupérer les datas d'obs -->
 

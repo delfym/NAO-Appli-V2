@@ -88,15 +88,42 @@ class AdminSpaceController extends Controller
         }
         //$observations = $obs->findByUserId($this->currentUserId);
 
+
 //var_dump($observations);
              /*  $obs->setFile(new File(
               $this->getParameter('file_directory').'/'.$obs->getFile())  */
            // );
 
 
+        $observations = $obs->findByUserId($this->currentUserId);
+
+
         return new Response($twig->render('pages/adminSpace/myObservations.html.twig',[
             'username'      => $this->currentUsername,
             'observations'  => $pager,
+        ]));
+    }
+
+
+    /**
+     * @Route("/allObservations")
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function allObservations(Environment $twig){
+        $this->getCurrentUser();
+
+        $obs = $this->getDoctrine()
+            ->getRepository(Observation::class);
+
+        $observations = $obs->findAll();
+
+        return new Response($twig->render('pages/adminSpace/allObservations.html.twig',[
+            'username'      => $this->currentUsername,
+            'observations'  => $observations
         ]));
     }
 
