@@ -106,24 +106,41 @@ class AdminSpaceController extends Controller
 
 
     /**
-     * @Route("/allObservations")
+     * @Route("/allObservations/{page}", name="all_observations", defaults={"page" = 1})
      * @param Environment $twig
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function allObservations(Environment $twig){
+    public function allObservations(Environment $twig, $page){
         $this->getCurrentUser();
 
         $obs = $this->getDoctrine()
-            ->getRepository(Observation::class);
+            ->getRepository(Observation::class)
+            ->createQueryBuilder('a')
+            ->where('a.validation_date IS NOT NULL')
+            ->andWhere('a.delete_date IS NULL')
+            ->andWhere('a.reason_of_delete IS NULL')
+            ->orderBy('a.post_date', 'ASC');
 
-        $observations = $obs->findAll();
+        $adapter = new DoctrineORMAdapter($obs);
+        $pager = new Pagerfanta($adapter);
+        $pager->setMaxPerPage(5);
+
+        try
+        {
+            $pager->setCurrentPage($page);
+        }
+        catch(NotValidCurrentPageException $e)
+        {
+            throw new NotFoundHttpException();
+        }    
+        //$observations = $obs->findAll();
 
         return new Response($twig->render('pages/adminSpace/allObservations.html.twig',[
             'username'      => $this->currentUsername,
-            'observations'  => $observations
+            'observations'  => $pager
         ]));
     }
 
