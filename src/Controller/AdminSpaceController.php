@@ -20,6 +20,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminSpaceController extends Controller
 {
@@ -54,20 +58,36 @@ class AdminSpaceController extends Controller
 
 
     /**
-     * @Route("/myObservations")
+     * @Route("/myObservations/{page}", name="my_observations", defaults={"page" = 1})
      * @param Environment $twig
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function myObservations(Environment $twig){
+    public function myObservations(Environment $twig, $page){
         $this->getCurrentUser();
 
         $obs = $this->getDoctrine()
-                    ->getRepository(Observation::class);
+                    ->getRepository(Observation::class)
+                    ->createQueryBuilder('o')
+                    ->where('o.user = :user')
+                    ->setParameter('user', $this->getUser());
 
-        $observations = $obs->findByUserId($this->currentUserId);
+        $adapter = new DoctrineORMAdapter($obs);
+        $pager = new Pagerfanta($adapter);
+        $pager->setMaxPerPage(5);
+
+        try
+        {
+            $pager->setCurrentPage($page);
+        }
+        catch(NotValidCurrentPageException $e)
+        {
+            throw new NotFoundHttpException();
+        }
+        //$observations = $obs->findByUserId($this->currentUserId);
+
 //var_dump($observations);
              /*  $obs->setFile(new File(
               $this->getParameter('file_directory').'/'.$obs->getFile())  */
@@ -76,30 +96,48 @@ class AdminSpaceController extends Controller
 
         return new Response($twig->render('pages/adminSpace/myObservations.html.twig',[
             'username'      => $this->currentUsername,
-            'observations'  => $observations
+            'observations'  => $pager,
         ]));
     }
 
     /**
-     * @Route("/obsToValidate")
+     * @Route("/obsToValidate/{page}", name="obs_validate", defaults={"page" = 1})
      * @param Environment $twig
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function obsToValidate(Environment $twig){
+    public function obsToValidate(Environment $twig, $page){
 
         $this->getCurrentUser();
         $obs = $this->getDoctrine()
-                    ->getRepository(Observation::class);
+                    ->getRepository(Observation::class)
+                    ->createQueryBuilder('v')
+                    ->where('v.validation_date IS NULL')
+                    ->andWhere('v.delete_date IS NULL')
+                    ->andWhere('v.reason_of_delete IS NULL')
+                    ->orderBy('v.post_date', 'ASC');
 
+        $adapter = new DoctrineORMAdapter($obs);
+        $pager = new Pagerfanta($adapter);
+        $pager->setMaxPerPage(5);
+
+        try
+        {
+            $pager->setCurrentPage($page);
+        }
+        catch(NotValidCurrentPageException $e)
+        {
+            throw new NotFoundHttpException();
+        }
+                    
         //$observations = $obs->findByUserId($this->currentUserId);
-        $obsToValidate = $obs->findByStatus($this->currentUserId);
+        //$obsToValidate = $obs->findByStatus($this->currentUserId);
 
         return new Response($twig->render('pages/adminSpace/obsToValidate.html.twig',[
             'username' => $this->currentUsername,
-            'validatesObs' => $obsToValidate
+            'validatesObs' => $pager,
         ]));
     }
 

@@ -23,7 +23,7 @@ class AutocompleteBirdsController extends Controller
 	public function autocompleteBirds(Request $request)
 	{
 
-		if ($request->isXmlHttpRequest() && $this->isGranted("ROLE_USER")) 
+		if ($request->isXmlHttpRequest()) 
 		{
 
 		$term = $request->get('term');

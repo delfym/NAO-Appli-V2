@@ -26,7 +26,11 @@
                     <h1 class="page-title">Mes observations</h1>
                 </header>
 
-                {% for obs in observations %}
+                {% if observations.haveToPaginate %}
+                        {{ pagerfanta(observations, 'default', {'routeName': 'my_observations'}) }}
+                {% endif %}
+
+                {% for obs in observations.currentPageResults %}
                     <section class="row obs">
                         <!-- faire une boucle pour récupérer les datas d'obs -->
 

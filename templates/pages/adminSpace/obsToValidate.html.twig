@@ -26,8 +26,12 @@
                     <h2 class="page-title" id="observToValidate">Mes observations à valider</h2>
                 </header>
                 <section class="row obs">
+
+                    {% if validatesObs.haveToPaginate %}
+                        {{ pagerfanta(validatesObs, 'default', {'routeName': 'obs_validate'}) }}
+                    {% endif %}
                     <!-- faire une boucle pour récupérer les datas d'obs -->
-                    {% for obs in validatesObs %}
+                    {% for obs in validatesObs.currentPageResults %}
                         <div id="obs_{{ obs.id }}">
                             <u><h5 class="h5 title-obs">{{ obs.observationTitle }}</h5></u>
                             <div class="col-lg-7">
