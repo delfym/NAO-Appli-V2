@@ -73,7 +73,7 @@
 
                         <li class="active"><a href="{{ asset('allObservations') }}">Toutes les observations</a></li>
                         <li><a href="{{ asset('observForm') }} ">Saisir une observation</a></li>
-                        <li class="active"><a href="{{ asset('/unsubscribe') }}">Se desinscrire</a></li>
+                        <li><a href="{{ asset('/unsubscribe') }}">Se desinscrire</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ asset('obsToValidate') }}">Les observations à valider</a></li>
                         <li><a href="{{ 'adminValidate' }}">Les nouveaux membres à valider</a></li>
