@@ -23,7 +23,7 @@
             <!-- Article main content -->
             <article class="col-md-8 maincontent">
                 <header class="myPage-header">
-                    <h1 class="page-title">Toutes les observations</h1>
+                    <h1 class="page-title">Toutes vos observations</h1>
                 </header>
 
                 {% if observations.haveToPaginate %}
@@ -40,6 +40,9 @@
                             </p>
                             <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
                             <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
+                            {% if obs.ReasonOfDelete %}
+                                <p><span class="title-obs">Raison de la suppression: </span> {{ obs.ReasonOfDelete }}</p>
+                            {% endif %}
                         </div>
                         <div>
                             {% if obs.file %}

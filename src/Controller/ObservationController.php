@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ObservationController extends Controller
 {
@@ -19,7 +20,7 @@ class ObservationController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-	public function postObservation(Request $request)
+	public function postObservation(Request $request, AuthorizationCheckerInterface $authChecker)
 	{
 		$observ = new Observation();
 		$form = $this->createForm(ObservationType::class, $observ);
@@ -41,6 +42,10 @@ class ObservationController extends Controller
 			$user->addObservation($observ);
 			$bird->addObservation($observ);
 
+			if ($authChecker->isGranted('ROLE_ADMIN')) 
+			{
+				$observ->setValidationDate(new \Datetime());
+			}
 
 			$file = $form->get('file')->getData();
 

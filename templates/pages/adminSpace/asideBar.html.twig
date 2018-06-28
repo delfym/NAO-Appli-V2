@@ -9,14 +9,10 @@
                         <h4 id="title-user">Bienvenue {{ username }} !</h4>
                     </div>
                 </div>
+                {% if is_granted('ROLE_USER') %}
                 <div class="row widget" id="obsLink">
                     <div class="col-xs-12">
                         <h4><a href="{{ asset('myObservations') }}">Mes observations</a></h4>
-                    </div>
-                </div>
-                <div class="row widget" id="allobsLink">
-                    <div class="col-xs-12">
-                        <h4><a href="{{ asset('allObservations') }}">Toutes les observations</a></h4>
                     </div>
                 </div>
                 <div class="row widget">
@@ -25,6 +21,12 @@
                     </div>
                 </div>
 
+                <div class="row widget" id="allobsLink">
+                    <div class="col-xs-12">
+                        <h4><a href="{{ asset('allObservations') }}">Toutes les observations</a></h4>
+                    </div>
+                </div>
+                {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                 <div class="row widget">
                     <div class="col-xs-12">

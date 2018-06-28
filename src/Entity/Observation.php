@@ -72,12 +72,12 @@ class Observation
     private $bird;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $geo_latitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $geo_longitude;
 

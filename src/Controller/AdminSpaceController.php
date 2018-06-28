@@ -95,7 +95,7 @@ class AdminSpaceController extends Controller
            // );
 
 
-        $observations = $obs->findByUserId($this->currentUserId);
+        //$observations = $obs->findByUserId($this->currentUserId);
 
 
         return new Response($twig->render('pages/adminSpace/myObservations.html.twig',[
@@ -122,7 +122,7 @@ class AdminSpaceController extends Controller
             ->where('a.validation_date IS NOT NULL')
             ->andWhere('a.delete_date IS NULL')
             ->andWhere('a.reason_of_delete IS NULL')
-            ->orderBy('a.post_date', 'ASC');
+            ->orderBy('a.post_date', 'DESC');
 
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
@@ -232,7 +232,17 @@ class AdminSpaceController extends Controller
     }
 
     private function getCurrentUser(){
-        $this->currentUserId = $this->getUser()->getId();
-        $this->currentUsername = $this->getUser()->getUsername();
+        if ($this->getUser() instanceof AppUsers) 
+        {
+            $this->currentUserId = $this->getUser()->getId();
+            $this->currentUsername = $this->getUser()->getUsername();
+        }
+        else
+        {
+            $this->currentUserId = null;
+            $this->currentUsername = "Anonyme";
+        }
+
+        
     }
 }

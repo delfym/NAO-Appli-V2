@@ -57,45 +57,6 @@ class PagesController extends Controller
         return new Response($twig->render('pages/index.html.twig'));
     }
 
-    /**
-     * @Route("/observForm")
-     * @param Environment $twig
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function observForm(Environment $twig)
-    {
-        return new Response($twig->render('pages/observForm.html.twig'));
-    }
-
-    /**
-     * @Route("/about")
-     * @param Environment $twig
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function about(Environment $twig)
-    {
-        return new Response($twig->render('pages/about.html.twig'));
-    }
-
-
-    /**
-     * @Route("/contact")
-     * @param Environment $twig
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function contact(Environment $twig)
-    {
-        return new Response($twig->render('pages/contact.html.twig'));
-    }
 
     /**
      * @Route("/legals")
