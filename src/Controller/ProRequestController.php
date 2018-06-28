@@ -33,6 +33,8 @@ class ProRequestController extends Controller
 									$em = $this->getDoctrine()->getManager();
 									$em->flush();
 
+									$this->addFlash('notice', 'Votre demande a ete envoyée.');
+
 									return $this->redirectToRoute('home');
 								}
 					}

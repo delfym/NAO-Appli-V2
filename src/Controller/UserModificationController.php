@@ -30,6 +30,10 @@ class UserModificationController extends Controller
 						$em->persist($user);
 						$em->flush();
 
+						$this->addFlash('notice', 'Vos modifications on bien ete prises en compte');
+
+						return $this->redirectToRoute('home');
+
 					}
 
 				return $this->render('pages/modification.html.twig', array(
