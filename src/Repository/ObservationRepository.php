@@ -98,4 +98,12 @@ class ObservationRepository extends ServiceEntityRepository
 
         return $qb->getResult();
     }
+
+    public function findAllObs() {
+        return $obs = $this->createQueryBuilder('a')
+                    ->where('a.validation_date IS NOT NULL')
+                    ->andWhere('a.delete_date IS NULL')
+                    ->andWhere('a.reason_of_delete IS NULL')
+                    ->orderBy('a.post_date', 'DESC');
+    }
 }
