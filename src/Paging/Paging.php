@@ -24,7 +24,7 @@ class Paging
 
         $this->nbPages = ceil($nbChapters/$perPage);
         if (empty($numPage)){
-            return $chapters = $this->chapter->getChapters(0,5);
+            return $chapters = $this->chapter->getChapters(0,4);
         } else {
             if(($start <= $nbChapters)
                 && ($perPage <= $this->chapter->countChapters())){
