@@ -70,7 +70,11 @@
 
         </div>
     </div>    <!-- /container -->
-
+    <div  class="pagerfanta pull-right">
+        {% if observations.haveToPaginate %}
+            {{ pagerfanta(observations, 'default', {'routeName': 'my_observations'}, 'twitter_bootstrap3') }}
+        {% endif %}
+    </div>
 
 {% endblock %}
 {%  block javascripts %}
