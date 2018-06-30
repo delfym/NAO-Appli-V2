@@ -112,7 +112,7 @@ class AdminSpaceController extends Controller
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage(3);
-
+/*
         try
         {
             $pager->setCurrentPage($page);
@@ -121,6 +121,7 @@ class AdminSpaceController extends Controller
         {
             throw new NotFoundHttpException();
         }
+*/
 
         return new Response($twig->render('pages/adminSpace/allObservations.html.twig',[
             'username'      => $this->currentUsername,
@@ -146,7 +147,7 @@ class AdminSpaceController extends Controller
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage(3);
-
+/*
         try
         {
             $pager->setCurrentPage($page);
@@ -155,7 +156,7 @@ class AdminSpaceController extends Controller
         {
             throw new NotFoundHttpException();
         }
-                    
+ */
         //$observations = $obs->findByUserId($this->currentUserId);
         //$obsToValidate = $obs->findByStatus($this->currentUserId);
 

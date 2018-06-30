@@ -15,26 +15,28 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProMemberValidateController extends Controller
 {
-	/**
-	 * @Route("/adminValidate/{page}", name="validate_pro_member", defaults={"page" = 1})
-	 */
+    /**
+     * @Route("/adminValidate/{page}", name="validate_pro_member", defaults={"page" = 1})
+     * @param Request $request
+     * @param $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
 	public function proMemberValidate(Request $request, $page)
 	{
 		$username = $this->getUser()->getUsername();
-		$query = $this->getDoctrine()->getRepository('App:AppUsers')->createQueryBuilder('o')
-		->where('o.adminRequest IS NOT NULL')
-		->andWhere('o.role = :role')
-		->andWhere('o.isActive = 1')
-		->setParameter('role', "ROLE_USER")
-		->orderBy('o.adminRequest', 'ASC')
-		->getQuery();
-		//->getResult()
+		$query = $this->getDoctrine()->getRepository('App:AppUsers')
+            ->createQueryBuilder('o')
+            ->where('o.adminRequest IS NOT NULL')
+            ->andWhere('o.role = :role')
+            ->andWhere('o.isActive = 1')
+            ->setParameter('role', "ROLE_USER")
+            ->orderBy('o.adminRequest', 'ASC')
+            ->getQuery();
+            //->getResult()
 
 		$adapter = new DoctrineORMAdapter($query);
 		$pager = new Pagerfanta($adapter);
-		$pager->setMaxPerPage(5);
-
-	
+		$pager->setMaxPerPage(3);
 
 		try
 		{

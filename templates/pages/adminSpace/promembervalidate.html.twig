@@ -63,16 +63,14 @@
 
                         </div>
                 </section>
-
-
             </article>
             <!-- /Article -->
 
         </div>
     </div>    <!-- /container -->
     <div  class="pagerfanta pull-right">
-        {% if observations.haveToPaginate %}
-            {{ pagerfanta(observations, 'default', {'routeName': 'my_observations'}, 'twitter_bootstrap3') }}
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(observations, 'default', {'routeName': 'my_observations'}) }}
         {% endif %}
     </div>
 

@@ -19,9 +19,12 @@ class SignupController extends Controller
 		$this->mailer = $mailer;
 	}
 
-	/**
-	 * @Route("/signup")
-	 */
+    /**
+     * @Route("/signup")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $userPasswordEncoderInterface
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
 	public function signup(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface) // a ameliorer avec gestion access avant et apres POST
 	{
 		if ($this->getUser() instanceof AppUsers) 
