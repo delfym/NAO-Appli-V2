@@ -22,86 +22,82 @@
 
             <!-- Article main content -->
             <article class="col-md-8 maincontent">
-                <header class=" myPage-header">
+                <header class="myPage-header">
                     <h2 class="page-title" id="observToValidate">Mes observations à valider</h2>
                 </header>
                 <section class="row obs">
-
-                    {% if validatesObs.haveToPaginate %}
-                        {{ pagerfanta(validatesObs, 'default', {'routeName': 'obs_validate'}) }}
-                    {% endif %}
                     <!-- faire une boucle pour récupérer les datas d'obs -->
                     {% for obs in validatesObs.currentPageResults %}
-                        <div id="obs_{{ obs.id }}">
-                            <u><h5 class="h5 title-obs">{{ obs.observationTitle }}</h5></u>
-                            <div class="col-lg-7">
-                                <p>
-                                    <span class="title-obs">Date de l'observation :</span> {{ obs.postDate | date("d/m/Y") }}
-                                </p>
-                                <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
-                                <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
-                            </div>
-                            <div class="col">
-                                {% if obs.file %}
-                                    <!--p class="col-1"-->
-                                        <img class="img_obs" src="{{ asset('user_image/' ~ obs.file) }}">
-                                    <!--/p-->
-
-                                {% endif %}
-                            </div>
-                            <div class="row btn-group btn-grp-obs actionChoice" data-path="{{ asset('updateObs') }}">
-                                <a class="btn-action btn btn-obs" name="validBtn_{{ obs.id }}"
-                                   type="button">Valider</a>
-                                <button class="btn-action btn btn-obs" ype="submit"
-                                        data-toggle="modal"
-                                        data-target="#modalBox"
-                                        name="RefuseBtn_{{ obs.id }}" t>
-                                        Refuser
-                                </button>
-                                <!-- envoi vers fenêtre modale pour motif -->
-                            </div>
-
-                            <!--  Modal -->
-                            <div class="modal" id="modalBox">
-                                <div class="modal-dialog">
-                                    <div class="modal-content align-middle">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">x</button>
-                                            <h5 class="modal-title" id="report">Refuser l'observation</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post" action="{{ asset('refusedObs') }}">
-                                                <label>Sélectionner un motif de refus :
-                                                    <select id="refusalComment" name="refusalComment"
-                                                            class="list-group-item-dark">
-                                                        <option value="incohérent">incohérent</option>
-                                                        <option value="incomplet">commentaire à compléter</option>
-                                                        <option value="photo illisible">photo illisible</option>
-                                                    </select>
-                                                </label>
-                                                <input type="hidden" name="idObs" id="RefusalIdObs" value=""/>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" name="report">Valider</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/div-->
-
-                            <p id="separate"></p>
+                    <div id="obs_{{ obs.id }}">
+                        <div class="row">
+                        <u><h5 class="h5 title-obs">{{ obs.observationTitle }}</h5></u>
+                        <div class="col-lg-7 sepObs">
+                            <p><span class="title-obs">Date de l'observation :</span> {{ obs.postDate | date("d/m/Y") }}
+                            </p>
+                            <p><span class="title-obs">Commentaire de l'observation :</span> {{ obs.comment }} </p>
+                            <p><span class="title-obs">Oiseau observé : </span> {{ obs.bird.nomDeReference }}</p>
                         </div>
-                    {% endfor %}
+                        <div class="col">
+                            {% if obs.file %}
+                                <p class="col-1">
+                                    <img class="img_obs" src="{{ asset('user_image/' ~ obs.file) }}">
+                                </p>
+                            {% endif %}
+                        </div>
+                        </div>
+                        <div class="row btn-group btn-grp-obs actionChoice" data-path="{{ asset('updateObs') }}">
+                            <a class="btn-action btn btn-obs" name="validBtn_{{ obs.id }}"
+                               type="button">Valider</a>
+                            <button class="btn-action btn btn-obs" ype="submit"
+                                    data-toggle="modal"
+                                    data-target="#modalBox"
+                                    name="RefuseBtn_{{ obs.id }}" t>
+                                Refuser
+                            </button>
+                            <!-- envoi vers fenêtre modale pour motif -->
+                        </div>
+                        <p id="separateObs"></p>
+                        {% endfor %}
+                    </div>
                 </section>
-
-
             </article>
+            <!--  Modal -->
+            <div class="modal" id="modalBox">
+                <div class="modal-dialog">
+                    <div class="modal-content align-middle">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h5 class="modal-title" id="report">Refuser l'observation</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="{{ asset('refusedObs') }}">
+                                <label>Sélectionner un motif de refus :
+                                    <select id="refusalComment" name="refusalComment"
+                                            class="list-group-item-dark">
+                                        <option value="incohérent">incohérent</option>
+                                        <option value="incomplet">commentaire à compléter</option>
+                                        <option value="photo illisible">photo illisible</option>
+                                    </select>
+                                </label>
+                                <input type="hidden" name="idObs" id="RefusalIdObs" value=""/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="report">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/div-->
             <!-- /Article -->
-
         </div>
-    </div>    <!-- /container -->
 
+    </div>    <!-- /container -->
+    <div class="pagerfanta pull-right">
+        {% if validatesObs.haveToPaginate %}
+            {{ pagerfanta(validatesObs, 'default', {'routeName': 'obs_validate'}) }}
+        {% endif %}
+    </div>
 
 {% endblock %}
 

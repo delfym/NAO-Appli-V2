@@ -106,4 +106,12 @@ class ObservationRepository extends ServiceEntityRepository
                     ->andWhere('a.reason_of_delete IS NULL')
                     ->orderBy('a.post_date', 'DESC');
     }
+
+    public function getObsToValidate(){
+        return $this->createQueryBuilder('v')
+                    ->where('v.validation_date IS NULL')
+                    ->andWhere('v.delete_date IS NULL')
+                    ->andWhere('v.reason_of_delete IS NULL')
+                    ->orderBy('v.post_date', 'ASC');
+}
 }

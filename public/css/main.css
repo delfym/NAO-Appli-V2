@@ -121,8 +121,19 @@ form label, form .btn{
 	background-color: #ffb73a;
 	border-radius: 5px;
 	box-shadow: 0 1px 1px #ffb73a;
+	margin-top: 4px;
+	margin-bottom: 4px;
 }
 
+
+#separateObs{
+	height: 1px;
+	background-color: rgba(77, 77, 77, 0.83);
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(77, 77, 77, 0.83);
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 
 
 /*

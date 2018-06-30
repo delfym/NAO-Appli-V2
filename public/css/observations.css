@@ -1,5 +1,6 @@
 .title-obs {
     font-weight: bold;
+    margin-left: 15px;
 }
 
 .img_obs {
@@ -10,7 +11,12 @@
 
 
 .obs{
-    padding-left: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.sepObs {
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
 #title-user{

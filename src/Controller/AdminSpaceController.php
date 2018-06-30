@@ -153,15 +153,11 @@ class AdminSpaceController extends Controller
         $this->getCurrentUser();
         $obs = $this->getDoctrine()
                     ->getRepository(Observation::class)
-                    ->createQueryBuilder('v')
-                    ->where('v.validation_date IS NULL')
-                    ->andWhere('v.delete_date IS NULL')
-                    ->andWhere('v.reason_of_delete IS NULL')
-                    ->orderBy('v.post_date', 'ASC');
+                    ->getObsToValidate();
 
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
-        $pager->setMaxPerPage(5);
+        $pager->setMaxPerPage(4);
 
         try
         {
