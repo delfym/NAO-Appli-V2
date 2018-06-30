@@ -47,7 +47,7 @@ class AdminSpaceController extends Controller
                     ->getRepository(Observation::class);
 
         $observations = $obs->findByUserId($this->currentUserId, 2);
-        $validatesObs = $obs->findByStatus($this->currentUserId);
+        $validatesObs = $obs->findByStatus($this->currentUserId,2);
 
         return new Response($twig->render('pages/adminSpace/adminSpace.html.twig',[
             'username' => $this->currentUsername,
@@ -86,17 +86,6 @@ class AdminSpaceController extends Controller
         {
             throw new NotFoundHttpException();
         }
-        //$observations = $obs->findByUserId($this->currentUserId);
-
-
-
-             /*  $obs->setFile(new File(
-              $this->getParameter('file_directory').'/'.$obs->getFile())  */
-           // );
-
-
-        //$observations = $obs->findByUserId($this->currentUserId);
-
 
         return new Response($twig->render('pages/adminSpace/myObservations.html.twig',[
             'username'      => $this->currentUsername,
@@ -122,7 +111,7 @@ class AdminSpaceController extends Controller
 
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
-        $pager->setMaxPerPage(4);
+        $pager->setMaxPerPage(3);
 
         try
         {
@@ -131,8 +120,7 @@ class AdminSpaceController extends Controller
         catch(NotValidCurrentPageException $e)
         {
             throw new NotFoundHttpException();
-        }    
-        //$observations = $obs->findAll();
+        }
 
         return new Response($twig->render('pages/adminSpace/allObservations.html.twig',[
             'username'      => $this->currentUsername,
@@ -157,7 +145,7 @@ class AdminSpaceController extends Controller
 
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
-        $pager->setMaxPerPage(4);
+        $pager->setMaxPerPage(3);
 
         try
         {
@@ -232,7 +220,7 @@ class AdminSpaceController extends Controller
         else
         {
             $this->currentUserId = null;
-            $this->currentUsername = "Anonyme";
+            $this->currentUsername = "!";
         }
 
         

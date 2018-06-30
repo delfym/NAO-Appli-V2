@@ -114,4 +114,6 @@ class ObservationRepository extends ServiceEntityRepository
                     ->andWhere('v.reason_of_delete IS NULL')
                     ->orderBy('v.post_date', 'ASC');
 }
+
+
 }
