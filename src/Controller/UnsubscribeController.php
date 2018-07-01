@@ -6,20 +6,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\DeletionConfirmationType;
+use Symfony\Flex\Response;
+use Twig\Environment;
 
 class UnsubscribeController extends Controller
 {
-	/**
-	 * @Route("/unsubscribe")
-	 */
+    /**
+     * @Route("/unsubscribe")
+     * @param Request $request
+     * @return string
+     */
 	public function unsubscribe(Request $request)
 	{
 		$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); 		
 		
-		$form = $this->createForm(DeletionConfirmationtype::class);
+		$form = $this->createForm(DeletionConfirmationType::class);
 		$form->handleRequest($request);
 
-		if ($form->isSubmitted() && $form->isValid()) 
+		if ($form->isSubmitted() && $form->isValid())
 		{
 			$data = $form->getData();
 
@@ -37,15 +41,15 @@ class UnsubscribeController extends Controller
 				//$em->remove($user);
 				$em->flush();
 
-				$this->addFlash('notice', 'Votre demande de desinscription a ete prise en compte');
+				$this->addFlash('notice', 'Votre demande de désinscription a été prise en compte.');
 
 				return $this->redirectToRoute('home');
 			}
 		}
 
-		return  $this->render('pages/confirmdeletion.html.twig', array(
-			'form' => $form->createView()
-		));
+		return $this->render('pages/confirmdeletion.html.twig', [
+			'form' => $form->createView()]
+		);
 	}
 }
 

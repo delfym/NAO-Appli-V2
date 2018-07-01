@@ -95,8 +95,9 @@
     </div>    <!-- /container -->
     <div class="pagerfanta pull-right">
         {% if validatesObs.haveToPaginate %}
-            {{ pagerfanta(validatesObs, 'default', {'routeName': 'obs_validate'}) }}
+            {{ pagerfanta(validatesObs, {'routeName': 'obs_validate'}) }}
         {% endif %}
+
     </div>
 
 {% endblock %}

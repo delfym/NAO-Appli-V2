@@ -38,23 +38,9 @@ class PagesController extends Controller
      */
     public function home(Environment $twig)
     {
-        dump($this->getUser());
+        //dump($this->getUser());
         return new Response($twig->render('pages/index.html.twig'));
 
-    }
-
-    /**
-     * @Route("/test")
-     * @param Environment $twig
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function test(Environment $twig)
-    {
-        // return new Response('test');
-        return new Response($twig->render('pages/index.html.twig'));
     }
 
     /**

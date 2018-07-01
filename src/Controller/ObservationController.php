@@ -9,8 +9,9 @@ use App\Entity\AppUsers;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\FileUploader;
+//use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ObservationController extends Controller
@@ -18,6 +19,7 @@ class ObservationController extends Controller
     /**
      * @Route("/observForm")
      * @param Request $request
+     * @param AuthorizationCheckerInterface $authChecker
      * @return \Symfony\Component\HttpFoundation\Response
      */
 	public function postObservation(Request $request, AuthorizationCheckerInterface $authChecker)

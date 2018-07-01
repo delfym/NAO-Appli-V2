@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\AppUsers;
 use App\Entity\Observation;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -112,7 +113,7 @@ class AdminSpaceController extends Controller
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage(3);
-/*
+
         try
         {
             $pager->setCurrentPage($page);
@@ -121,7 +122,7 @@ class AdminSpaceController extends Controller
         {
             throw new NotFoundHttpException();
         }
-*/
+
 
         return new Response($twig->render('pages/adminSpace/allObservations.html.twig',[
             'username'      => $this->currentUsername,
@@ -130,7 +131,7 @@ class AdminSpaceController extends Controller
     }
 
     /**
-     * @Route("/obsToValidate/{page}", name="obs_validate", defaults={"page" = 1})
+     * @Route("/obsToValidate/{page}", name="obs_validate", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @param Environment $twig
      * @return Response
      * @throws \Twig_Error_Loader
@@ -147,23 +148,23 @@ class AdminSpaceController extends Controller
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage(3);
-/*
+
         try
         {
             $pager->setCurrentPage($page);
+
+            return new Response($twig->render('pages/adminSpace/obsToValidate.html.twig',[
+                'username' => $this->currentUsername,
+                'validatesObs' => $pager,
+            ]));
         }
         catch(NotValidCurrentPageException $e)
         {
-            throw new NotFoundHttpException();
-        }
- */
-        //$observations = $obs->findByUserId($this->currentUserId);
-        //$obsToValidate = $obs->findByStatus($this->currentUserId);
+            //throw new NotFoundHttpException('page non trouvée');
+            return new Response($this->render('pages/index.html.twig'));
 
-        return new Response($twig->render('pages/adminSpace/obsToValidate.html.twig',[
-            'username' => $this->currentUsername,
-            'validatesObs' => $pager,
-        ]));
+        }
+
     }
 
     /**
