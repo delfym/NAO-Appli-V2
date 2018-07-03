@@ -51,7 +51,7 @@ class ForgotPasswordController extends Controller
 				$message = (new \Swift_Message("Recuperation de votre mot de passe NAO"))
 				->setFrom('palmino.angelo@gmail.com')
 				->setTo($alreadyexist->getMail())
-				->addPart("Merci de bien voiloir cliquer sur ce lien pour changer votre mot de passe http://nao.local/index.php/resetpassword/".$alreadyexist->getUniqueKey());
+				->addPart("Merci de bien voiloir cliquer sur ce lien pour changer votre mot de passe http://localhost:8888/nao-app/public/resetpassword/".$alreadyexist->getUniqueKey());
 
 			  $this->mailer->send($message);
 
@@ -76,7 +76,7 @@ class ForgotPasswordController extends Controller
 			 $message = (new \Swift_Message("Recuperation de votre mot de passe NAO"))
 				->setFrom('palmino.angelo@gmail.com')
 				->setTo($forgot->getMail())
-				->addPart("Merci de bien voiloir cliquer sur ce lien pour changer votre mot de passe http://nao.local/index.php/resetpassword/".$forgot->getUniqueKey());
+				->addPart("Merci de bien voiloir cliquer sur ce lien pour changer votre mot de passe http://localhost:8888/nao-app/public/resetpassword/".$forgot->getUniqueKey());
 
 			  $this->mailer->send($message);
 

@@ -60,7 +60,7 @@ class SignupController extends Controller
 			$message = (new \Swift_Message("Activation de votre compte NAO"))
 				->setFrom('nao@gmail.com')
 				->setTo($user->getMail())
-				->addPart("Merci de bien vouloir cliquer sur ce lien pour activer votre compte " . $this->generateUrl('accountactivation') ."/".$accountvalidation->getValidationKey());
+				->addPart("Merci de bien vouloir cliquer sur ce lien pour activer votre compte http://localhost:8888/nao-app/public/accountactivation/".$accountvalidation->getValidationKey());
 
 			  $this->mailer->send($message);
 
