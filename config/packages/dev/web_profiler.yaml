@@ -1,6 +1,6 @@
 web_profiler:
     toolbar: true
-    intercept_redirects: false
+    intercept_redirects: true
 #    excluded_ajax_paths:  ^/((index|app(_[\w]+)?)\.php/)?_wdt
 
 #    excluded_ajax_paths:  ^/((index|app(_[\w]+)?)\.php/)?_wdt

@@ -58,9 +58,9 @@ class SignupController extends Controller
 			$entityManager->flush();
 
 			$message = (new \Swift_Message("Activation de votre compte NAO"))
-				->setFrom('palmino.angelo@gmail.com')
+				->setFrom('nao@gmail.com')
 				->setTo($user->getMail())
-				->addPart("Merci de bien vouloir cliquer sur ce lien pour activer votre compte http://nao.local/index.php/accountactivation/".$accountvalidation->getValidationKey());
+				->addPart("Merci de bien vouloir cliquer sur ce lien pour activer votre compte " . $this->generateUrl('accountactivation') ."/".$accountvalidation->getValidationKey());
 
 			  $this->mailer->send($message);
 
