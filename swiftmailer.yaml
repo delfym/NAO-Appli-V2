@@ -1,0 +1,16 @@
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool: { type: 'memory' }
+
+#    host: smtp.gmail.com
+ #   transport: smtp
+  #  username: louvre.accueil@gmail.com
+   # password: louvre-accueil@OC
+    #port: 465
+    #encryption: ssl
+    #auth_mode: login
+
+
+#    secret: 8d1bf47eb0916cf1c488f8c90408c3fa
+
+
