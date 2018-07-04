@@ -34,7 +34,7 @@ $('form').on('click', '#btn-searchObs', function (e) {
         .fail("Nous n'\avons pas d\'observations pour cet oiseau\.");
 });
 
-// Afficher les données sur l('oiseeau
+// Afficher les données sur l'oiseeau
 
 $('form').on('click', '#btn-displayInfos', function (e) {
     e.preventDefault();
