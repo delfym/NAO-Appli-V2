@@ -46,7 +46,7 @@ class ObservationType extends AbstractType
                 "label" => "Date de l'observation",
             ))
             ->add('autocomp_bird', TextType::class, array(
-                "attr" => array('class' => 'form-control',),
+                "attr" => array('class' => 'form-control', 'placeholder' => 'Veuillez saisir le nom de l\'oiseau observé'),
                 "mapped" => false,
                 "label" => "Oiseau Observé",
                 "constraints" => array(
