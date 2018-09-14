@@ -1,17 +1,13 @@
 <?php 
 
 namespace App\Controller;
-
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-//use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+	use Symfony\Component\HttpFoundation\Response;
+	use Symfony\Component\HttpFoundation\Request;
+	use Symfony\Component\Routing\Annotation\Route;
+	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+	use Symfony\Component\HttpFoundation\RedirectResponse;
+	use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AutocompleteBirdsController extends Controller
 {
@@ -22,34 +18,17 @@ class AutocompleteBirdsController extends Controller
      */
 	public function autocompleteBirds(Request $request)
 	{
-
 		if ($request->isXmlHttpRequest()) 
 		{
+			$term = $request->get('term');
+			$maxRows = $request->get('maxRows');
 
-		$term = $request->get('term');
-		$maxRows = $request->get('maxRows');
+			$em = $this->getDoctrine()->getManager();
 
-		$em = $this->getDoctrine()->getManager();
+			$birds = $em->getRepository('App:Birds')
+						->getBirdsByrefName($term, $maxRows);
 
-		$encoders = array(new XmlEncoder(), new JsonEncoder);
-
-		$normalizers = array(new ObjectNormalizer());
-
-		$serializer = new Serializer($normalizers, $encoders);
-
-		$birds = $em->getRepository('App:Birds')->createQueryBuilder('b')
-			->select('b.nom_de_reference')
-			->andWhere('b.nom_de_reference LIKE :bird')
-			->setParameter('bird', '%'.$term.'%')
-			->setMaxResults($maxRows)
-			->getQuery()
-			->getResult();
-
-	    $json = $serializer->serialize($birds, 'json');
-		$response = new Response($json);
-		$response->headers->set('Content-Type', 'application/json');
-		return $response;
-		
+			return new JsonResponse($birds);	
 		}
 		else {
 

@@ -13,7 +13,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 //************************************************
 $('form').on('click', '#btn-searchObs', function (e) {
-    var marker;
 
     e.preventDefault();
     if ($('.leaflet-marker-icon')) {
@@ -26,8 +25,14 @@ $('form').on('click', '#btn-searchObs', function (e) {
     $.post(path, {birdRefName: birdRefName},
         function (data) {
             var i = 0;
+            //dire que si plus de 3 points sur une petite zone changer de marqueur / "curseur"
             $.each(data, function () {
-                marker = L.marker([data[i].geo_latitude, data[i].geo_longitude]).addTo(mymap);
+              var circle = L.circle([data[i].geo_latitude, data[i].geo_longitude], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 500
+        }).addTo(mymap);
                 i++;
             });
         })

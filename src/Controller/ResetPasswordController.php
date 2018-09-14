@@ -25,12 +25,9 @@ class ResetPasswordController extends Controller
 		{  
 			$em = $this->getDoctrine()->getManager();
 
-			$forgotpassword = $em->getRepository('App:ForgotPassword')->createQueryBuilder('u')
-			->andWhere('u.unique_key = :key')
-			->setParameter('key', $key)
-			->getQuery()
-			->getOneOrNullResult();
-
+			$forgotpassword = $em->getRepository('App:ForgotPassword')
+								 ->getPass($key);
+								 
 			if (false === empty($forgotpassword)) 
 			{
 				 $user = $forgotpassword->getUser();

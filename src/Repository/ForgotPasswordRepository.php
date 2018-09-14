@@ -19,32 +19,20 @@ class ForgotPasswordRepository extends ServiceEntityRepository
         parent::__construct($registry, ForgotPassword::class);
     }
 
-//    /**
-//     * @return ForgotPassword[] Returns an array of ForgotPassword objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
+    public function checkMail($forgot){
         return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('f.mail = :mail')
+            ->setParameter('mail', $forgot)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ForgotPassword
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+    public function getPass($key) {
+        return  $this->createQueryBuilder('u')
+                    ->andWhere('u.unique_key = :key')
+                    ->setParameter('key', $key)
+                    ->getQuery()
+                    ->getOneOrNullResult();
     }
-    */
+
 }

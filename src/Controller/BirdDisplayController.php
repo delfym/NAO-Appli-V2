@@ -22,27 +22,21 @@ class BirdDisplayController extends Controller
     public function displayObservation(Request $request)
     {
         $form = $this->createForm(ObservationType::class);
-        $em = $this->getDoctrine()->getManager();
+        $em =   $this->getDoctrine()->getManager();
 
         $selectedBird = $form->get('autocomp_bird')->getData();
 
-        //$user = $this->getUser();
-        //récupérer l'id de l'obs saisie grace à ajax
-
         if ($request->isMethod('POST')
             && $form->handleRequest($request)
-                ->isValid()) {
-
+                    ->isValid()) {
         }
         $form->handleRequest($request);
         $obs = $em->getRepository(Observation::class);
-
 
         return $this->render('pages/displayObs.html.twig', [
             'form' => $form->createView()
         ]);
     }
-
 
     /**
      * @Route("/displayBird")
@@ -55,9 +49,10 @@ class BirdDisplayController extends Controller
 
             $birdRef = htmlspecialchars($_POST['birdRefName']);
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()
+                       ->getManager();
             $birdInfos = $em->getRepository(Birds::class)
-                ->findByBirdName($birdRef);
+                            ->findByBirdName($birdRef);
 
             return new JsonResponse($birdInfos);
         }

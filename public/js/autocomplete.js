@@ -8,7 +8,7 @@ $(document).ready(function() {
         var term = request.term
       	if (term in cache) {
       		response($.map(cache[term], function(objet){
-      			return objet.nom_de_reference;
+      			return objet.nom_vernaculaire;
       		}));
       	return;
       	}
@@ -22,7 +22,7 @@ $(document).ready(function() {
           success : function( donnee ) {
           	cache[term] = donnee;
           	response($.map(donnee, function(objet){
-          		return objet.nom_de_reference;
+          		return objet.nom_vernaculaire;
           	}));
 
           }

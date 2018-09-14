@@ -34,6 +34,12 @@ class ObservationRepository extends ServiceEntityRepository
         return $qb->getResult();
     }
 
+    public function getCurrentUser($user){
+        return $this->createQueryBuilder('o')
+                    ->where('o.user = :user')
+                    ->setParameter('user', $user); 
+    }
+
     /**
      * @param $id
      * @param int $first_result
@@ -51,11 +57,6 @@ class ObservationRepository extends ServiceEntityRepository
             ->setFirstResult($first_result)
             ->setMaxResults($max_results);
         return $qb->getQuery()->getResult();
-
-     //   $pag = new Paginator($qb);
-//var_dump($pag);
-  //      $nbPages = $pag->count();
-    //    return $pag;
     }
 
     /**
@@ -89,7 +90,7 @@ class ObservationRepository extends ServiceEntityRepository
             ->addSelect('o.geo_longitude')
             ->addSelect('o.geo_latitude')
             ->leftJoin('o.bird', 'b')
-            ->where('b.nom_de_reference = :birdNameRef')
+            ->where('b.nom_vernaculaire = :birdNameRef')
             ->addSelect('b')
             ->setParameter('birdNameRef', $birdName)
            // ->orderBy('b.nom_de_reference', 'ASC')

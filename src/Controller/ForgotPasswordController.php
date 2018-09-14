@@ -40,11 +40,8 @@ class ForgotPasswordController extends Controller
 
 			//VERIFIER SI DEMANDE PAS DEJA PRESENTE EN BDD SI EXISTE RENVOI MAIL
 
-			$alreadyexist = $em->getRepository('App:ForgotPassword')->createQueryBuilder('f')
-				->andWhere('f.mail = :mail')
-				->setParameter('mail', $forgot->getMail())
-				->getQuery()
-				->getOneOrNullResult();
+			$alreadyexist = $em->getRepository('App:ForgotPassword')
+								->checkMail($forgot->getMail());
 
 			if (false === empty($alreadyexist)) 
 			{

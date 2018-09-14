@@ -19,32 +19,14 @@ class AccountValidationRepository extends ServiceEntityRepository
         parent::__construct($registry, AccountValidation::class);
     }
 
-//    /**
-//     * @return AccountValidation[] Returns an array of AccountValidation objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function verif($key) {
 
-    /*
-    public function findOneBySomeField($value): ?AccountValidation
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $q = $this->createQueryBuilder('a')
+            ->andWhere('a.validation_key = :key')
+            ->setParameter('key', $key)
+            ->getQuery();
+
+            return $q->getOneOrNullResult;
     }
-    */
+
 }

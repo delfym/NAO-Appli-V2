@@ -8,28 +8,35 @@
 
 namespace App\Controller;
 
-use App\Entity\AppUsers;
-use App\Entity\Observation;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Twig\Environment;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Exception\NotValidCurrentPageException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+    use App\Entity\AppUsers;
+    use App\Entity\Observation;
+    use Symfony\Component\HttpFoundation\File\File;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
+    use Symfony\Component\HttpFoundation\JsonResponse;
+    use Symfony\Component\HttpFoundation\RedirectResponse;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+    use Symfony\Component\Security\Core\User\UserInterface;
+    use Twig\Environment;
+    use Pagerfanta\Adapter\DoctrineORMAdapter;
+    use Pagerfanta\Pagerfanta;
+    use Pagerfanta\Exception\NotValidCurrentPageException;
+    use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminSpaceController extends Controller
 {
     private $currentUsername;
     private $currentUserId;
+
+
+    private function getObsRepo(){
+         return $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository(Observation::class);             
+    }
 
     /**
      * @Route("/adminSpace")
@@ -40,15 +47,10 @@ class AdminSpaceController extends Controller
      * @throws \Twig_Error_Syntax
      */
     public function adminSpace(Environment $twig){
+        $observations = $this->getObsRepo()
+                             ->findByUserId($this->currentUserId, 2);
 
-        //$currentUserId = $this->getUser()->getId();
-        //$currentUsername = $this->getUser()->getUsername();
-        $this->getCurrentUser();
-        $obs = $this->getDoctrine()
-                    ->getRepository(Observation::class);
-
-        $observations = $obs->findByUserId($this->currentUserId, 2);
-        $validatesObs = $obs->findByStatus($this->currentUserId,2);
+        $validatesObs = $obs->findByStatus($this->currentUserId, 2);
 
         return new Response($twig->render('pages/adminSpace/adminSpace.html.twig',[
             'username' => $this->currentUsername,
@@ -56,7 +58,6 @@ class AdminSpaceController extends Controller
             'validatesObs' => $validatesObs
         ]));
     }
-
 
     /**
      * @Route("/myObservations/{page}", name="my_observations", defaults={"page" = 1})
@@ -67,15 +68,11 @@ class AdminSpaceController extends Controller
      * @throws \Twig_Error_Syntax
      */
     public function myObservations(Environment $twig, $page){
-        $this->getCurrentUser();
 
-        $obs = $this->getDoctrine()
-                    ->getRepository(Observation::class)
-                    ->createQueryBuilder('o')
-                    ->where('o.user = :user')
-                    ->setParameter('user', $this->getUser());
+        $myObs = $this->getObsRepo()
+                      ->getCurrentUser($this->getUser());
 
-        $adapter = new DoctrineORMAdapter($obs);
+        $adapter = new DoctrineORMAdapter($myObs);
         $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage(5);
 
@@ -94,7 +91,6 @@ class AdminSpaceController extends Controller
         ]));
     }
 
-
     /**
      * @Route("/allObservations/{page}", name="all_observations", defaults={"page" = 1})
      * @param Environment $twig
@@ -104,11 +100,8 @@ class AdminSpaceController extends Controller
      * @throws \Twig_Error_Syntax
      */
     public function allObservations(Environment $twig, $page){
-        $this->getCurrentUser();
-
-        $obs = $this->getDoctrine()
-            ->getRepository(Observation::class)
-            ->findAllObs();
+        $obs = $this->getObsRepo()
+                    ->findAllObs(); 
 
         $adapter = new DoctrineORMAdapter($obs);
         $pager = new Pagerfanta($adapter);
@@ -140,7 +133,6 @@ class AdminSpaceController extends Controller
      */
     public function obsToValidate(Environment $twig, $page){
 
-        $this->getCurrentUser();
         $obs = $this->getDoctrine()
                     ->getRepository(Observation::class)
                     ->getObsToValidate();
@@ -164,7 +156,6 @@ class AdminSpaceController extends Controller
             return new Response($this->render('pages/index.html.twig'));
 
         }
-
     }
 
     /**
@@ -199,11 +190,8 @@ class AdminSpaceController extends Controller
             $obsId = htmlspecialchars($_POST['idObs']);
             $refusalComment = htmlspecialchars($_POST['refusalComment']);
 
-            $em = $this->getDoctrine()
-                        ->getManager();
-
-            $obsToUpdate = $em->getRepository(Observation::class)
-                                ->find($obsId);
+            $obsToUpdate->getObsRepo()
+                        ->find($obsId);
             $obsToUpdate->setDeleteDate(new \DateTime());
             $obsToUpdate->setReasonOfDelete($refusalComment);
             $em->flush();
@@ -224,7 +212,5 @@ class AdminSpaceController extends Controller
             $this->currentUserId = null;
             $this->currentUsername = "!";
         }
-
-        
     }
 }

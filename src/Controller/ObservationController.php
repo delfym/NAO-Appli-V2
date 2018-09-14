@@ -2,17 +2,16 @@
 
 namespace App\Controller;
 
-
-use App\Form\ObservationType;
-use App\Entity\Observation;
-use App\Entity\AppUsers;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-//use App\Service\FileUploader;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+	use App\Form\ObservationType;
+	use App\Entity\Observation;
+	use App\Entity\AppUsers;
+	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\HttpFoundation\Request;
+	use Symfony\Component\Routing\Annotation\Route;
+	//use App\Service\FileUploader;
+	use Symfony\Component\HttpFoundation\File\UploadedFile;
+	use Symfony\Component\HttpFoundation\File\File;
+	use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ObservationController extends Controller
 {
@@ -33,14 +32,10 @@ class ObservationController extends Controller
             $selectedBird = $form->get('autocomp_bird')->getData();
             $user = $this->getUser();
 
-			$bird = $this->getDoctrine()->getRepository('App:Birds')
-                        ->createQueryBuilder('b')
-                        ->andWhere('b.nom_de_reference = :bird')
-                        ->setParameter('bird', $selectedBird)
-                        ->getQuery()
-                        ->getOneOrNullResult(); // retourne un resultat sous forme d'objet ou null (faire verif if null === bird)
-                //->getResult();
-
+			$bird = $this->getDoctrine()
+						 ->getRepository('App:Birds')
+						 ->getBirdByRef($selectedBird);
+                       
 			$user->addObservation($observ);
 			$bird->addObservation($observ);
 

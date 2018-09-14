@@ -25,7 +25,7 @@ class ObservationDisplayController extends Controller
 		$form = $this->createForm(ObservationType::class);
         $em = $this->getDoctrine()->getManager();
 
-            $selectedBird = $form->get('autocomp_bird')->getData();
+        $selectedBird = $form->get('autocomp_bird')->getData();
 
 			//$user = $this->getUser();
 			//récupérer l'id de l'obs saisie grace à ajax
@@ -58,7 +58,7 @@ class ObservationDisplayController extends Controller
                 ->getManager();
 
             $obsToUpdate = $em->getRepository(Observation::class)
-                ->find($obsId);
+                            ->find($obsId);
             $obsToUpdate->setValidationDate(new \DateTime());
             $em->flush();
             return new JsonResponse(null,200);

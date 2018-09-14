@@ -19,6 +19,17 @@ class AppUsersRepository extends ServiceEntityRepository
         parent::__construct($registry, AppUsers::class);
     }
 
+    public function getRole($role) {
+        return $this->createQueryBuilder('o')
+                    ->where('o.adminRequest IS NOT NULL')
+                    ->andWhere('o.role = :role')
+                    ->andWhere('o.isActive = 1')
+                    ->setParameter('role', $role)
+                    ->orderBy('o.adminRequest', 'ASC')
+                    ->getQuery();
+                    //->getResult()
+    }
+
 //    /**
 //     * @return AppUsers[] Returns an array of AppUsers objects
 //     */

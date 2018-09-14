@@ -62,9 +62,9 @@ class SignupController extends Controller
 				->setTo($user->getMail())
 				->addPart("Merci de bien vouloir cliquer sur ce lien pour activer votre compte http://localhost:8888/nao-app/public/accountactivation/".$accountvalidation->getValidationKey());
 
-			  $this->mailer->send($message);
+			$this->mailer->send($message);
 
-			 $this->addFlash('notice', 'Votre compte à ete créé, merci de bien vouloir l\'activer en cliquant sur le lien que vous avez recu par mail');
+			$this->addFlash('notice', 'Votre compte à ete créé, merci de bien vouloir l\'activer en cliquant sur le lien que vous avez recu par mail');
 
 			return $this->redirectToRoute('home');
 		}

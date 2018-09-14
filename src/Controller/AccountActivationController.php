@@ -18,21 +18,16 @@ class AccountActivationController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 
-			$mailvalidation = $em->getRepository('App:AccountValidation')->createQueryBuilder('a')
-			->andWhere('a.validation_key = :key')
-			->setParameter('key', $key)
-			->getQuery()
-			->getOneOrNullResult();
+			$mailvalidation = $em->getRepository('App:AccountValidation')
+								 ->verif($key);
 
 			if (false === empty($mailvalidation)) 
 			{
 				$mailvalidation->getUser()->setMailValidationDate(new Datetime());
 				$em->remove($mailvalidation);
 				$em->flush();
-				
-				//$em->flush();
 
-				$this->addFlash('notice', 'Votre compte a ete validé, merci de vous connecter.');
+				$this->addFlash('notice', 'Votre compte a été validé, merci de vous connecter.');
 				return $this->redirectToRoute('home');
 			}
 			else

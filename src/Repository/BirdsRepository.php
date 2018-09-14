@@ -27,12 +27,28 @@ class BirdsRepository extends ServiceEntityRepository
      */
     public function findByBirdName($birdName)
     {
-        $qb = $this->createQueryBuilder('b')
-            ->where('b.nom_de_reference = :birdNameRef')
-            ->setParameter('birdNameRef', $birdName)
-            ->orderBy('b.nom_de_reference', 'ASC')
-            ->getQuery();
+        $qb = $this ->createQueryBuilder('b')
+                    ->where('b.nom_vernaculaire = :birdNameRef')
+                    ->setParameter('birdNameRef', $birdName)
+                    ->getQuery();
         return $qb->getArrayResult();
-        //return $qb->getOneOrNullResult();
+    }
+
+    public function getBirdsByrefName($term, $maxRows){
+        return $this->createQueryBuilder('b')
+                    ->select('b.nom_vernaculaire')
+                    ->andWhere('b.nom_vernaculaire LIKE :bird')
+                    ->setParameter('bird', '%'.$term.'%')
+                    ->setMaxResults($maxRows)
+                    ->getQuery()
+                    ->getResult();
+    }
+    
+    public function getBirdByRef($selectedBird){
+         return $this   ->createQueryBuilder('b')
+                        ->andWhere('b.nom_vernaculaire = :bird')
+                        ->setParameter('bird', $selectedBird)
+                        ->getQuery()
+                        ->getOneOrNullResult();    
     }
 }

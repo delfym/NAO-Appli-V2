@@ -19,8 +19,8 @@ class BirdValidator extends ConstraintValidator
 	public function validate($value, Constraint $constraint)
 	{
 		$bird = $this->em->getRepository('App:Birds')->createQueryBuilder('b')
-			->select('b.nom_de_reference')
-			->andWhere('b.nom_de_reference = :bird')
+			->select('b.nom_vernaculaire')
+			->andWhere('b.nom_vernaculaire = :bird')
 			->setParameter('bird', $value)
 			->getQuery()
 			->getResult();
