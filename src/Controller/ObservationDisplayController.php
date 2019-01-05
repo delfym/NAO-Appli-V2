@@ -2,16 +2,15 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Birds;
-use App\Form\ObservationType;
-use App\Entity\Observation;
-use App\Entity\AppUsers;
-use http\Env\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+    use App\Entity\Birds;
+    use App\Form\ObservationType;
+    use App\Entity\Observation;
+    use App\Entity\AppUsers;
+    use http\Env\Response;
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\HttpFoundation\JsonResponse;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\Routing\Annotation\Route;
 
 class ObservationDisplayController extends Controller
 {
