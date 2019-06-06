@@ -2,58 +2,58 @@
 
 {% block body %}
 
-	<header id="head" class="secondary"></header>
+    <header id="head" class="secondary"></header>
 
-	<!-- container -->
-	<div class="container">
+    <!-- container -->
+    <div class="container">
 
-		<ol class="breadcrumb">
-			<li><a href="index.html">Accueil</a></li>
-			<li class="active">Page d'administration</li>
-		</ol>
+        <ol class="breadcrumb">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="active">Page d'administration</li>
+        </ol>
 
-		<div class="row">
-			<div class="row">
-				<p></p>
-			</div>
-			<!-- Sidebar -->
+        <div class="row">
+            <div class="row">
+                <p></p>
+            </div>
+            <!-- Sidebar -->
 
             {%  include ('pages/adminSpace/asideBar.html.twig') %}
 
-			<!-- /Sidebar -->
+            <!-- /Sidebar -->
 
-			<!-- Article main content -->
-			<article class="col-md-8 maincontent">
-				<header class="myPage-header">
-					<h1 class="page-title">Mon tableau de bord</h1>
-				</header>
-				<h5 class="title-obs"><a href="{{ asset('myObservations') }}">Mes dernières observations</a></h5>
-				<ul>
+            <!-- Article main content -->
+            <article class="col-md-8 maincontent">
+                <header class="myPage-header">
+                    <h1 class="page-title">Mon tableau de bord</h1>
+                </header>
+                <h5 class="title-obs"><a href="{{ asset('myObservations') }}">Mes dernières observations</a></h5>
+                <ul>
 
-					<!-- faire une boucle pour récupérer les datas d'obs -->
+                    <!-- faire une boucle pour récupérer les datas d'obs -->
                     {% for obs in observations %}
 
-						<li>{{ obs.observationTitle }}  - date de l'observation : {{ obs.comment }}  <br>
-							oiseau observé : {{ obs.bird.nomVernaculaire }} </li>
-                    {% endfor %}
-				</ul>
+                        <li>{{ obs.observationTitle }}  - date de l'observation : {{ obs.comment }}  <br>
+                            oiseau observé : {{ obs.bird.nomVernaculaire }} </li>
+                        {% endfor %}
+                </ul>
 
-				<h5 class="title-obs"><a href="{{ asset('obsToValidate') }}">Mes observations à valider</a></h5>
+                <h5 class="title-obs"><a href="{{ asset('obsToValidate') }}">Mes observations à valider</a></h5>
 
-				<ul>
+                <ul>
                     {% for validObs in validatesObs %}
-						<li>{{ validObs.observationTitle }}  - commentaire : {{ validObs.comment }}  </li>
-                    {% endfor %}
-				</ul>
+                        <li>{{ validObs.observationTitle }}  - commentaire : {{ validObs.comment }}  </li>
+                        {% endfor %}
+                </ul>
 
-				<h5 class="title-obs"><a href="{{ asset('adminValidate') }}">Les nouveaux naturalistes à valider</a></h5>
-				<p>Vous avez  nouveaux membres à valider</p>
+                <h5 class="title-obs"><a href="{{ asset('adminValidate') }}">Les nouveaux naturalistes à valider</a></h5>
+                <p>Vous avez  nouveaux membres à valider</p>
 
-			</article>
-			<!-- /Article -->
+            </article>
+            <!-- /Article -->
 
-		</div>
-	</div>    <!-- /container -->
+        </div>
+    </div>    <!-- /container -->
 
 
 {% endblock %}
