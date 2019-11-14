@@ -20,7 +20,7 @@ class AccountActivationController extends Controller
 
 			$mailvalidation = $em->getRepository('App:AccountValidation')
 								 ->verif($key);
-
+								 
 			if (false === empty($mailvalidation)) 
 			{
 				$mailvalidation->getUser()->setMailValidationDate(new Datetime());
